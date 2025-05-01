@@ -40,3 +40,7 @@ Open to feedback, mentorship, or collaboration! Reach out via:
 **Star this repo** to follow my journey, or **fork it** to start your own!  
 
 > *"Cybersecurity is a journey, not a destination. Every log analyzed, every alert triaged, and every vulnerability patched brings us closer to a safer digital world."*  
+
+### **Progress** 
+Day-1: ./Daily-Logs/Week-1/2025-04-30.md
+Day-2: ./Daily-Logs/Week-1/2025-05-01.md

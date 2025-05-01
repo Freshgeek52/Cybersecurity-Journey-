@@ -1,0 +1,367 @@
+#Careers in Cybersecurity
+
+##Defensive Security
+
+Job Role: Security Analyst
+__________________________
+
+Defensive Security is all about trying to find and stop the bad guys.
+
+Security Analysts are the front line of defensive security operations and the most in-demand job in cybersecurity.
+They are responsible for receiving, analyzing, and triaging security tickets as part of an organization’s Security Operations Center (SOC).
+
+As a Security Analyst or SOC Analyst, your primary duty is to ensure an organization’s digital assets are secure and protected from unauthorized access. 
+You protect both the online and on-premise infrastructures, monitor metrics and data to identify suspicious activity, and identify and mitigate risks before adversaries breach your system. Some adversaries will still breach your system, and an Analyst fights the frontline battle.
+
+Security Analyst roles are typically organized into different levels (i.e. 1, 2, and 3) based on seniority and skill. Although leveling is a common practice across the industry, there is limited consistency around precisely what skills or responsibilities each level should have. As a general rule, Level 1 Analysts are responsible for sorting through security alerts and triaging tickets, and will be expected to resolve common issues. Level 2 or Level 3 Analysts are responsible for handling more severe issues and expected to have advanced skills in Digital Forensics and Incident Response, as well as Threat Intelligence and Threat Hunting - although these skills are often spun off as separate, dedicated roles in larger organizations.
+
+In the interviews below, you will hear from both Chris, a Security Analyst, and Marc, an Incident Responder.
+
+Job Responsibilities
+Network Monitoring - Ensure all systems are operational and review log data for recent changes, failures, errors, status changes, access and administration events, and other events unusual for your environment.
+Reporting - Generate reports for managers and administrators to evaluate the effectiveness of security protocols.
+Vulnerability Management - Make sure that software is up-to-date, apply patches when vulnerabilities are identified, and remove services and processes that are no longer needed.
+Training - Educate other employees and network users on proper security policies and procedures.
+
+
+Prerequisite Skills
+Analytical skills
+Communication skills
+Networking
+Patching
+Backup/Recovery
+Operating Systems: Linux, Windows, Mac OS
+Scripting
+PowerShell
+Intrusion Detection System (IDS)
+Active Directory (AD)
+Cisco/PAN Equipment
+Servers
+Troubleshooting
+Virtualization
+Containers
+
+
+Lab: Log Review
+________________
+Overview
+In this lab exercise, you will assume the role of Security Operations Center (SOC) Analyst tasked with reviewing a series of log records that show a password attack on an SSH server.
+
+Password attacks are among the most common techniques that cyber adversaries use to gain access to target systems and applications. These techniques typically involve repeatedly attempting to log into a target environment while guessing the different username and password combinations. This process can be automated, allowing an adversary to make a high volume of username/password guesses in a very short time, even across many targets simultaneously. Due to their ease of execution and enduring effectiveness, you will almost certainly run into this type of attack as a security analyst.
+
+Note: A good defense against these techniques is multi-factor authentication, where you need a username and password and a temporary code sent to you via text or available from an authenticator application.
+
+One of the more common functions of a security analyst is to review log files for signs of an attack. Log files are records of events that have transpired in view of a given application or system. Here is an example of a log record from an SSH (remote access) server.
+
+Embedded image
+
+In this case, these are authentication records, meaning that the server application recorded when someone tried to enter a username and password. Notice that these log records explicitly tell you what happened. Review the record and the corresponding descriptions below.
+
+The date and time of the event.
+The hostname of the system that recorded the event, in this case the system named “SSH-Server-2”.
+Descriptive text stating that the user “jsmith” failed to authenticate because they entered the wrong password.
+Descriptive text stating that the source of the failed authentication attempt is the system 172.47.30.1.
+In the next steps, you will review a series of log records that show a password attack on an SSH server. These records are in the same format as the example above.
+
+Lab Instructions
+Follow the instructions below to get the answer to the question on the Tasks tab.
+
+On the Desktop, double-click the ssh_authentication_log.txt file to open it.
+Embedded image
+
+As the title suggests, this is a file with log records associated with SSH authentication.
+Use the log records in this file to answer the question on the Tasks tab.
+
+Pay attention to the following attributes, which are sometimes characteristic of a password attack:
+
+-Very short time period between successive authentication failures, all from the same source IP address. Rapid attempts are indicative of an automated attack.
+
+-Multiple instances of different invalid usernames, again all from the same source IP address. If the person trying to authenticate was in possession of an authorized account, they would likely not be attempting to use multiple, invalid usernames.
+Close the ssh_authentication_log.txt file.
+
+Pro Tip: Even though all of the log records in the example log represent failed authentication attempts, the adversary now knows the names of some valid user accounts on the target. This can be leveraged for additional password attacks later that focus on those usernames.
+
+
+
+##Offensive Security
+
+Job Role: Penetration Tester
+____________________________
+Overview
+Offensive Security is all about validating security controls by trying to break them.
+
+Penetration Testers are the individuals who identify and exploit vulnerabilities. It may be helpful to note that penetration testing is one of two main roles that fall under the umbrella of ethical hacking; the other role is Red Team or Red Teamer.  While both roles follow ethical hacking principles, the goal of most penetration tests is to find as many vulnerabilities as possible in the specified time period. A red team engagement is usually a longer process and is more covert in nature. Red Teamers aim to find as many vulnerabilities as possible as quietly possible to simulate a real attack.
+
+Embedded image
+
+Job Responsibilities
+Scoping - Understand what IP address ranges can be touched, what systems can be tested, and how far you can go; often referred to as the Rules of Engagement.
+OSINT (Open Source Intelligence) - Identify everything you can about the target (company or individual).
+Social Engineering - Getting someone to give you information via a variety of methods including phishing, vishing, smishing, or simply talking someone into letting you into the building.
+Exploit - Once system access is achieved, what can you do? How can you maintain access to the target?
+Reporting - A formal written report detailing the vulnerabilities found, methods used, and recommendations for remediation.
+
+
+Prerequisite Skills
+Strong Networking
+Strong OS
+Documentation 
+Scripting
+OSINT
+Offensive Security Tools
+Common Vulnerabilities and Exposures (CVEs)
+Command Line Interface (CLI)
+
+Lab: Password Cracking
+________________________
+Overview
+In this lab, you will assume the role of a Penetration Tester. You are with cracking a list of passwords that you previously exfiltrated from a vulnerable web application. The vulnerable application was successfully exploited, resulting in leaked passwords that require cleartext (or cracked) values. Once acquired, you can use them to extend your attacks against the system or even pivot within the internal network to another system. The goal of this exercise is to identify the password hashing algorithm and attempt to crack the password.
+
+Lab Instructions
+Follow the instructions below to get the answer to the question on the Tasks tab.
+
+On the dock at the bottom of the screen, click the Terminal Emulator icon to open a terminal window.
+At the command prompt, type cd ~/Documents/ and press Enter to change your current directory to the current user's Documents folder.
+Embedded image
+
+At the prompt, type ls and press Enter to display a list of the files in the current directory.
+
+You should see a file titled hash.txt.
+Embedded image
+
+At the prompt, type cat hash.txt and press Enter to display the contents of the file.
+Embedded image
+
+The output of this command looks like it's a bunch of random letters and numbers, but it's far from random. It actually a hash that was created by running a word through a hashing algorithm. By definition, hashing algorithms cannot be reversed, but many older hashing algorithms can now be decoded due to weaknesses in the ways they were created. If we can discover what algorithm was used to create this hash, we may be able to decode the original text used.
+
+In the next step, you will use the hash-identifier tool to attempt to determine the original hashing algorithm used.
+At the prompt, type cat hash.txt | python3 hash-id.py and press Enter, then scroll up to the top of the output.
+Embedded image
+
+Hash-identifier runs a series of tests on a given hash value to attempt to determine the algorithm used to create the hash. This is important because trying to decode a hash using the wrong algorithm won't yield the results we're looking for.
+
+It looks like the most likely hash algorithm for your hashed password is MD5. In the next step, you will attempt to crack the hashed password using a tool called John the Ripper.
+At the command prompt, type john-the-ripper --format=raw-md5 hash.txt --wordlist=darkweb2017-top10000.txt and press Enter to crack the hashed password.
+Embedded image
+
+This tool uses the following switches:
+
+--format (This is the format of the hash you identified with hash-identifier)
+--wordlist (This is the wordlist or dictionary that we are using to crack the hash)
+
+John the Ripper will compare our hash with a wordlist made up of several known hashes and their original text. If our hash is in the wordlist we selected, when John the Ripper finishes running, you will see the password displayed in the middle of the output in orange text.
+
+Take note of the cracked password. You will need this information to answer one of the questions on the Tasks tab.
+Close the Terminal window.
+Summary
+In this lab, you assumed the role of a Penetration Tester and cracked a weak password.
+
+
+
+##Engineering and Operations
+
+Job Role: Security Engineer
+----------------------------
+Overview
+Engineering and Operations is all about building and maintaining secure information systems.
+
+Security Engineers are security-minded architects and builders. They are responsible for planning and implementing security controls throughout an IT environment. As skilled security experts, they will also commonly play a cross-functional role that assists the Defensive, Offensive, and GRC functions.
+
+At some organizations, the Security Engineer role may be forked into a separate Cloud Security Engineer role. As the name implies, Cloud Security Engineers specialize in security engineering within the context cloud infrastructure. In the interviews below, you will hear from both Owen, a Security Engineer, and Seema, a Cloud Security Engineer.
+
+Job Responsibilities
+Ensure security controls are in place to protect the organization’s infrastructure, applications, and data.
+Plan, implement, manage, monitor, and upgrade security measures for the protection of systems, networks, and data.
+Assist in penetration testing, incident response, and risk analysis.
+Write reports and communicate with other departments.
+
+
+Prerequisite Skills
+
+Understanding of cyber security methodologies
+Ability to evaluate system changes for security implications and make recommendations for improvements
+Knowledge of current cyber security trends
+Research emerging trends and hacking techniques
+Networking experience 
+Proficiency in programming languages like Java, Python Net, C++, Bash, and PowerShell
+Solid understanding of the OSI model
+Work well with others, including collaboration and communication with other departments
+Ability to work under pressure and thrive in a fast-paced environment
+Strong attention to detail and problem-solving skills
+
+Lab: Audit a Web Server
+-----------------------
+Overview
+In this lab, you will assume the role of a Security Engineer who is responsible for planning and implementing security controls for your employer. For this scenario, you have given the IT team the security requirements for an Apache Web Server. The IT Team has completed the build, and now it's your job to ensure all security protocols were implemented before the web server is placed into production.
+
+Lab Instructions
+Every security requirement in the lab has a point value. If you find that a given security requirement is met, then you will add the points for the requirement to the total. If the security requirement is not met, then no points are added. In the end, you will need to determine the correct number of points based on your findings. You will report your findings in the Tasks tab.
+
+Don't worry! You will be told exactly what commands to perform and what the expected output should be to meet the security requirements. In addition, there is a file on the desktop called commands.txt containing the commands used in this lab. Feel free to cut and paste from this file.
+
+Note: We are only performing a micro audit as a full production audit would take considerable time.
+
+From the dock, open a new Terminal window.
+At the cybrary@ubuntu prompt, type sudo apachectl -V | grep "version" and press Enter.
+
+The first thing we want to ensure is that Apache is up to date. For the purposes of this lab, assume the most recent version for this operating system is 2.4.52.
+
+This requirement is worth 10 points.
+At the cybrary@ubuntu prompt, type sudo grep -A4 "var/www/" /etc/apache2/apache2.conf and press Enter.
+
+This command will look for the part of the Apache configuration file that enables or disables directory listing. If you see the keyword Indexes, then directory listing is enabled. If you see -Indexes (note the minus sign), then directory listing is disabled. A secure web server should disable directory listing.
+
+This requirement is worth 10 points.
+At the cybrary@ubuntu prompt, type curl -s -k -i https://localhost | grep "Server" and press Enter.
+
+If you see the Apache server version, then this security requirement is not met. A secure web server should not easily reveal its version information to attackers.
+
+This requirement is worth 10 points.
+At the cybrary@ubuntu prompt, type curl http://localhost and press Enter.
+
+A secure web server should redirect all unencrypted traffic (HTTP) to an encrypted service (HTTPS). You should see a message indicating that all traffic is being redirected ("301 Redirect"). If instead you see "THIS IS MY WEBSITE" then traffic is not being redirected.
+
+This requirement is worth 10 points.
+At the cybrary@ubuntu prompt, type
+- curl https://localhost and press Enter.
+
+A secure web browser should use a valid SSL certificate. You should see "THIS IS MY WEBSITE". If instead you see a message indicating an issue with the SSL certificate (e.g. "SSL Certificate problem: self signed certificate"), then this security requirement is not met.
+
+This requirement is worth 10 points.
+Summary
+In this lab, you assumed the role of a Security Engineer and assessed the security readiness of a new Apache web server
+
+
+
+##Governance, Risk, and Compliance
+
+Job Role: GRC Analyst
+----------------------
+Overview
+Governance, Risk, and Compliance (GRC) is a discipline within cybersecurity that focuses on assessing business policies, procedures, and operations to ensure an organization is meeting privacy requirements and is compliant with regulations, industry standards, and laws.
+
+GRC roles vary widely by organization. In many cases, they are non-technical analyst roles (GRC Analyst) that provide administrative oversight to the Defensive, Offensive, and Engineering functions. In others, they may be combined with engineering functions. In the interview below, you will hear from Danielle, a Remediation Engineer.
+
+Job Responsibilities
+Protect the Organization and Assets - Remediate vulnerabilities, reduce risks, and strengthen the security posture of the organization
+Maintain Compliance - Monitor for regulatory and policy compliance, analyze sensitive data, and determine what regulations need to be followed
+Risk Management - Help manage the legal or operational risks related to critical information assets
+Oversee Assessments & Audits - Includes internal and external assessments
+Training - Develop policies and procedures and train the organization on those policies and procedures
+
+
+Prerequisite Skills
+
+Communication
+Critical Thinking
+Time Management
+Privacy Laws, Regulations, & Standards
+Policies & Processes
+Data Life Cycle
+Research and GAP Analysis
+Auditing
+
+
+Lab: Cyber Risk Analysis
+---------------------------
+Cybersecurity Risk Management
+Risk is inevitable. While it would be remarkable to eliminate all risk associated with protecting information assets, doing so is impossible. A determined adversary with enough time and resources will always pose a threat, and therefore a risk. However unlikely, the event of an earthquake striking your organization's data center is always a possibility. With this fact in mind, the goal of cybersecurity is to reduce risk to an acceptable level through countermeasures and mitigations.
+
+The process of reducing risk to an acceptable level is formalized through the use of a Cybersecurity Risk Management Program. A Cybersecurity Risk Management Program is a series of policies, processes, and procedures designed to reduce risk, manage security effectiveness, and provide detective and corrective actions aligned to laws, regulations, standards, and frameworks.
+
+It is important to note that a Cybersecurity Risk Management Program is not a one-size-fits-all solution. Each organization must define what information is to be protected, understand the threat landscape, assess its vulnerabilities, define its risk tolerance, and establish a plan to mitigate risk.
+
+Risk Analysis
+Cyber Risk Managers/Analysts or Auditors will often conduct a quantitative Cyber Risk Analysis that assigns factual data and monetary terms to express the level of risk and loss that may happen if safeguards are not in place. In the exercise below, you will practice performing a Cyber Risk Analysis.
+
+First, some key terms you will use in your analysis:
+
+Asset Value (AV) - The monetary value an asset is worth.
+Exposure Factor (EF) - The percentage of the assets value that would be lost if a breach or attack happened.
+Single Loss Expectancy (SLE) - The loss from a single incident. (AV x EF)
+Annual Rate of Occurrence (ARO) - The number of times an incident is expected to occur in a year.
+Annual Loss Expectancy (ALE) - The loss that is expected to happen within a year. (SLE x ARO)
+Safeguard Value (SV) - The cost of a control that will be used to mitigate risk. SV is (ALE before implementing safeguard) - (ALE after implementing safeguard) - (Annual cost of safeguard) = Value of safeguard to company.
+Scenario
+A tech startup issues one laptop to each of its 50 staff members. The value of each laptop is $1,800. In the past 3 years, the company has lost an average of 2 laptops per quarter of the year because staff left their device unattended outside the organization.
+
+What is the SLE? - The entire laptop is lost, therefore the loss is $1,800 per laptop.
+What is the ARO? - Two laptops are lost each quarter of a year, so the ARO is 8.
+What is the ALE? - ALE = SLE x ARO, so this is $1,800 x 8 = $14,400
+Now you can use the ALE value to determine the effectiveness of an implemented control. Suppose the company could purchase passcode-protected and trackable bags for each employee's laptop. The cost of each bag is $30, and it is estimated that the ARO will decrease from 8 to 4. Should the company purchase these bags?
+
+Recall that the Safeguard Value (SV) is calculated as ALE before safeguard ($14,400), minus ALE after implementing the safeguard ($1,800 x 4 laptops is $7,200), minus the cost of the safeguard (50 laptops x $30 is $1,500). So, $14,400 - $7,200 - $1,500 = $5,700, meaning that if the organization implements this safeguard, they can save $5,700 in the first year. If the organization does not implement this safeguard, they will continue to lose $14,400. Seems like a pretty good deal!
+
+Note: In a quantitative Cyber Risk Analysis, you may be tasked with contrasting and comparing several safeguard measures at the same time to determine which to implement. The key to making this decision is dependent on the Cost Benefit Analysis (CBA) of the implemented security control or countermeasure..
+
+==============================================================================================================================================================================
+
+##Network Basics
+
+
+1.1 Introducing Key Terms and the CIA Triad
+--------------------------------------------
+Key Terms
+In this section, we will provide a list of key terms that you should know as we get started. We will go over many of these in the lessons that follow, as well as provide new terms along the way.
+
+Unless otherwise noted, most of these definitions are from the NIST Computer Security Resource Center. NIST is the National Institute of Standards and Technology, and many standards we rely upon in cybersecurity (and computing in general) were created by NIST.
+
+Bit - A binary digit having a value of 0 or 1. The atomic unit of information in computing.
+Byte - A group of eight bits that is treated either as a single entity or as an array of 8 individual bits.
+Software - Computer programs and associated data that can be dynamically written and modified during execution.
+Network - A system implemented with a collection of interconnected components. Such components may include routers, hubs, cabling, telecommunications controllers, key distribution centers, and technical control devices.
+Defense-in-Depth - An information security strategy that integrates people, technology, and operations capabilities to establish variable barriers across multiple layers and missions of the organization.
+Authentication - Verifying a user is who they say they are.
+Authorization - Validating that an identity being claimed by the user is known to the system and verifying what that user should have access to.
+Identification - Asserting an identity and having it confirmed.
+Confidentiality - Preserving authorized restrictions on information access and disclosure, including means for protecting personal privacy and proprietary information.
+Integrity - Guarding against improper information modification or destruction and includes ensuring information non-repudiation and authenticity.
+Availability - Ensuring timely and reliable access to and use of information.
+Non-Repudiation - Not being able to deny you did something. In the context of network communications, non-repudiation refers to the proof of who the sender of a message was. In this way, the sender cannot deny that they sent it.
+Vulnerability - A weakness or flaw that could potentially permit undesirable actions on your assets.
+Threat - A source of harm that acts upon (i.e. exploits) a vulnerability.
+Risk - The possibility of an negative event occurring - i.e. when a threat acts upon a vulnerability.
+Threat Actor - An individual or a group that exploits vulnerabilities in technology.
+
+The CIA Triad
+
+1.2 Networking and Network Models - Part 1
+-------------------------------------
+
+Parts of a Network
+Before we jump into the video below, let's describe some of the components you'll find in a basic network so you have a picture in your mind going forward.
+
+As we noted in the previous lesson, a network is basically two or more computers that are linked together and share a common set of resources, files, and services. You likely have a home network, probably with one or more desktops or laptops or phones or tablets connected to it. In fact, these days, you may even have a smart TV, doorbell, thermostat, or personal assistant device connected to that network as well.
+
+In order to connect your home network to the internet, you have a router, which is a device that connects networks and routes traffic between them.
+
+Embedded image
+
+Another device that you will frequently see in networks is called a switch or Ethernet switch. This is a device that connects nodes (computers) on the same network. So, unlike a router, a switch is only concerned about sending traffic between computers on the same network, rather than routing data between networks.
+
+You might encounter a switch at your office, where multiple computers on your LAN (Local Area Network) are connected via cables into a switch. You may not see the switch near your desk, as it may be located in a special room within your building, where network administrators can access it.
+
+A similar device is a hub. A hub also sends data between nodes on the same network, but the difference is that it broadcasts data to all nodes and is not smart enough to send only certain data to a certain node. Because switches can be used to send data to specific nodes, you may find that your office network only uses switches and does not have a hub.
+
+While hubs are effectively obsolete at this point, they are still useful as a point of comparison when learning the fundamentals of networking.
+
+Embedded image
+
+A few other items on a network that you need to know about are servers, firewalls, and endpoints. We'll start with endpoints, as we actually already mentioned them above.
+
+Endpoints are typically those things that end-users interact with, such as desktops, laptops, mobile phones, and so forth. That's sort of where the data ends as it goes out of a network, to a human, and back again.
+
+Then you have servers. These are simply computers that provide a particular service. Examples are web servers, email servers, print servers, and so forth. You can think of them as providing services that everyone needs (i.e., everyone needs to send email; everyone needs to print files, and so forth).
+
+Lastly, firewalls are important devices in a network that filter traffic going between networks for the purposes of protecting the network. Typically, we think of the firewall as being something that protects us from bad things coming in from the internet, such as spam, viruses, and so forth.
+
+A Quick Review of Network Device Terms
+To recap, here are the network terms covered above:
+
+Hub - According to TechTarget, a network hub is "a node that broadcasts data to every computer or Ethernet-based device connected to it." Remember that unlike a switch, a hub broadcasts to all nodes and cannot direct traffic to specific nodes.
+Switch - A device that connects multiple nodes on the same network. Remember that it is more sophisticated than a hub because it can direct traffic to only certain nodes instead of broadcasting to all nodes.
+Router - A device that connects and routes traffic between networks
+Endpoint - Typically, an end-user device like a desktop, laptop, printer, mobile phone, etc.
+Server - A computer that is dedicated to providing a particular service, like a mail server or print server.
+Firewall - A device that filters traffic going between networks for the purposes of protecting the network.
+The OSI Model

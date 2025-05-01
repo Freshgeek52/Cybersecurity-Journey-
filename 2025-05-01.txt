@@ -1,0 +1,282 @@
+===================================================================================================================
+##SonicWall SMA100 Exploited Vulnerabilities Summary
+
+**SonicWall** is a cybersecurity company specializing 
+in network security solutions, offering products like firewalls,
+ VPNs, and secure remote access appliances to protect organizations 
+from cyber threats. Their **Secure Mobile Access (SMA) 100 Series** 
+devices provide secure remote connectivity (e.g., SSL-VPN) for employees. 
+Recently, two critical vulnerabilities in SMA100 appliances were exploited: 
+**CVE-2023-44221**, a command injection flaw allowing authenticated attackers 
+with admin rights to execute arbitrary commands, and **CVE-2024-38475**, 
+a severe Apache HTTP Server flaw (CVSS 9.8) enabling session hijacking 
+via URL manipulation. Both were patched in late 2023/2024, but attackers
+ are actively exploiting unpatched systems to hijack sessions or gain 
+unauthorized access, prompting urgent updates and audits of administrative logins.
+
+##Key Points
+
+Active Exploitation:
+
+Attackers are using CVE-2024-38475 to hijack sessions and gain unauthorized access.
+
+SonicWall confirmed "unauthorized logins" and file access attempts.
+
+No public details on targets, attack scale, or threat actors.
+
+Mitigation Steps:
+
+Immediate Patching:
+
+Ensure SMA appliances are updated to the patched firmware versions.
+
+Review Logins:
+
+Audit SMA100 administrative accounts for suspicious activity (e.g., unrecognized logins).
+
+Enable MFA:
+
+Enforce Multi-Factor Authentication for all administrative interfaces.
+
+Restrict Access:
+
+Limit SSL-VPN and management interfaces to trusted IPs.
+
+Session Monitoring:
+
+Monitor for unusual session activity (e.g., multiple active sessions from unknown IPs).
+
+
+##Why This Matters for SOC Analysts
+
+Detection Opportunities:
+
+Look for mod_rewrite exploitation attempts in Apache logs.
+
+Monitor SMA100 logs for unexpected command executions (nobody user activity).
+
+Skill Relevance:
+
+Incident response for appliance vulnerabilities.
+
+Patching prioritization based on CVSS scores and exploitation status.
+
+========================================================================================================================
+
+
+
+1.3 Networking and Network Models - Part 2
+------------------------------------------
+The OSI Model vs. The TCP/IP Model
+
+1.4 Common Ports and Protocols
+-------------------------------
+
+Common secure and insecure ports and protocols and the reasons why.
+
+A Little More about FTPS and SFTP
+First of all, be aware that some protocols deal with communication, some deal with management, and some deal with security. As such, they are often used in concert with each other.
+
+For example, a protocol that handles communication may be used along with a protocol that handles security. That is the case with the two secure versions of File Transfer Protocol (FTP): FTPS and SFTP. FTPS is where file transfer is being done with SSL (Secure Sockets Layer) encryption added to it. SFTP is where file transfer is being done with SSH (Secure Shell), which sort of provides a secure channel for the file transfer to take place.
+
+SSH itself is worth knowing more about. Let's dig in below.
+
+What is a Shell?
+Now that we've introduced SSH, let's go into it a bit more and talk about a couple of other concepts that are sort of related and important for you to know in the context of cybersecurity.
+
+Shell - If SSH is a Secure Shell, what is a shell? A shell is a computer program that allows you to control a computer from a command-line interface (CLI). This is where you don't have a graphical user interface (with images and buttons and so forth), but just a command prompt, where you type in commands in order to control what's happening on the computer.
+
+You can think of a shell as a sort of portal - either to the control center of the computer you're using or to a remote computer if you're using SSH to connect remotely. As you move further in your cybersecurity journey, you will likely type commands from a CLI at some point, if you haven't already.
+SSH - As we've mentioned, SSH stands for Secure Shell. Per Wikipedia, SSH is "a cryptographic network protocol for operating network services securely over an unsecured network. Its most notable applications are remote login and command-line execution."
+
+When a hacker wants to get access to a server on a network and control it, a major accomplishment would be for the hacker to obtain SSH credentials for that server. So, it's extremely important to protect those credentials, which should only be accessible to authorized administrators.
+Web Shell - A web shell, on the other hand, is a nefarious script that a hacker will use to access and control a web server remotely.
+
+In the context of cybersecurity, you may hear the phrase, "get a shell," which typically refers to a hacker obtaining control over a server so as to carry out an attack.
+
+
+1.5 Network Threats and Attacks
+--------------------------------
+
+Attack Flow Frameworks
+Before we look at some examples of network threats and attacks, let's talk about some frameworks we can use to understand how cyber criminals operate. We will look at both Lockheed Martin's Cyber Kill Chain and the MITRE Corporation's ATT&CK Framework. The idea behind these frameworks is to allow us to think like an adversary. What are adversaries trying to do at each stage of an attack? How might they do one thing in order to enable another?
+
+Lockheed Martin's Cyber Kill Chain
+Lockheed Martin has developed a framework to describe the basic steps an adversary might take when carrying out a cyber attack. The framework is based on intelligence about what attackers have commonly done, and it enables security teams to plan their counter-moves at each stage so they can effectively detect and prevent attacks.
+
+The framework is called the Cyber Kill Chain. The 7 steps in this framework are as follows, but keep in mind that an adversary may repeat steps and may not always follow this process in a linear fashion:
+
+Reconnaissance - Obtain information about the target.
+Weaponization - Create the malware to use against the victim.
+Delivery - Infiltrate the victim's network to deliver the malware.
+Exploitation - Once in the victim network, take steps to achieve goals.
+Installation - Install malware, backdoors, and other cyber weapons.
+Command and Control (C2) - Communicate with the malware once installed.
+Actions on Objectives - Carry out the final objective, such as stealing information or disrupting services.
+Embedded image
+
+MITRE ATT&CK Framework
+Another model we can use to understand how a cyber threat actor operates is the MITRE ATT&CK Framework. ATT&CK stands for Adversarial Tactics, Techniques, & Common Knowledge. You will see some overlap between how Lockheed Martin and MITRE have described the steps in an attack.
+
+MITRE has 14 tactics in its enterprise framework that describe what an adversary is trying to accomplish at various stages of an attack. A given attack may only include some of these tactics, and they may be repeated. Each tactic is associated with various techniques and procedures. The tactics describe what the attacker is trying to do, and the techniques describe how they might go about doing it. Procedures provide real-life examples of how attackers have used the techniques in the past. The tactics in this framework are:
+
+Reconnaissance - Gather info about the victim from the outside.
+Resource Development - Establish resources to use.
+Initial Access - Gain access to the victim network.
+Execution - Run malicious code.
+Persistence - Maintain one's foothold.
+Privilege Escalation - Gain higher-level privileges.
+Defense Evasion - Avoid being detected.
+Credential Access - Steal account credentials.
+Discovery - Learn more about the victim's network environment.
+Lateral Movement - Move around in the network.
+Collection - Gather data of interest for achieving one's goal.
+Command and Control (C2) - Communicate from within compromised systems and control them.
+Exfiltration - Steal data.
+Impact - Manipulate, interrupt, or destroy systems and data.
+Because the MITRE ATT&CK Framework describes these tactics, techniques, and procedures that adversaries are known to use, the term TTP (Tactics, Techniques, and Procedures) has become a common way to refer to the way an adversary might behave.
+
+The MITRE ATT&CK Framework is normally shown in a matrix like the one pictured below. However, threat actors are constantly devising new methods of attack, so MITRE continues to update its matrix to reflect the documented TTPs that have been seen in the wild.
+
+MITRE also maintains additional matrices to reflect the TTPs in enterprise networks, mobile networks, and ICS (Industrial Control System) networks.
+
+Embedded image
+
+Common Network Attacks
+
+Real Attacks in the News
+Now that we have gone over some common types of threats and attacks, let's take a look at some real examples in the news. Keep in mind that these attacks can be used in combination with each other to make up an overall attack flow. Here are just a few examples.
+
+Spoofing & Phishing: Threat Actors Use Google Cloud to Spoof Best Buy
+In this attack, the threat actors used spoofing and phishing. They sent a phishing email and used the Google Cloud Storage facility in the links of the email to bypass security systems. As such, there was a greater likelihood their phishing emails would make it into recipients' inboxes. If recipients of the email missed the clues that the email was fake and clicked the links, they would be taken to a malicious site.
+
+Phishing and Man-in-the-Middle: Cloudflare and Twilio Attacks
+In this set of attacks, threat actors used phishing text messages to employees of Cloudflare and Twilio that were made to look like they were from the IT department. The messages instructed recipients to change their passwords and were sophisticated enough to look legitimate. If the victims fell for it and changed their passwords, attackers would be able to intercept their new credentials and log into the same systems as the victims. This article explains other ways attackers could use a man-in-the-middle attack.
+
+DDOS Attack - Taiwanese Websites Hit with DDOS Attacks
+In this set of attacks, hackers temporarily shut down various Taiwanese government websites using Distributed Denial of Service attacks by overwhelming the sites with more traffic than they could handle.
+
+Remote Code Execution and Privilege Escalation - Zoom Privilege Escalation and Zoom Remote Code Execution Vulnerabilities
+In these two cases, Zoom was vulnerable to attack in certain situations. In the first case, an attacker could take advantage of Zoom's automatic update process by compromising an unprivileged user's account. When the update occurs, the attacker could escalate the user's privileges to a privileged user's (root) level. In the second case, an attacker on an already compromised system could use Zoom's chat feature to execute malware remotely (remote code execution) by sending the user a message over the XMPP protocol, which is used for instant messaging. In both cases, the vulnerabilities were patched; however, it is useful to understand how attackers might have taken advantage of these weaknesses.
+
+1.6 Network Security Infrastructure
+-------------------------------------
+Tools Used to Protect Networks
+In the next video, we will talk about the need to build in security from the ground up, and we'll also touch on some ways that we protect network security. Before we jump into that, let's highlight some key tools we use for network protection. You will likely hear these terms used a lot in the cybersecurity world, and it's important to know what they mean.
+
+IDS (Intrusion Detection System) - A device or software solution that monitors a network for activity that is known or suspected to be malicious and alerts network defenders about the activity. It does not take any action to respond or prevent the activity. Variations are NIDS (Network IDS) and HIDS (Host IDS).
+IPS (Intrusion Protection System) - A device or software solution that monitors a network for suspected or known malicious activity and actually takes action to prevent it or stop it. This feature of taking action to prevent the activity is what differentiates an IPS from an IDS. Variations are NIPS (Network IPS) and HIPS (Host IPS).
+SIEM (Security Information and Event Management) - A tool used to combine security information and event management in a way that allows analysts and network managers to more easily monitor it and make sense of it. A SIEM typically centralizes logs or pulls in already centralized logs from many sources so that they are consolidated and searchable for network defenders to visualize and analyze.
+EDR (Endpoint Detection & Response) - A solution that monitors end-user devices for malware and responds to prevent or stop it. We've talked a few times about endpoint devices and how they can be especially vulnerable. This solution is meant to help mitigate endpoint security issues.
+SOAR (Security Orchestration Automation & Response) - A solution that is typically made up of a collection of tools that automatically handle security operation tasks, like scanning for vulnerabilities and responding to incidents. This type of tool automates tasks that network defenders might normally do in response to a threat or incident. With automation of this sort, network defenders can be freed up to do other work and more quickly respond to incidents that get past normal defenses.
+Honeypot - A system (e.g., a web server) or system resource (e.g., a file on a server) that is designed to be attractive to potential hackers and intruders, like honey is attractive to bears. The idea is to put a honeypot out to attract an adversary and confirm whether that adversary is trying to target you. It can also provide valuable intelligence about how that adversary behaves in relation to the target.
+Securing the Network
+
+Summary
+In this lesson, you learned about some of the basic tools and techniques used to secure computer networks against attackers. At this point, you should now have a basic understanding of fundamental networking concepts. If you are completing this course as part of Cybrary's IT and Cybersecurity Foundations Career Path, you will soon have the opportunity to get hands-on with many of these concepts in the upcoming labs.
+
+Cybersecurity Basics
+======================
+
+1.1 Security Controls
+---------------------
+Here we define what a control is and what is a security control in full. 
+Types of security controls:
+-Physical 
+-logical/Technical
+-Administrative
+
+Security Awareness Training as a Control
+We briefly mentioned in the video that security training itself can be a type of administrative control. It is a good idea to involve all types of staff in your security training, including contractors, custodial staff, personnel who provide physical security, and after-hours support personnel.
+
+It is also worth noting that training can extend to visual aids and posters placed throughout the office that keep security top of mind for employees. Organizations should strive to provide security training to employees at least annually, if not quarterly. Furthermore, organizations should document when training has occurred.
+
+Embedded image
+
+One acronym you might see associated with this is Security Education, Training, and Awareness (SETA). A good SETA program will reinforce the following ideas:
+
+Everyone is responsible for security.
+A clean desk policy is not just a call to be neat; it is actually a good security control since office visitors cannot readily see potentially sensitive information.
+Employees should observe the proper procedures for disposing of confidential paper waste (such as by shredding it).
+Employees should observe strong password policies related to length and complexity and change their passwords regularly. (Logical/technical controls can be put in place to enforce these password standards, but the role of the employee is still important.)
+Employees should know the proper rules around sending email attachments, including when and how to encrypt them if they contain sensitive information.
+Employees should be aware of the threat posed by phishing and know to be cautious when opening email attachments or clicking links in emails or texts they receive. They also should know the proper procedure for reporting suspicious messages to the IT department.
+Additional Security Control Terminology
+In addition to the terms covered in the video above, you should also be familiar with the following:
+
+The Principle of Least Privilege - The principle that a security architecture should be designed so that each person or entity is granted the minimum system resources and authorizations that the entity needs to perform its function.
+The Need to Know - A determination that a prospective recipient requires access to specific information in order to perform official functions. Remember that this concept is related to access to information.
+Segregation of Duties - An administrative control that requires that more than one person is needed to complete a task, such as requiring more than one person to sign off on an expense. This principle is meant to reduce fraud and waste by reducing the possibility that a single person can make decisions that can put an organization at risk. (Also known as Separation of Duties)
+Dual Controls - This is a concept very similar to Segregation of Duties, where two people are required to perform an action in order to ensure that the responsibility for a high-risk action is shared.
+Man Trap - A type of physical control that is placed at the entrance to a building. It requires people to pass through two doors, with only one being open at a time.
+
+
+1.2 Access Management
+----------------------
+User Provisioning
+The act of granting a user access to a system can seem mundane, but it's important to realize how vital it is to safeguard that process. A hacker who gains access to a system by targeting a regular user in a phishing campaign could instantly have access to a lot of the organization's intellectual property. Normally, hackers will then try to escalate their privileges by seeking out admin-level rights on the system. However, the critical point where they got in, by targeting a regular user, is already a serious inflection point in an attack flow.
+
+Administrators normally need to do some identity proofing before they grant users access. Then, as they decide what privileges to give to users, they will likely need to think through certain questions. What do they really need access to? Should they be able to download software onto their machines? Do they need to access highly classified or sensitive information? If they need to access special information, do they need that access all the time or just in certain circumstances?
+
+By thinking through these types of questions, an administrator can reduce the risks associated with user provisioning.
+
+Embedded image
+
+When it comes to provisioning another privileged (admin) user, the administrator needs to think about the types of special access needed, such as for root, enterprise admin, or domain admin. In a small organization, there may be only one administrator, but in a large organization, there will likely be a team of administrators. In this situation, the team needs to sort out how to properly share admin-level account access and keep related credentials secure.
+
+In the following video, we'll talk more about identity and access management and review some models for how this provisioning can be done.
+
+Access Management
+
+Additional Access Management Terminology
+Here are a few other concepts you should know in connection with Access Management.
+
+User Life Cycle Management - This concept is associated with all the practices related to creating, maintaining, disabling, and deleting a user account. When a new employee joins an organization, administrators will create the account and onboard the new user. They may use a "baseline account" to set the user up and then apply any changes to that user's access that are commensurate with the user's role. If the user changes to a new position, the administrator may need to modify the account and its access. If the user takes a temporary leave of access, the admin will likely need to temporarily disable the account. And, finally, when the user has a separation of employment, the admin will need to delete and "offboard" the account. Administrators have a lot of responsibility when it comes to ensure that this life cycle is handled in the most secure and meticulous way.
+User Life Cycle Risks - Risks associated with not managing the user life cycle properly include inadvertently allowing for privilege creep, such as if a user required greater privileges for one role, but then transfers to another role, and the admin fails to remove those privileges. Another risk could be that the administrator fails to de-provision a user when that user goes on a temporary leave or separates from the organization.
+Privileged Access Management (PAM) - Properly managing privileged access is another major responsibility for administrators. Privileged users require admin-level accounts that need to be highly protected; however, with PAM, the need to use those privileges can be limited so that administrators only use them when needed. This process reduces risk and reduces the chances that a threat actor will be able to obtain privileged access. This is also known as "reducing the attack surface" by limiting the opportunities a threat actor has to exploit the system and gain greater access.
+Insider Threat - The threat that an insider will use her/his authorized access, wittingly or unwittingly, to do harm to the security of organizational operations and assets, individuals, other organizations, and the Nation. This is an important threat to keep in mind when performing access management and one that is often overlooked.
+
+##Access Model
+1.DAC
+2.MAC
+3.RBAC
+4.Access Control List
+
+1.3 Control Frameworks
+------------------------
+ISO27001
+COBITIT(control Objectices in IT) by ISSACA
+NIST
+
+
+1.4 Data Handling Practices
+-------------------------------
+
+1.5 Encryption and Cryptography
+-------------------------------
+Encryption | symmetric vs Asymmetric
+PKI
+Hashing
+CIA implication
+
+1.6 Incident Response
+---------------------
+Introduction to Incident Response
+In this lesson and the two that follow it, we will learn about how to deal with situations when things go wrong. We will begin with Incident Response, which is the initial point at which an organization is reacting to a situation.
+
+As we will discuss in the video below, when an incident occurs, you no longer have the opportunity to plan for it. You need to have already made a plan and have it ready to go. In the context of cybersecurity, an incident could be as minor as a failed attempt by a hacker to log into your system or as serious as a ransomware attack that brings your business to a halt.
+
+
+One of the biggest mistakes a company can make is to neglect the importance of having an incident response plan. In this article in Forbes Magazine, members of the Forbes Technology Council provided their tips for maintaining a robust IR plan. The first tip was to take a 'when, not if' approach to your plan and assume an incident is likely to occur. Check out the video below to learn more about the best practices related to Incident Response.
+
+
+Some other tips mentioned in the Forbes article referenced above reinforce the concepts we covered in the video, including:
+
+Tabletop exercises can be a very inexpensive yet effective way to exercise your plan.
+It's important to frequently review and update your plan. (This is part of the IR Life Cycle.)
+Your IR team needs to have a multidisciplinary make-up and span key parts of your organization.
+You should plan to have open communication with your customers. Having a plan for how you will communicate with customers (as well as other key stakeholders) is extremely important and not something you want to figure out on the fly.
+It is important to make sure there is a hierarchy, so that people know who the incident manager is and what the process for escalation is. How do you know when to declare an incident? If you have not explained that in your plan, your team will not even know how or when to kick of your response.
+
+
+
