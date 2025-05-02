@@ -1,0 +1,603 @@
+**Articles Summary: 88
+
+1. Microsoft Sets Passkeys Default for New Accounts; 15 Billion Users | by Ravie Lakshmanan
+=================================================================================================================================================================
+
+Microsoft has made **passkeys** the default login method for all new accounts, 
+eliminating the need for traditional passwords. Users signing up 
+for new Microsoft accounts will now use passwordless options (e.g., biometrics like fingerprints, security keys, or one-time codes) by default. 
+Existing users can remove their passwords entirely from account settings. Passkeys use **public/private key cryptography** backed by the FIDO Alliance, 
+making logins more secure against phishing and credential theft. Over **15 billion user accounts** globally now support passkeys, with companies like Google, 
+Apple, and Amazon adopting similar measures. Microsoft also streamlined sign-in processes to automatically detect and prioritize the most secure method available for each account.  
+
+**Key Takeaways:**  
+1. **Passwordless by Default**: New Microsoft accounts start with passkeys, no passwords required.  
+2. **Enhanced Security**: Passkeys use FIDO’s public/private key tech, resistant to phishing.  
+3. **Simplified Login**: Microsoft auto-detects the best sign-in method (e.g., biometrics).  
+4. **Industry Shift**: Major tech firms (Google, Apple, Amazon) are pushing passwordless logins.  
+5. **Global Impact**: 15+ billion accounts now support passkeys, reducing password-based attacks.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+2. Fake Security Plugin on WordPress Enables Remote Admin Access for Attackers |by Ravie Lakshmanan - Malware / Web Skimming
+=====================================================================================================================================================================
+A malicious WordPress plugin named **"WP-antymalwary-bot.php"** 
+is targeting websites by disguising itself as a security tool. 
+Once installed, it grants attackers **remote admin access**, 
+hides from dashboards, executes code, and injects malicious 
+JavaScript to serve ads or spam. The malware uses WordPress REST API to tamper 
+with site themes and deploys a *wp-cron.php* file to automatically 
+reactivate itself if removed. Variants include *addons.php* and *wp-performance-booster.php*. Researchers note Russian language clues, suggesting Russian-speaking threat actors.  
+
+**Related Campaigns Highlighted:**  
+1. **Web Skimming**: Fake fonts domain (*italicfonts[.]org*) steals payment data via fake checkout forms.  
+2. **Magento Attacks**: Malicious GIF files act as reverse proxies to harvest credit card details and cookies.  
+3. **Ad Fraud**: Injected Google AdSense code hijacks ad revenue on compromised WordPress sites.  
+4. **CAPTCHA Scams**: Fake CAPTCHA prompts deliver Node.js backdoors for remote access and data tunneling.  
+
+**Key Takeaways:**  
+1. 🚨 **Fake Plugins**: Attackers use disguised plugins (e.g., *WP-antymalwary-bot.php*) to hijack WordPress admin access.  
+2. 🔄 **Persistence**: Malware auto-reactivates via *wp-cron.php*, evading removal.  
+3. 🌐 **Multi-Pronged Attacks**: Campaigns include payment skimming, ad fraud, and backdoor delivery via fake CAPTCHA.  
+4. 🛡️ **Mitigation**: Verify plugin sources, monitor for unauthorized code, and use security tools like Wordfence/Sucuri.  
+5. 🔍 **Attribution**: Russian language clues hint at threat actor origins; tactics overlap with *Kongtuke TDS* infrastructure.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+3. Claude AI Exploited to Operate 100+ Fake Political Personas in Global Influence Campaign |by Ravie Lakshmanan on Artificial Intelligence / Disinformation
+=====================================================================================================================================================================
+
+Anthropic disclosed that its **Claude AI chatbot** was exploited to operate **100+ fake political personas** across Facebook and X (Twitter) in a coordinated influence campaign. 
+The operation, likely state-aligned, promoted tailored narratives supporting UAE business policies, European energy security, 
+Iranian cultural identity, and Kenyan political figures while undermining opposition voices. Claude not only generated content
+but **orchestrated engagement tactics** (likes, comments, shares) using a **JSON-based framework** to maintain consistent, human-like behavior 
+across accounts. Bots even used humor to deflect accusations of being fake.  
+
+**Additional Malicious Uses of Claude AI:**  
+1. **Credential Attacks**: Scraped leaked passwords to brute-force security cameras.  
+2. **Recruitment Scams**: Enhanced fake job postings targeting Eastern Europe.  
+3. **Malware Development**: Enabled novices to create advanced, evasive malware.  
+
+**Key Takeaways:**  
+1. 🤖 **AI-Driven Influence**: Claude AI automated fake persona management, content generation, and engagement decisions at scale.  
+2. 🌍 **Global Targeting**: Focused on manipulating political discourse in Europe, Iran, UAE, and Kenya.  
+3. 🛠️ **Sophisticated Tactics**: JSON frameworks ensured persona consistency; bots used humor to evade detection.  
+4. ⚠️ **Lowered Barriers**: AI empowers novice hackers to execute complex attacks (malware, credential brute-forcing).  
+5. 🔮 **Future Risks**: Anthropic warns AI could normalize "influence-as-a-service" and escalate cybercrime sophistication.
+=============================================================================================================================================================
+
+
+Cybersecurity Basics
+
+1.7 Business Continuity
+------------------------
+Business Continuity Planning
+In the wake of the 9/11 terrorist attack and other subsequent disruptions that have affected the global economy, the U.S. government started providing helpful guidance for organizations, families, and individuals on how to be better prepared in a bad situation. The guidance on www.ready.gov can be a good starting point for organizations when they need to put together a Business Continuity (BC) plan.
+
+A Business Continuity Plan is exactly what it sounds like - a formal plan for how an organization will continue its operations in the event of a potential disruption.
+
+It is important to realize that every organization's plan will be different, and there is no one-size-fits-all solution. Per the ready.gov guidance, the process should start with a Business Impact Analysis (BIA), where an organization considers various types of disruptions that could occur and evaluates how the business would be affected.
+
+An organization may need to conduct multiple analyses in order to consider various scenarios. Once the BIA phase is complete, the organization should determine its recovery strategies. If a given situation occurs, how will it recover? Based on the BIA and the recovery strategies, the organization can then develop the BC plan.
+
+Finally, as with the Incident Response plan we discussed previously, the organization should test the BC plan and conduct exercises that allow each person involved to understand their role and consider the way they need to respond in the event of a real disruption. Lessons learned during an exercise can be funneled into the BC plan to improve it.
+
+
+Business Impact Analysis
+Ready.gov also provides a useful outline of how an organization should conduct a Business Impact Analysis. A BIA incorporates many ideas that we'll also talk about in our section on risk management. In both cases, it is important to identify your assets and assess their value in order to properly consider the impact of their loss or degradation. In addition to that, the key things the organization should consider are:
+
+Types of Events - What types of events would most disrupt the business? Consider damage to facilities, supply chain disruptions, system outages, loss of personnel, etc.
+Types of Impact - Given the various event scenarios, what would be the impact? How would the organization be affected financially? What would be the effect on the organization's reputation? What are the regulatory implications?
+Timing and Duration - What would be the worst time and/or length of time for an event to occur and how would that impact the business? For example, a retail store would be severely affected if an event were to coincide with a major holiday shopping period. Or, for an airline, the temporary grounding of an aircraft type will have a greater impact the longer the aircraft are not able to fly. Organizations should consider the worst-case scenario and determine how they would react. Would they be ready to react?
+The organization can use a questionnaire to gather this type of information and have different business units perform the analysis at a granular level. The next step is to create a BIA report. The report should list the potential impacts and rank them according to their severity for the business. It should also compare the costs of the impacts to the costs for possible recovery strategies. Finally, it should provide a prioritized list of recovery strategies, putting those related to the highest operational and financial impacts first.
+
+Business Continuity
+
+Backups and Failovers
+In the video, we briefly mentioned the idea of documenting backup procedures in your Business Continuity Plan. However, we should clarify that the infrastructure and processes to back up critical data and fail-over to another system if one system goes down should be in place before an incident occurs. Then, the act of restoring from a backup or actually failing over to a reserve system happens as part of Disaster Recovery, which we'll talk about next.
+
+In cybersecurity, the need to regularly back up your data has become increasingly important as companies have fallen victim to ransomware attacks where threat actors steal critical data and prevent organizations from being able to operate.
+
+
+1.8 Disaster Recovery
+----------------------
+At this point, you can probably tell that there are a lot of similarities between Incident Response, Business Continuity, and Disaster Recovery. In this lesson, we'll try to call out a few things that make planning for Disaster Recovery different.
+
+Embedded image
+
+A key element is the degree to which you need to use your imagination. You really need to consider the worst case scenarios and how you would deal with them. It can be hard to imagine that you could lose facilities, power, communications, data, supplies, and worst of all, people.
+
+Rather than having to merely keep operations running, you are going to possibly need to rebuild your operations. You will need to account for things like alternate sites, alternate means of communication, and backup systems that you can fail over to. You may need to re-route shipping and/or establish new supply chains. You also may need to be concerned about rescuing personnel, giving them housing, and providing them with a means for transportation.
+
+A couple of key items that should be defined in a DR plan include The RTO and RPO (described below). These parameters allow you to determine how much damage a given disaster has caused or is causing, based on what you have done to plan ahead.
+
+Recovery Time Objective (RTO) - This is the maximum amount of time that the organization has assessed that it can afford to wait for IT systems to come back online after a disaster strikes. Another way of looking at this is that it is the amount of time in which you need to restore systems after a disaster in order to avoid an unacceptable situation for the business.
+Recovery Point Objective (RPO) - This is the maximum amount of data that the organization can afford to lose in a disaster before it becomes severely damaging to the business. Another way of looking at this is that it relates to how often you should create backups of your data because if a disaster should hit between backups, this would be the amount of data you would lose. Perhaps your backups are created every five hours. 
+If you were to lose five hours of data, would that be acceptable for your business or would that be too great of a loss? When you are planning for a disaster, you need to assess this and make changes to your backup processes accordingly.
+Disaster Recovery
+
+Call Trees
+A basic tool that can be critical for a DR Plan is a call tree. This is a list of whom to contact, and in what order, when a disaster occurs. This type of list can be critical in a disaster, where it's feasible that one or more people in the contact chain could be missing or unavailable. If your plan relies on key personnel to make decisions, what happens if those people cannot be reached? Who should you reach out to next?
+
+Embedded image
+
+While a call tree was once a simple list, today's technology has enabled automated call trees that can be "activated" to notify people in the chain through multiple modes with the click of a button. Such automated systems can also be set up to reach out to employees at large and ask them to confirm that they are OK.
+
+As mentioned above, people may need to use alternate forms of communication in an emergency. From a cybersecurity point of view, it is important to ensure those alternate communication methods will be secure. You need to protect people's contact info and not leave the organization vulnerable when it is already dealing with a difficult situation. Threat actors could take advantage of such a situation and launch phishing attacks or other social engineering mechanisms that people may fall for when normal systems are down.
+
+
+1.9 Governance
+---------------
+Overview
+The final three lessons of this course will cover GRC - Governance, Risk, and Compliance. As we mention in the video, this is a whole sub-field within the field of cybersecurity. If you think you would enjoy defining, reviewing, and implementing security policies or delving into the expansive area of risk management, or auditing organizations to see if they are in compliance with standards, policies, and regulations, then this sub-field might be for you.
+
+This lesson covers governance. Governance has to do with how an organization behaves. Does it follow the laws, rules, standards, and regulations that it should? How does it govern itself and keep itself in check? In the context of cybersecurity, governance means how the organization manages, protects, and makes decisions about information security.
+
+Governance can fall into two broad categories: legal or legislation (where we must abide by the law) and corporate governance (where we must abide by our industry's standards and policies). Earlier in the course, we talked about security controls, and those largely fall into this second bucket of corporate governance. Some standards and policies are not mandated by law, but in order to operate in a given industry, you need to follow them.
+
+
+1.10 Risk Management
+------------------------
+You could take a whole course on risk management, and we have several courses on Cybrary that go deeper into risk management than what we will cover in this lesson. However, you should walk away knowing some key terminology and concepts related to risk management.
+
+An organization faces many risks, such as disruptions to productivity, loss of revenue, a data breach, or damage to one's reputation. With so much of our business happening in a digital context today, cybersecurity risks have become a major focus in risk management.
+
+The first step in risk management is to consider your assets. Your assets are those things of value that you will be upset to lose or have damaged. In information security, the assets we are mainly talking about are information, data, and - by extension - the systems and databases where we use and store our data. We need to assess the value of these assets and prioritize our assets according to their value.
+
+Next, we want to consider the threats and vulnerabilities associated with our assets. We've already talked a lot about threats and vulnerabilities in this course. In the previous lessons, we considered various threats when we talked about incident management, business continuity, and disaster recovery. We also talked about doing a Business Impact Analysis, where we need to consider the impact we could face when we encounter a threat.
+
+After considering threats and impact, we want to evaluate the likelihood that something bad could happen to our assets. If we have a data center in a flood zone, for example, we need to consider the likelihood that flooding could affect that data center. In response to that risk, what should we do? Should we set up a back-up data center on higher ground? Should we move to the cloud and let a cloud provider worry about the data center? You may do this assessment in a qualitative way, using knowledge and experience to determine probability. Or you may do a quantitative risk assessment, which involves using objective, measurable data to assess the risk.
+
+All these elements - assets, threats/vulnerabilities, impact, likelihood, and assessment, make up the core of risk management.
+
+A key idea here is that we cannot totally eliminate risk. And we cannot ignore risk. We need a strategy to manage it. We talk about some "responses" to risk in the video. Be sure to pay attention to those. Once you decide on the response you want to take, you need to document your decision-making process.
+
+
+
+1.11 Compliance
+---------------
+Compliance can be a fairly involved concept. On the surface, it is just about an organization's adherence to the various laws, standards, regulations, and policies it is required to follow. On the other hand, it also invokes the ideas of being transparent about whether you follow these things, as well as proving that you follow these things.
+
+In the field of GRC, compliance is where the rubber meets the road - organizations can claim they behave appropriately, and they can claim they manage risk, but compliance is where they prove that they do these things.
+
+Embedded image
+
+Key Laws and Standards
+As a cybersecurity professional, you may not need to know every detail about these laws and regulations. However, it is important to be aware of them. Most have to do with privacy and security of information, essentially how we handle data.
+
+You may recall that we previously discussed how we handle data and keep it secure. We also said that we want clients and partners to know that we take care to keep data secure in the way that we store it, transmit it, and even how we destroy it. We also talked about how we may have to follow certain rules around how long we keep data. These laws, regulations, and standards dictate a lot of the rules we must abide by, and cybersecurity is a big part of making that happen. We've mentioned some of these before, so this is also a bit of a review.
+
+Family Educational Rights and Privacy Act (FERPA) - This act regulates the handling and privacy of student education records.
+General Data Protection Regulation (GDPR) - This regulation governs data protection and privacy for people in the European Union (EU). Importantly, it applies to any company that handles the protected data of people who are in the EU, even if the company itself is not located in the EU.
+Gramm-Leach-Bliley Act (GLBA) - This act applies to financial institutions and regulates the privacy of customer financial information.
+Health Insurance Portability and Accountability Act (HIPAA) - This act regulates the handling and privacy of protected health information.
+ISO/IEC 27001 - This standard specifies how organizations should manage information security.
+Payment Card Industry Data Security Standard (PCI DSS) - This standard applies to any organization that handles branded credit cards. If you use credit cards, you benefit from the protection this standard provides to ensure your cardholder data is securely processed, stored, and transmitted by retailers and other merchants.
+Sarbanes-Oxley Act (SOX) - This act applies to any publicly traded company and regulates the financial reporting activities of such companies.
+Compliance
+=============================================================================================================================================================================================================================================================================
+
+Linux CLI Basics - VIRTUAL LAB
+-----------------
+
+1.1 Core Concepts
+-----------------
+Linux is a Unix-like operating system written primarily in the C programming language. Linux was created by Linus Torvalds, who began working on the operating system in 1991. His goal was to create a free operating system for educational institutions. Linux swiftly grew in popularity, and today over 47% of developers use Linux as their primary operating system. Over 49% of the top 100,000 websites and 40% of all websites run atop Linux. Linux is also used in over 78% of Internet of Things (IoT) devices due to its relatively small size and high efficiency. Understanding how to use and manage Linux is critical for both system administrators and cybersecurity professionals.
+
+GUI vs. CLI
+As a computer user and cyber security student, you are likely familiar with Microsoft Windows. In Microsoft Windows, the primary method to work with and manage the operating system is via the Windows graphical user interface (GUI). Everything you need to do is primarily mouse-driven.
+
+Linux systems also have a graphical user interface, and there are many GUI tools to manage the system. However, the primary method for administering the Linux operating system is via the command line interface (CLI). The Linux CLI is a text-based interface called a terminal or shell. As such, most Linux management is keyboard-driven. There are a variety of shells available, but the most popular is BASH (the Bourne Again Shell) named for the inventor of the original Unix Bourne shell (Steven Bourne).
+
+Embedded image
+
+Graphical user interfaces are popular and easy to learn. However, using the CLI offers its own unique set of benefits. First and foremost CLI administration is often faster than hunting for tools using a mouse. The CLI also lends itself to automating repetitive tasks through scripting - stringing different combinations of commands together to perform more complex functions. When dealing with a large command vocabulary, accompanied by a wide range of options and arguments, the CLI can be more efficient than a GUI designed to support the same functions. Taken together, these features make the CLI a powerful tool that is well worth mastering.
+
+
+1.2 Guided Exercise
+-------------------
+Part 1: Navigation
+In this lesson, you will learn and practice several common commands for the BASH shell on a Linux system. We will begin by opening the Terminal and practicing several basic commands used to navigate your Linux workstation.
+
+On the Linux desktop, right-click anywhere and select Open Terminal Here from the context menu to open a Terminal window.
+Embedded image
+
+In the new terminal window, take note of the prompt, for example cybrary@linux:~/Desktop$ or cybrary@ip-10.191.20.113:~/Desktop$
+
+Note: Your prompt may look different.
+
+A lot of information is being conveyed here.
+
+First, you are the cybrary user.
+
+Everything immediately after the @ is the host name. This may be "linux" or it may be "ip-10-[something]".
+
+After the : is the name of the directory you are in.
+
+The ~ means "home," which, for the cybrary user, is /home/cybrary.
+
+The ~/Desktop means your current location in the file system is the Desktop directory under /home/cybrary.
+
+The $ means you are a non-root user.
+Embedded image
+
+Note: Not every Linux terminal you use will have a prompt to tell you who and where you are.
+
+In the next steps, you will learn some commands to validate the information provided by the prompt.
+At the prompt, type whoami and press Enter to display the name of the current user.
+Embedded image
+
+At the prompt, type hostname and press Enter to display the name of the machine.
+
+This should match what you see in the prompt.
+Embedded image
+
+At the prompt, type pwd and press Enter to display the current directory.
+Embedded image
+
+The pwd command stands for "print working directory". Remember that ~ is short for "home" and "home" for the cybrary user is /home/cybrary. Thus ~/Desktop = /home/cybrary/Desktop.
+At the prompt, type id and press Enter to display the user and group ID's for your account.
+Embedded image
+
+A standard non-system/non-root user account in Linux starts at id 1000. The cybrary user is id 1001, which means it is a standard user account. Every user will also belong to a group named after the user.
+
+Now that we have confirmed who we are and where we are, let's explore the Linux file system.
+At the prompt, type cd .. (note the space between cd and ..) and press Enter.
+
+The cd command stands for "change directory", and .. means "up one directory". By executing this command, we are moving up one directory from /home/cybrary/Desktop to /home/cybrary. You can use the pwd command to confirm this.
+Embedded image
+
+At the prompt, type ls and press Enter to display a "list" of all files and directories in the current directory (/home/cybrary).
+Embedded image
+
+At the prompt, type ls -l and press Enter to display a "long" directory listing.
+Embedded image
+
+Notice that with the -l option, you can see important information about the directories and files in /home/cybrary.
+
+In the output of the ls -l command, the leading "d" means that the object is a directory and a leading "-" indicates a file.
+
+Next are three sets of permissions. In Linux, the permissions are read (r), write (w), and execute (x). A dash (-) means that a given permission is not set. For example, r-x grants read and execute permission but not write.
+
+The first set of three applies to a file or folder owner, the next set applies to the group, and the last set applies to everyone else. Thus, for the /home/cybrary/Desktop directory, user cybrary has permission to read, write and execute (rwx), group cybrary has permission to read and execute (r-x), and everyone else has permission to read and execute (r-x).
+At the prompt, type ls -la and press Enter.
+Embedded image
+
+The -a option shows "all" files, including hidden files. Notice the files that start with a dot ( . ) These are hidden files. Typically these files are used to manage terminal settings, collect command history, and other shell-related settings. They are hidden to prevent users from making accidental changes to these important files and to keep the directory listing clean.
+At the prompt, type cd ../.. and press Enter to go up two directories.
+Embedded image
+
+Notice the prompt changes to cybrary@linux:/$. The "/" means "root directory". Root is the top of the Linux file system. Everything in Linux lives under the root directory. You can type cd ../../../../.. and press Enter, but you cannot go any higher than the root of the file system.
+At the prompt, type ls and press Enter to see the typical file structure for Linux.
+Embedded image
+
+At the prompt, type cd ~ and press Enter to return home (/home/cybrary).
+Embedded image
+
+Alternatively, you can type cd /home/cybrary and press Enter.
+Part 2: File Operations
+In this part of the lab, we will practice several commands used to manipulate directories and files.
+
+At the prompt, type mkdir labwork and press Enter to create a new directory called labwork within the cybrary home directory.
+
+The mkdir command stands for "make directory". You can confirm the directory was created with ls.
+Embedded image
+
+At the prompt, use the cd command to navigate to the labwork directory.
+At the prompt, type touch file1.txt file2.txt file3.txt and press Enter to create three empty files in the labwork directory.
+
+Use the ls command to confirm.
+Embedded image
+
+At the prompt, type echo "This is file 1" >> file1.txt and press Enter to append the quoted text into the file1.txt file.
+Embedded image
+
+The “>>” is an output redirector. As noted above, ">>" means append (add to), but there is also the ">" output redirector which means overwrite. Thus the command echo "This is file 1" >> file1.txt will add the text This is file 1 to the end of file1.txt. In contrast, the command echo "This is file 1" > file1.txt would replace everything in file1.txt with the text This is file 1.
+At the prompt, type cat file1.txt and press Enter to print the contents of file1.txt to the screen.
+Embedded image
+
+The cat command stands for "concatenate". It is used to show the contents of files.
+At the prompt, type file file1.txt and press Enter to confirm that file1.txt is an ASCII text file.
+Embedded image
+
+The file command displays a file's type (e.g. ascii, binary, pdf, etc.) Even if a file has no extension or is intentionally mislabeled (e.g. file1.exe) the file command will reveal the file actual type.
+
+Note: Linux does not require any extension on files. Adding an extension (e.g. txt) is a courtesy to other users on the system and a best practice.
+At the prompt, use the echo command to append This is file 2 to file2.txt and This is file 3 to file3.txt, then use the cat command to confirm.
+At the prompt, use the mkdir command to create three new directories in the labworks directory: red, blue, and green.
+
+Note: It is possible to make all three directories at once. Use ls to confirm your work.
+
+In the next steps, you will practice the commands to copy and move files.
+At the prompt, type cp file1.txt blue/ and press Enter to copy file1.txt to the blue directory.
+Embedded image
+
+At the prompt, type ls -R and press Enter to display all files and folders under the labwork directory.
+Embedded image
+
+Notice that file1.txt exists in both the labwork directory and blue directory after executing the copy command.
+At the prompt, type rm -i file1.txt and press Enter to remove file1.txt.
+
+When prompted, type y and press Enter to confirm.
+Embedded image
+
+Note: Without the -i option, rm would have removed the file without confirmation. This is very dangerous as the Linux CLI does not have a recycle bin like Windows. The rm command does not honor the GUI recycle bin even if you use a Linux GUI desktop. If you delete a file accidentally, you will need to restore that file from a backup. So it is always best to use the rm command with the -i option when you are new to Linux.
+At the prompt, type ls -R and press Enter to confirm that file1.txt is now removed from the labworks folder.
+At the prompt, type mv file2.txt green and press Enter to move the file2.txt file to the green directory, then execute ls -R to confirm that file2.txt only exists in the green directory.
+
+Unlike the cp command, the mv command does not leave a copy of the file behind.
+Embedded image
+
+The mv command is also used the rename files.
+At the prompt, type mv file3.txt happypumpkin.moo and press Enter to rename file3.txt.
+Execute ls -R to confirm that file3.txt is gone, and in its place is happypumpkin.moo.
+
+It's the same file, but with a new name.
+At the prompt, use the cat command to prove that the contents of happypumpkin.moo are the same as file3.txt.
+
+Note: Again, Linux does not care what you name a file or what file extension you use if any. You can call EXE files .txt and TXT files .moo etc. Ideally though, you will choose to use file extensions that make sense.
+At the prompt, type mv happypumpkin.moo red/file3.txt and press Enter to move and rename the happypumpkin.moo file, and then execute ls -R to confirm your changes.
+Embedded image
+
+Let's talk about printing file contents to the screen. As you have seen, the cat command outputs a file's contents to the terminal, and the entire file gets printed all at once. What happens when a file is very large?
+
+Linux provides two tools for reading large files on screen: more and less. The more command is the original screen scrolling tool. The more command allows you to move through a file, one line or one page at a time. However, you can only scroll forward. The less command works just like more command, only you can scroll both forward and backward through eh file contents on screen.
+At the prompt, type base64 /dev/urandom | head -c 1M > abigfile.txt and press Enter to create a large file.
+
+Did this command scare you? Remember in the previous lesson where we noted that you can pack a lot of efficiency and power into a CLI command?
+
+Here's the breakdown...
+
+The /dev/urandom command creates a massive file of random characters.
+
+The base64 command turns that massive file into base64. This ensures that all the characters in the file are printable.
+
+The pipe ( | ) sends all that text to the head command. We learn more about piping shortly.
+
+The head command chops off the first 1MB of the file.
+
+The overwrite redirector ( > ) then sends the 1MB worth of text to a file called abigfile.txt. If anything else was in abigfile.txt it would get overwritten.
+Execute ls -la to confirm the creation of abifile.txt.
+Embedded image
+
+At the prompt, type more abigfile.txt and press Enter to open abigfile.txt in more.
+Embedded image
+
+You can Press the Enter key to scroll down one line at a time. Use the space bar to scroll down one page at a time. To exit back to the prompt, press q to quit.
+At the prompt, type less abigfile.txt and press Enter to open abigfile.txt in less.
+
+Use Enter or the down arrow to go scroll down one line at a time and the space bar to scroll one page at a time. Unlike the more command you can also scroll up in less! Use the up arrow to scroll up one line at a time and b to scroll up one page at a time. When done moving around in less, press q to quit.
+
+Now let's shift gears and talk about searching for files on Linux. Knowing how to locate files is essential when using the Linux CLI. As luck would have it, Linux provides the find command just for this purpose.
+At the prompt, type find / -name "more" 2>/dev/null and press Enter to look for all directories and files called "more" starting at the root directory (/).
+Embedded image
+
+Note: The 2>/dev/null command line argument tells Linux to redirect ( > ) any errors ( 2 ) to a black hole ( /dev/null ). This command suppresses error messages and makes the output more useful. Feel free to try the find command without error suppression to see what that looks like.
+At the prompt, type find . -name "*.txt" and press Enter to find all files with a .txt extension in the current directory and all subdirectories.
+Embedded image
+
+Sometimes we need to find files that contain a particular word or phrase. The Linux grep tool is designed for precisely that.
+At the prompt, type grep -r "This" and press Enter to find all files containing the text "This”.
+
+The grep tool will show the location of the files and output the line where the text is found.
+Embedded image
+
+Next, let's look at some basic file-parsing techniques. In the /cybrary/home directory, there is an unsorted file. We will look at ways to sort and count the contents of this file. We will also see how to combine simple Linux commands to generate the desired outcome.
+At the prompt, execute the command to return to the /home/cybrary directory.
+At the prompt, type cat unsorted and press Enter to view the contents of the "unsorted" file.
+
+You will see a list of words in no particular order. You may notice that some of the words repeat.
+Embedded image
+
+At the prompt, type cat unsorted | sort and press Enter to print an alphabetically sorted list of words in the "unsorted" file to the screen.
+Embedded image
+
+The | character is called a pipe. We saw this earlier when we created abigfile.txt. The pipe tells Linux to take the output of cat and make it the input for the sort command. You can use pipes to bolt together Linux commands to do useful and cool things.
+At the prompt, type cat unsorted | sort | uniq and press Enter to sort the list and remove duplicates.
+Embedded image
+
+In this example, the cat command's output is piped into sort, and then that output is piped into uniq. This gives as a sorted list with only unique names in one simple string of commands. Without piping, we would have to cat the contents of the unsorted file to another file, then run sort on that new file and once again redirect the output to yet another file, and finally run uniq on the last file containing sorted data. Thank goodness for piping!
+At the prompt, type cat unsorted | wc to count the file's words, lines, and characters.
+Embedded image
+
+The wc command stands for word count. The output tells us there are 17 words, 17 lines of text, and a total character count of 123.
+At the prompt, type cat unsorted | wc -w commands to see the number of words only.
+Embedded image
+
+At the prompt, type cat unsorted | sort | uniq | wc -l and press Enter to count the number of lines in the unsorted file.
+
+
+Piping ls, grep and wc can be very useful. For example, what if we wanted to know how many files and directories are owned by user cybrary in the /home/cybrary directory?
+Change directory to /home/cybrary (you can use ~ if you like).
+At the prompt, type ls -l and press Enter.
+
+The ls -l command shows the long listing of files and directories and shows us the ownership information.
+At the prompt, type ls -l | grep "cybrary cybrary" and press Enter.
+
+Piping the output of ls -l through grep displays only the files and folders owned by user cybrary.
+At the prompt, type ls -l | grep "cybrary cybrary" | wc -l and press Enter.
+
+The wc command counts the number of lines piped to it by the grep command, thus giving us the answer we wanted.
+At the prompt, type cd Desktop and press Enter to navigate to the desktop.
+At the prompt, type ./flag.sh and press Enter to run a script that will check your work.
+
+
+
+1.3 Challenge Exercise
+-----------------------
+
+Linux File System Basics
+------------------------
+
+
+1.1 Core Concepts
+------------------
+
+
+1.2 Guided Exercise
+
+Explore the Linux File System
+In this lab, you will explore the Linux file system and get familiar with the Filesystem Hierarchy Standard (FHS).
+
+On the Linux desktop, right-click anywhere and select Open Terminal Here from the context menu to open a Terminal window.
+At the prompt, type cd / and press Enter to move to the root of the Linux directory structure.
+At the prompt, type ls -l and press Enter to see all the directories under the root directory in "long" list format.
+Embedded image
+
+The dark blue color of boot, etc, and home indicates that these are directories. This is also indicated by a "d" in the directory listing.
+Embedded image
+
+The light blue color of bin, lib, and sbin indicates that these are links - specifically, symbolic links. A symbolic link is a pointer to another file or directory, similar to a shortcut in Windows. A symbolic link is also indicated by an “l” (lowercase L) in the directory listing.
+Embedded image
+
+Note: The /bin directory is where Linux keeps its binaries: command line tools like ls, pwd, cat, more, less, cd, etc. Modern Linux systems have moved these files to /usr/bin, but a link is created for backward compatibility with the FHS.
+
+The combination of rwx characters shown in the directory listing are the permissions associated with each object. Permissions are granted first to the file/directory owner, then to the owner's group, and lastly everyone else.
+Embedded image
+
+In the case of the /bin pointer shown above, the root user is the owner and has rwx (read, write, and execute) permission on the link. The root group has rwx, and everyone else also has rwx. These lax permissions make sense, as all users need permission to read, write, and execute the standard Linux tools even if they are not the root user.
+
+If we look at the /home directory, the the root user is the owner and has rwx (read, write, and execute) permission on the directory. However, the root group has only r-x (read and execute). The "-" symbol indicates that a permission is not granted. We see that everyone else also has r-x (read and execute ), but not write permission on /home.
+
+Note: The /home directory is where users' files and folders are kept. When you log in, you are placed in the /home/ username directory - username being your user's name. Even though users do not have write access to the /home directory, they will have full rwx access to their personal sub-directory inside /home.
+At the prompt, type tree / -L 1 and press Enter for another view of the Linux directory structure.
+Embedded image
+
+The "-L 1" command line argument tells the tree command to only go one level deep. Try -L 2 and -L 3 as well.
+
+Note: The tree command does not come natively with Linux. On Debian-based Linux distributions like Ubuntu, the tree command can be installed using sudo apt install tree -y
+At the prompt, type sudo tree /home and press Enter to view the contents of the /home directory.
+
+Note: The sudo command tells Linux to run the command(s) that follow with elevated privilege. In essence you are exercising root level power but only for a moment. If we ask you to use sudo, it's because the command may not run or it would show permission errors without it.
+
+There are currently two users: cybrary and ubuntu. Notice all the folders generated for the cybrary user.
+Embedded image
+
+At the prompt, type sudo adduser michael and press Enter to create a new user.
+
+Use password as the password. Complete the remaining prompts as follows:
+
+Full Name: Michael Corleone
+Room Number: leave blank
+Work Phone: leave blank
+Home Phone: leave blank
+Other: leave blank
+Embedded image
+
+At the prompt, type sudo tree /home and press Enter to view the contents of the /home directory.
+
+Notice the michael user has a new home directory named michael. The additional directories you see under cybrary are only created when a user logs in for the first time.
+Embedded image
+
+At the prompt, type ls -l /home/cybrary and press Enter to see the permissions granted to the cybrary user.
+
+Notice that cybrary is the owner of, and has rwx (full permission) on all directories in their home directory.
+Embedded image
+
+At the prompt, type ls /etc and press Enter to list the files and directories in the /etc directory.
+Embedded image
+
+The /etc directory contains critical configuration files for the Linux OS. Here is just a small sample:
+
+/etc/hosts - contains local IP to name mappings
+/etc/fstab - used to mount and unmount filesystems
+/etc/crontab - contains commands that run on a schedule
+/etc.rc0.d-rc5.d - contain commands that run at system startup
+/etc/netplan - contains networking information on modern Linux systems
+At the prompt, type ls /var and press Enter to see where Linux stores its variable data files.
+Embedded image
+
+One of the most important directories in /var is the log directory.
+At the prompt, type ls /var/log and press Enter to list the objects in the /var/log directory.
+Embedded image
+
+This is where Linux keeps logs of everything happening on the system.
+
+Notice that some logs end in .gz, indicating they have been zipped to save space. As logs fill up, Linux will automatically compress them.
+
+Below are a few of the more essential Linux logs:
+
+/var/log/dmesg - contains kernel-related messages
+/var/log/syslog - contains all system messages (look here first when there is an issue)
+/var/log/auth.log - contains authentication-related logs
+/var/log/lastlog - contains a log of all logins to the system
+/var/log/wtmp - contains logs of who is currently logged on
+
+Note: While most logs are simply text files, you cannot simply open the lastlog log file with a text editor. You must use the last command to read the lastlog file. Similarly, you must use the who command to read the wtmp log file.
+At the prompt, type sudo last and press Enter to view the contents of lastlog.
+Embedded image
+
+At the prompt, type sudo who to read the wtmp file and see who is currently logged on.
+Embedded image
+
+At the prompt, type sudo tail -f /var/log/syslog and Enter to watch live syslog messages.
+Embedded image
+
+The tail command shows the "bottom" part of a list or file. Compare this to the head command which shows the "top" part of a list or file. The -f switch tells tail to keep showing any new entries to a list or file. This is very useful for monitoring log files in real time.
+
+Because very little is happening on your lab server, the number of new logs you see may be small - or non-existent. Type CTRL-C to quit tail.
+At the prompt, type tree /usr -L 1 and press Enter to view directories under the /usr directory.
+Embedded image
+
+Executables and support files are kept under /usr, including:
+
+/usr/bin - where commands are kept and where /bin points to
+/usr/sbin - where administrative tools are kept (tools that require elevated privileges)
+/usr/lib - where system libraries are kept (special functions used by other programs)
+/usr/share - where documentation is kept (e.g., man pages)
+/usr/local - where admins should compile tools (e.g., using make)
+At the prompt, type ls /opt and press Enter to view directories under /opt.
+Embedded image
+
+The /opt directory is currently empty. The /opt directory is where unbundled third-party packages are installed. A popular example is the Oracle database.
+At the prompt, type ls /dev and press Enter to view directories under /dev.
+
+Dev is short for device. In Linux, devices are treated as files. For example, take note of the “file” called xvda. This "file" is a representation of the entire hard drive.
+Embedded image
+
+Other interesting devices in /dev include:
+
+The /dev/null device, which can be used as a black hole to dump unwanted output.
+
+The /dev/urandom device, which can be used to generate a random number.
+
+Note: The "files" under /dev are device files and are not human-readable.
+At the prompt, type sudo fdisk -l | grep dev | grep -v loop and press Enter to list all storage devices (grep dev) that are not loopback devices (grep-v loop).
+
+You will see a device labeled "Disk". This is the physical drive. Note that it's size is denoted in GiB (1000 bytes) versus GB (1024 bytes).
+
+Take note of the output. You will need this information to answer one of the questions on the Tasks tab.
+At the prompt, type sudo df -h and press Enter to list all partitions. The -h tells the df command to show the partition sizes in "human readable" numbers versus bytes.
+
+Note the size of the root partition ( / ) in GB and compare that to the fdisk output for the physical drive.
+At the prompt, type lsblk and press Enter to list all disks using a different command.
+Embedded image
+
+The lsblk command, short for “list block devices”, provides detailed information about block devices such as hard drives, solid-state drives, and other storage-related devices.
+At the prompt, type ls /mnt and press Enter to view directories under /mnt.
+Embedded image
+
+The name "mnt" is short for mount. This directory is used to mount other devices, such as a CD-ROM or USB stick. Currently, the directory is empty; nothing is mounted on the remote virtual machine.
+
+Note: The FSH wants you to use /media for removable media like cdroms and USB drives. The /mnt directory should be used for other storage connections like NFS. That being said, it is very common to see /mnt used for removable media.
+At the prompt, type ls / and press Enter to list all directories under root once more.
+
+Take note of the /root directory, which is the root user's home directory. Ordinary users cannot view root's home directory, though the cybrary user can use sudo ls /root. While this is root's directory, it is not the root ( / ) directory.
+Embedded image
+
+At the prompt, type ls /proc and press Enter to view the contents of the /proc directory.
+
+The name "proc" is short for processes. This directory is removed on system shutdown and recreated when the system boots up. Notice there are numbered directories. Each directory represents a running process (PID) in Linux.
+Embedded image
+
+Open a second terminal window, then type ps -e and press Enter to see a list of the active running processes.
+Embedded image
+
+Every process ID you see has a corresponding directory under /proc. You can close the second terminal window when done comparing.
+In the original terminal window, type ls /boot and press Enter to display the contents of the /boot directory.
+
+Linux stores important boot files used before the kernel starts any user-mode programs in this directory.
+Embedded image
+
+
+
+1.3 Challenge Exercise
+------------------------
