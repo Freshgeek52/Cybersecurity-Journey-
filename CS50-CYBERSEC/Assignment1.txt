@@ -1,0 +1,44 @@
+Characterize the difference between a database hack and a database leak.
+1 point
+We talk about a database hack when there is potential breach that allow a threat actor to intentionally take advantage of the vulnerability in order to gain unauthorized access. Whereas a database leak is the accidental or non-intentional disclosure/exposure of data due to human/machine error.
+In what sense might files not actually be deleted even if you empty the recycle bin on Windows or empty the trash on macOS?
+1 point
+Technically, when you delete a file and empty the recycle bin or trash, the file is not completely removed from your drive. Rather, it just frees up the space that the file was occupying in the drive by deleting the registry that it has created for it, making it invisible to see in our screen. Whenever we create or download a file into our computer, it is automatically written in our drive in a physical manner so for us to completely removing it from the drive, after deletion we have to make sure to overwrite new data on the space previously allocated to the deleted one. That being said, we can conclude that, technically sense files are not actually being deleted even if we empty the trash/recycle.
+How do quantum computers differ from traditional (non-quantum) computers?
+1 point
+Quantum computers differ from traditional one in the information processing aspect. While traditional computers work following the logic of bits which means their data can be in either 0 or 1. However, quantum computers use the qubits logic where data can be 0, 1 or can be both. The combination of 0 and 1 helps quantum computers to perform specific tasks at a very high speed - which seems almost impossible for traditional computer. With all confidence, we can assert that, the difference lies in their basic unit, processing capabilities, speed in completing tasks, and error handling.
+What is the term for the prevailing method via which public-key (i.e., asymmetric) cryptography enables two parties to establish a shared secret, even over an insecure (i.e., unencrypted) channel?
+1 point
+Diffie-Hellman-Merkle Key Exchange. 
+What is a salt, in the context of this lecture?
+1 point
+It is a random data being added to a password before the encryption and storage of it.
+Suppose that Alice and Bob need to coordinate a meeting, as by exchanging emails using Microsoft Outlook, a popular client for email.
+
+If their emails are encrypted in-transit, who (besides Alice and Bob, or anyone with access to their computer) might nonetheless be able to read the emails, if anyone?
+1 point
+No one will be able to read the emails in transit.
+Suppose that you have been hired to perform some work for Charlie. After agreeing to terms, you send the contract to Charlie via email, and, later that day, you receive a digitally signed copy from an email address that appears to belong to Charlie but isn't the one to which you sent the contract originally.
+
+How can you be as certain as possible, technologically (that is, without consulting Charlie) that Charlie was the one who digitally signed the contract?
+1 point
+To be sure Charlie was the one who digitally signed the contract, you have to validate the signature itself to make sure it was not modified - tools such as Adobe Acrobat, OpenSSL, GnuPG can help you do that. If the digital signature uses certificate, make sure this is issued by a trusted Certificate Authority.
+MD5 is an example of a still popular hashing algorithm that has been in use since the early 1990s. Read this article about MD5 before continuing on.
+
+Note that MD5 is a 128-bit algorithm, meaning its digests (i.e. hash values) are always 128 bits in length, and therefore there are 2^128 unique digests available. Thus, understand that the article's critique that there is a "high potential for collisions," while not invalid or indeed even incorrect, is perhaps something that should be understood with a bit of context.
+
+Suppose that a company has made a large file available for download via its website. Why might they also make available the MD5 hash of that file (as is indeed a common practice)?
+1 point
+Making the MD5 hash available for the users has a great benefit:
+ensure the file to be downloaded is exactly what they have provided and that the file is not tampered by malicious actors. Thus, preserving the file's integrity.
+Identify one or more significant differences between a cipher and a hash.
+1 point
+Difference between cipher and hash:
+1. cipher is reversible. Hash is not.
+2. cipher ensure confidentiality whereas hash covers the integrity part.
+3. Hash has no keys while cipher does.
+4. Hash output is usually fixed size while cipher output is mostly similar to its input size.
+Otkz D zvmizy v amzz kjdio! di ocz wjs wzgjr.
+No, the above isn't random typing! :)
+1 point
+It is a ciphertext. 

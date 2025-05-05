@@ -1,0 +1,481 @@
+**Article summary:**  
+
+1*U.S. Charges Yemeni Hacker Behind Black Kingdom Ransomware Targeting 1,500 Systems || May 03, 2025 by Ravie Lakshmanan on Cybercrime / Malware
+==============================================================================================================================================================
+ The U.S. Department of Justice (DoJ) charged Yemeni national Rami Khaled Ahmed 
+for deploying **Black Kingdom ransomware**, exploiting the **ProxyLogon vulnerability** 
+in Microsoft Exchange Server to attack 1,500+ systems globally, including U.S. businesses, 
+schools, and hospitals. Ahmed demanded $10,000 Bitcoin ransoms, leveraging web shells and 
+PowerShell commands in attacks described as "amateurish" by cybersecurity firm Sophos. 
+Concurrently, the DoJ announced actions against other cybercriminals: 
+Ukrainian national Artem Stryzhak (Nefilim ransomware), British member Tyler Buchanan (Scattered Spider group), 
+and leaders of child extortion group 764. Ransomware trends reveal a **surge in attacks (2,289 incidents in Q1 2025)**
+ but **declining payouts**, with 64% of victims refusing payments in 2024. Law enforcement disruptions have led to fragmented, 
+decentralized operations, shifting toward "lone-wolf" tactics and encryption-less extortion.
+
+**Key Takeaways:**  
+- **Global Law Enforcement Action**: U.S. charges highlight cross-border collaboration (Yemen, Ukraine, Spain) to combat cybercrime.  
+- **Exploitation of Known Vulnerabilities**: ProxyLogon (CVE-2021-26855) remains a critical attack vector, emphasizing patch urgency.  
+- **Ransomware Trends**:  
+  - Attacks rose 126% YoY (Q1 2025) but payments dropped (median: $115k in 2024 vs. $150k in 2023).  
+  - Shift to decentralized operations and data theft over encryption.  
+- **Cybercrime Networks**: Groups like Scattered Spider and 764 link ransomware to broader crimes (e.g., child exploitation, insider threats).  
+- **Sector Targets**: Consumer goods, healthcare, and industrial manufacturing face highest ransomware risks.  
+- **Defensive Progress**: Increased victim resistance to payments (64% refused ransoms in 2024) reflects improved preparedness and law enforcement impact.
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+2* TikTok Slammed With €530 Million GDPR Fine for Sending E.U. Data to China || May 02, 2025 by Ravie Lakshmanan on Data Privacy / Social Media
+==============================================================================================================================================================
+
+Ireland’s Data Protection Commission (DPC) imposed a **€530 million ($601 million) GDPR fine** on TikTok for unlawfully transferring European Economic Area (EEA) 
+user data to China and failing to meet transparency requirements. The investigation, launched in 2021, found TikTok violated **Article 46(1)** 
+of the GDPR by not ensuring Chinese data protections matched EU standards, particularly given China’s anti-terrorism and counter-espionage laws that
+ grant authorities broad data access. Despite TikTok’s claims that it never shared EEA data with Chinese officials, the DPC revealed the company misled 
+regulators by initially denying storage of EU data in China, later admitting a system flaw caused limited data to reside there until February 2025. 
+TikTok must now suspend China-bound data transfers within six months and faces potential further penalties. This follows a **2023 €345 million fine** 
+for mishandling children’s data, underscoring recurring compliance failures. TikTok defended itself by citing **Project Clover**, 
+its data security initiative, but regulators dismissed it as insufficient to address violations.
+
+---
+
+**Key Takeaways:**  
+
+- **GDPR Enforcement**: The fine highlights strict EU enforcement of cross-border data transfer rules, emphasizing equivalence in third-country protections.  
+- **Transparency Failures**: TikTok’s misleading statements about data storage in China worsened penalties, stressing the importance of regulatory honesty.  
+- **China Data Risks**: Concerns over Chinese laws enabling state access to data remain a critical barrier for companies operating in the EU.  
+- **Systemic Non-Compliance**: This marks TikTok’s second major GDPR penalty in two years, signaling persistent governance gaps.  
+- **Operational Impact**: The six-month suspension order disrupts TikTok’s data flows, forcing infrastructural changes to retain EU market access.  
+- **Broader Implications**: Companies reliant on third-country data processing must preemptively align with GDPR’s Article 46 or face severe repercussions.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+3* Iranian Hackers Maintain 2-Year Access to Middle East CNI via VPN Flaws and Malware || Ravie LakshmananMalware / Operational Technology - 03-05-2025
+=============================================================================================================================================================
+
+An Iranian state-sponsored hacking group, Lemon Sandstorm (aka Parisite), maintained persistent access to Middle East critical national infrastructure (CNI)
+ for nearly two years (May 2023–February 2025) by exploiting VPN vulnerabilities in Fortinet, Pulse Secure, and Palo Alto Networks. The attack, analyzed by 
+FortiGuard, unfolded in four stages, deploying tools like **Havoc** (command-and-control framework), **NeoExpressRAT** (Discord-linked backdoor), 
+**SystemBC** (ransomware precursor), and custom malware such as **HanifNet** and **CredInterceptor** (LSASS credential harvester). Open-source tools like
+**MeshCentral** (remote monitoring) and web shells (e.g., **RecShell**, **DropShell**) facilitated lateral movement and data exfiltration. The attackers
+ adapted tactics as defenses improved, using spear-phishing, Biotime vulnerabilities (CVE-2023-38950-38952), and proxy chains (e.g., **plink**, **Ngrok**)
+ to evade detection. Despite targeting operational technology (OT) networks, no OT breaches were confirmed.  
+
+**Key Takeaway:**  
+The campaign underscores the sophistication of state-backed threats, emphasizing the need for rigorous patch management, multi-factor authentication, 
+and network segmentation to defend against evolving tactics like VPN exploits, credential theft, and layered persistence mechanisms. 
+Critical infrastructure must prioritize advanced threat detection and response to counter prolonged, adaptive intrusions.
+
+=============================================================================================================================================================
+
+Linux File System Basics
+--------------------------
+
+1.3 Challenge Exercise
+
+Overview
+In this challenge, you will use the cat command to retrieve flags that demonstrate you know key directories in the Linux file system. 
+The cat command prints the content of a file to the terminal. For example, to view the contents of /etc/hosts, type cat etc/hosts and press Enter.
+
+1. There is a file called flag in the directory where Linux keeps device files. What is the flag?
+Type your answer here
+
+>> /dev
+
+2. There is a file called flag in the directory where Linux keeps administrative tools (tools that require elevated privileges). What is the flag?
+Type your answer here
+
+>> /usr/sbin - where administrative tools are kept (tools that require elevated privileges) 
+
+3. There is a file called flag in the directory where Linux keeps common commands. What is the flag?
+Type your answer here
+
+>> /usr/bin - where commands are kept and where /bin points to
+
+
+4. There is a file called flag in the directory where Linux keeps variable data. What is the flag?
+
+>>/var
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Network Reference Models
+------------------------
+
+1.1 Core Concepts
+-------------------------
+
+ISO Model || TCP/IP Model
+
+1.2 Guided Exercise
+---------------------
+Examine a Packet Capture
+In this guided exercise, you will take a look at the TCP/IP and OSI model layers through the Wireshark protocol analyzer. Wireshark will display all the encapsulated portions of a packet in its Packet Details pane. However, it does not conform to either the TCP/IP or OSI model, but rather a combination of both. 
+
+Namely, it only combines layers 5-7 (Application, Presentation, Session) of the OSI model, leaving alone layers 1-2 (Physical and Data Link, as opposed to combining them into a Network Access layer as in the TCP/IP model). Let’s add that detail to the diagram you previously viewed so you get the full comparative picture.
+
+It’s also important to note that Wireshark will list these layers of encapsulation with the lower layers at the top (Physical, Data Link), and the higher layers at the bottom (Application). 
+
+Alright – enough chit chat. Open the Packet Capture and get busy.
+
+From the Desktop, double-click the Practice.pcpng file to launch this lesson's Packet Capture in Wireshark.
+Embedded image
+
+The Packet List pane (top) and the Packet Details pane (middle) are the ones you’re interested in. You’ll select packets from the Packet List, and inspect its encapsulated layers in the Packet Details pane.
+
+Go ahead and remove the Packet Bytes pane from your view to free up some real estate.
+From the Wireshark menu, select View > Packet Bytes to remove the Packet Bytes pane from your view.
+Embedded image
+
+First disclaimer: Know that the term 'packet' is used liberally in Wireshark to refer to the data units captured for inspection, regardless of whether the ‘packet’ has any of the headers and trailers associated with the same-named PDUs at the Internet/Network layers. Gotta call it something to be consistent, so packet it is!
+In the Packet List view, select the first broadcast packet in the list.
+Embedded image
+
+You’re looking at a wireless Packet Capture. These beacons are the broadcast messages sent out by a Wireless Access Point (WAP) to advertise its network. We’ve selected a Wireless capture because it will provide information about the Physical layer. If this were captured on a wired interface, Wireshark would begin with the Data Link layer (2), because this is the layer at which Wireshark decodes packets captured over the wire (as opposed to over-the-air).
+In the Packet Details pane, double-click the Frame row (top) to expand it.
+Embedded image
+
+Second (last) disclaimer: this “Frame” section will be included in every packet, and does not correspond to the Frame PDUs that switches forward over the Data Link layer in a local network. Rather, this is a special Wireshark meta-layer that contains details about the packet. This include useful information like:
+
+Encapsulation type –  this refers to the top-layer header present in the packet. By “top”, this refers to the lowest layer in OSI and TCP/IP terms, that is available in the packet. This makes sense if you remember that traveling down the stack (sending data, aka encapsulation) means adding additional details to the packet.
+
+Protocols in frame – contains a colon-separated list of all protocols contained in this packet. In this case, you can see it contains information about the radio transmission (the Physical Layer) and about the 802.11 WLAN protocol (the Data Link Layer). These are displayed left-to-right from the lowest to the highest protocol layer found in the packet. You can inspect these protocols in the rows below.
+Double-click the Frame row to collapse it, then double-click the Radiotap Header v0 row to expand it.
+
+This contains Physical Layer information, such as the data rate, the strength of the antenna signal in decibel milliwatts (dBm), the channel being used, and the frequency. You can see this broadcast packet advertises a network over the 2.4GHz layer, the most common frequency for Wi-Fi networks (the other being the less-crowded 5GHz).
+Double-click the Radiotap Header v0 row to collapse it, then double-click the 802.11 radio information row to expand it.
+
+
+This layer contains much of the same (Physical Layer) information displayed in the previous one, although is slightly more readable.
+Double-click the 802.11 radio information row to collapse it, then double-click the IEEE 802.11 Beacon frame row to expand it.
+
+
+Now we’re on to the Data Link layer. The giveaway? Look at those destination and source MAC addresses, those address identifiers found in the headers of Frames, used by switches to forward data to its destination on the local network. You’ve got a broadcast address as destination (the highest possible MAC address, since FF is the largest value in hexadecimal), and the MAC address of the transmitting network card on the WAP.
+
+Take note of the MAC address for the transmitter. You will need it to answer one of the questions on the Tasks tab.
+Double-click the IEEE 802.11 Beacon frame row to collapse it, then double-click the IEEE 802.11 Wireless Management row to expand it.
+
+
+Similar to the radio rows, this row contains much of the same information contained in the previously inspected lower layers. One additional piece is the Beacon Interval, which refers to the frequency at which these beacons are broadcast.
+
+No more layers to inspect in these packets, as these simple Beacon Frames contain no higher-layer information. Let’s move on to a packet that contains some additional layers.
+In the Wireshark display filter bar, type tcp to show only packets with TCP.
+
+Looking at the Protocol column in the Packet List Pane, notice you can see TCP packets, as well as some HTTP packets in the list. That’s because both contain TCP information. Specifically, HTTP packets, which contain higher-layer Application Layer details, are encapsulated by the layers below it, including the Transport layer (and specifically TCP), so naturally they contain all the lower-layer dependencies.
+Select the first HTTP packet in the list (No. 841).
+
+
+Behold - the same layers you saw in the Beacon packet, in addition to the lower layers that wrap up (encapsulate) the HTTP protocol. From top-to-bottom, you’ll find:
+=======================================================================
+Physical Layer (Radio Information)
+Data Link Layer (IEEE 802.11 and Logical-Link Control Information)
+Internet/Network Layer (Internet Protocol Version 4)
+Transport Layer (Transmission Control Protocol, aka TCP)
+Application Layer (Hypertext Transfer Protocol)
+Double-click the Internet Protocol Version 4 row to expand it.
+=============================================================================
+
+A couple interesting Network/Internet Layer details can be found here, such as:
+
+Source and Destination IP addresses – you know, those logical identifiers of the Internet/Network Layer.
+Protocol – the Transport Layer Protocol it has encapsulated (TCP).
+
+Take note of the destination IP address. You will need it to answer one of the questions on the Tasks tab, along with the port number, which you will find in the next step.
+
+Now let's continue moving up the stack and check out that encapsulated Transport Layer protocol.
+Double-click the Internet Protocol Version 4 to collapse it, then double-click the Transmission Control Protocol row to expand it.
+Embedded image
+
+Remember, this layer is the province of ports! You can see the destination port (a common port for HTTP, or unencrypted web traffic), and the source port (a random one chosen by the sending application). You also see sequence and acknowledgement numbers, which help TCP track the transmission for error-checking, delivery guarantees, and reassembly at the other end. How reliable!
+Double-click the Transmission Control Protocol row to collapse it, then double-click the Hypertext Transfer Protocol row to expand it.
+Embedded image
+
+You’ve reached the top layer of abstraction, the old and venerable HTTP. Here you’ll find the HTTP request made (GET / HTTP/1.1, aka get the hypertext document at the root of the web site, using HTTP version 1.1) in addition to the full host URI in the form of protocol://ip-address:port.
+
+Okay, almost done – you’ve reached the top layer of this packet, but this was just an HTTP request. For an HTTP response, data will be sent as well (that data being the content of the web page), which Wireshark will add as another Application Layer. Check that out before closing this section out.
+In the Packet List pane, select the second HTTP packet (no.844) to view the HTTP response.
+Embedded image
+
+Okay, so there are actually two new details here: an additional Transport layer row that notes the TCP segments that were reassembled, and the aforementioned new Application layer that contains the data sent back to the client.
+In the Packet Details pane, double-click the Line-based text data row to expand it.
+Embedded image
+
+There it is – the human-generated message that was sent down the stack for encapsulation into the lower layer PDUs for sending over-the-air, then sent back up the stack to peel away (decapsulate) those additional layers of information, ultimately revealing the message contained therein to the client. What a trip!
+
+Take note of the "flag" in the Application layer data. You will need this information to answer one of the questions on the Tasks tab.
+
+Note: We're putting "flag" in quotes here because we're referring to something different than the TCP flags you will find in network traffic. In this case, we mean "flag" as in "Capture the Flag" - which refers to a popular Virtual Lab format where the objective is to retrieve a unique value to win the game. Be sure to include the {brackets} - these are a common convention in Capture the Flag style challenges.
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+IP Addressing Basics
+======================
+
+1.1 Core Concepts
+------------------
+In this lab, we will explore the building blocks of modern networking: Transmission Control Protocol/Internet Protocol (TCP/IP) and Address Resolution Protocol (ARP).
+
+TCP/IP and ARP have their roots in the early days of networking when computer networks began to form in the late 1960s and early 1970s. Back then, networks were constructed at great cost using custom hardware and proprietary software. In the 1990s, the Internet Engineering Task Force (IETF) worked with leading industry vendors to create open standards. Today's modern networks are based on these standards.
+
+The TCP/IP Network Model
+TCP/IP is a suite of networking protocols that govern how data is transmitted, routed, and received between devices on a network. TCP/IP is a layered protocol, meaning it's organized into four distinct areas, each with specific functions:
+
+Embedded image
+
+Together, the TCP/IP protocols enable data to be broken into packets, routed across networks, and reliably delivered and reassembled. The suite's flexibility and scalability have contributed to its widespread adoption and role as the backbone of the modern Internet.
+
+Note: You may already be familiar with another network reference model, the OSI model (perhaps in our Network Reference Models lab?). The OSI model—which has seven layers—is considered more comprehensive, while the TCP/IP model is considered more practical. Neither model perfectly depicts reality, but they are useful for understanding how a modern network functions.
+
+Transmission Control Protocol
+The Transmission Control Protocol provides reliable, connection-oriented communication. It establishes a communication channel between two devices, allowing data transfer and ensuring that data is sent and received correctly without errors. TCP uses port numbers to distinguish between services running on the same device. For example, port 80 is typically associated with HTTP (web) traffic, while port 25 is used for SMTP (email) traffic. Below is a list of the more common TCP ports:
+
+Embedded image
+
+Note: UDP stands for User Datagram Protocol. UDP offers faster, connectionless communication but doesn't provide the same reliability and error correction as TCP.
+
+Internet Protocol
+The Internet Protocol is responsible for moving data packets from a source to a destination across networks using routers. A router is a special device that can forward packets to and from different networks using IP addresses. There are two types of IP addresses used today. Internet Protocol version 4 (IPv4) is currently the most widely used. IPv4 is a 32-bit address made up of four octets and a subnet mask. The newer Internet Protocol version 6 (IPv6) uses massive 128-bit addresses to accommodate the growing number of devices on the Internet. This lab will focus on IPv4 addresses.
+
+As noted above, an IPv4 address is made up of four octets. An octet is a number from 0 to 255. The subnet mask's purpose is to signal which octets represent the host and which represent the network. Let's look at an example:
+
+Embedded image
+
+In the example above, 192.168.10.100 is the IP Address, and 255.255.255.0 is the subnet mask. A 255 in the subnet mask means the octet is part of the network, while a 0 (zero) means the octet represents the host. The first three octets (192.168.10) are the network, and the fourth octet (.100) is the host. Thus this example shows host 100 on network 192.168.10.0.
+
+Hosts on the same network can speak to each other directly using ARP (see below), while hosts on another network must have messages forwarded using a router. In the example below, the first and second hosts shown share the same network (192.168.10), and thus, they can reach each other without a router. However, the third host does not use the same network (192.168.11) and will require a router to communicate with the first two.
+
+
+Note: It is common to see 255.255.255.0 written as /24 ("slash" 24). This means that 192.168.10.100/24 is the same as 192.168.10.100 255.255.255.0.
+
+Routing and Subnetting
+For this lab, you only need to understand that an IP address is made up of two parts (network and host) and that only hosts on the same network can speak to each other without a router. In the example below, 192.168.10.10 can speak directly to 192.168.10.20, but it will need the router at 192.168.10.1 (called a gateway) to speak with 192.168.11.10 or 192.168.11.20. Notice the router has two IP Addresses, one in each network. It's important to note that routers do not need to be part of a given network to route traffic. A router can use its own gateway to send packets outside of the local networks (e.g., to and from the Internet).
+
+Embedded image
+
+Media Access Control and Address Resolution Protocol
+When a device on a local network segment wants to communicate with another device on the same segment, it needs to know the destination device's Media Access Control (MAC) address. The MAC address is a 12-digit hexadecimal number unique on a given network segment. ARP is used to map local IP Addresses to MAC addresses.
+
+ARP works as follows:
+
+A host broadcasts an ARP request to the local network.
+When the device with the target IP address sees the ARP request, it replies with an ARP response
+After receiving the ARP response, the requesting device stores a mapping of the IP address to MAC address in its ARP cache.
+Note: The ARP cache is used to avoid sending ARP requests for the same IP address frequently. Entries in the ARP cache typically have a timeout, after which they are considered stale and need to be refreshed.
+
+With the MAC address now known, the sending device can encapsulate IP packets within Ethernet frames and send these to the target device using the destination MAC address.
+
+
+1.2 Guided Exercise
+--------------------
+Getting Started
+In this lesson, you will practice analyzing a TCP/IP network topology using the GNS3 network simulator.
+
+On the dock at the bottom of the screen, click the Terminal icon to open a new Terminal window.
+At the command prompt, type gns3 & and press Enter to open GNS3 in the background.
+
+When GNS3 opens, you will be asked to create a project or open an existing project.
+In the Project window, click the Projects library tab, then select the IP Address Basics project and click OK.
+
+When prompted, click No to skip the update check.
+
+GNS3 will open the IP Address Basics lab topology. You will see a large window in the center (the topology window) showing four Linux hosts, two switches, and a router.
+Embedded image
+
+On the GNS3 control bar, click the Start button (the large green arrow) to power on all devices.
+
+When prompted, click Yes to continue.
+
+In the GNS3 topology window, you will see all connections turn green, indicating the hosts are powered on and connected to the network.
+Embedded image
+
+Part 1: Examine Network Hosts
+In this part of the lab, we will open a terminal on each host in the network and examine its network configuration information, routing table, and network configuration file.
+
+In the GNS3 topology window, right-click Linux-1 and select Console from the context menu.
+Embedded image
+
+Restore the Terminal window.
+
+You should now see a new tab titled Linux-1.
+Embedded image
+
+In the terminal window, on the Linux-1 tab, type ifconfig and press Enter to display the network configuration for the Linux-1 host.
+Embedded image
+
+You should see two network interfaces: eth0 (the primary network interface for this Linux system) and lo (a loopback interface, which is a virtual interface used by the operating system to communicate with itself).
+
+Take note of the MAC address (HWaddr), IP Address (inet addr), and the Subnet Mask (Mask) for the eth0 interface.
+
+Because the subnet mask is 255.255.255.0, we know that the first three octets are the network address, and the last octet is the host address. Thus, this is the 192.168.0.10 host on the 192.168.0.0/24 network.
+
+Note: Because this is a virtual environment, the MAC addresses will change every time GNS3 restarts the network. MAC addresses do not change in the real world, although many devices (such as smartphones) are capable of spoofing their MAC addresses for privacy reasons.
+Execute ifconfig on Linux-2, Linux-3, and Linux-4 to display the network configurations for the remaining hosts.
+
+Take note of the IP Address and subnet mask on Linux-3. You will need this information to answer one of the questions on the Tasks tab.
+In the terminal window, on the Linux-1 tab, type ip a and press Enter to display the network configuration on the Linux-1 host.
+Embedded image
+
+The ip a command has replaced the ifconfig command on many modern Linux systems. Notice that you see similar information to the output of the ifconfig command, but that ip a uses slash notation to express the subnet mask.
+In the terminal window, on the Linux-1 tab, type netstat -r and press Enter to display the kernel IP routing table.
+Embedded image
+
+You should see that the default gateway is 192.168.0.1. Any IP traffic not destined for the local network is sent to the default gateway (router). The router then forwards the packet to the correct network or onward to another router.
+Execute netstat -r on Linux-2, Linux-3, and Linux-4 to look up the default gateway for each host.
+In the terminal window, on the Linux-1 tab, type cat /etc/network/interfaces and press Enter to display the full Linux network configuration file.
+
+The section that matters is under the comment # Static config for eth0. This is where the network configuration is defined.
+Embedded image
+
+Note: If the gateway is misconfigured in /etc/network/interfaces it will not appear as a default gateway using netstat -r.
+Review the /etc/network/interfaces file on Linux-2, Linux-3, and Linux-4.
+
+Take of the flag hidden in the Linux-2 /etc/network/interfaces file. You will need this information to answer one of the questions on the Tasks tab.
+Part 2: Test Connectivity
+The first step in troubleshooting a network issue is to ensure the default gateway is correct and to test connectivity to that gateway. In this part of the lab, you will practice testing the connectivity between Linux-1 and the 192.168.0.1 gateway.
+
+In the terminal window, on the Linux-1 tab, type ping -c 4 192.168.0.1 and press Enter to test connectivity to the default gateway.
+Embedded image
+
+Test connectivity to the default gateway on Linux-2, Linux-3, and Linux-4.
+
+Be sure to use the correct gateway for each network.
+
+If a host has the correct IP address, subnet mask, and gateway, it should be able to reach any other host the router can. Our router sits between two networks: 192.168.0.0/24 and 192.168.1.0/24. Thus, any correctly configured host on 192.168.0.0/24 should be able to reach hosts in 192.168.1.0/24 and vice-versa.
+In the terminal window, on the Linux-1 tab, type ping -c 4 192.168.1.10 and press Enter to test connectivity to the 192.168.1.0/24 network.
+In the GNS3 topology window, right-click the Router and select Stop from the context menu.
+
+You will see the connection indicators on the Router turn red. Without a gateway (router), network 192.168.0.0/24 should not be able to reach network 192.168.1.0/24.
+Embedded image
+
+In the terminal window, on the Linux-1 tab, type ping -c 4 192.168.1.10 and press Enter to test connectivity to the 192.168.1.0/24 network.
+
+You should find that you can no longer reach the 192.168.1.0/24 network.
+In the GNS3 topology window, right-click the Router and select Start.
+
+You should see the connection indicators on the Router turn green. Wait a few seconds after you power up the router before proceeding to the next step.
+In the terminal window, on the Linux-1 tab, type ping -c 4 192.168.1.10 and press Enter to test connectivity to the 192.168.1.0/24 network.
+
+Connectivity should now be restored.
+Part 3: Inspect ARP Caches
+In this part of the lab, we will shift our focus to local subnet traffic and ARP. Recall that ARP is used to map local IP Addresses to MAC addresses.
+
+First, you will toggle the power on the network to reset the devices.
+
+On the GNS3 control bar, click the Stop button (the large red box) to power off all devices.
+
+When prompted, click Yes to continue.
+
+In the GNS3 topology window, you will see that all connections turn red (except for the switches, which are always green), indicating the hosts are powered off. This action will close the Linux-1, Linux-2, Linux-3, and Linux-4 tabs in the terminal window.
+Embedded image
+
+On the GNS3 control bar, click the Start button to power on all devices.
+
+When prompted, click Yes to continue.
+In the GNS3 topology window, right-click Linux-1 and select Console from the context menu.
+
+As before, a new tab called Linux-1 will open in your existing terminal window.
+In the terminal window, on the Linux-1 tab, type arp -a to display all cached ARP entries.
+
+We have not made any networking requests yet, so there will be nothing in the ARP cache.
+On the Linux-1 tab, type ping -c 4 192.168.0.20 and press Enter to test connectivity to Linux-2 on the local subnet.
+
+Linux-1 will first send an ARP request to all hosts on the 192.168.0.0/24 network (using a Broadcast). Linux-2 will answer with its MAC address. Lastly, Linux-1 will create a MAC to IP mapping that will cache for some time.
+On the Linux-1 tab, type arp -a and take note of the ARP cache.
+Embedded image
+
+In the GNS3 topology window, right-click Linux-2, and select Console from the context menu.
+
+As before, a new tab called Linux-2 will open in your existing terminal window.
+In the terminal window, on the Linux-2 tab, type ifconfig and press Enter to confirm Linux-2's MAC address and compare it to the MAC address found in Linux-1's ARP cache.
+Embedded image
+
+Note: The ifconfig command will display the MAC address in all caps, whereas ARP stores the MAC address using lowercase letters. MAC addresses are not case-sensitive.
+In the terminal window, on the Linux-1 tab, type ping -c 4 192.168.1.10 and press Enter to test connectivity to the 192.168.1.10 host in the 192.168.1.0/24 network.
+On the Linux-1 tab, type arp -a and take note of the ARP cache.
+
+Is this what you expected? Remember, ARP is only for local addresses.
+From Linux-1, ping 192.168.1.20, then check the ARP cache.
+
+Did it change? Should it have?
+
+Take note of the IP addresses and MAC addresses related to the 192.168.1.0/24 network stored in the ARP cache. You will need this information to answer one of the questions on the Tasks tab.
+On the GNS3 control bar, click the Stop button to power off all devices.
+
+When prompted, click Yes to continue.
+Right-click the connection between Linux-1 and Switch-1 and select Start Capture to open a Wireshark session on this network link.
+Embedded image
+
+When prompted, click OK to continue.
+In Wireshark, type arp in the display filter field and press Enter to filter for ARP traffic only.
+Embedded image
+
+On the GNS3 control bar, click the Start button to power on all devices.
+
+When prompted, click Yes to continue.
+In the GNS3 topology window, right-click Linux-1 and select Console from the context menu.
+In the terminal window, on the Linux-1 tab, type ping -c 4 192.168.0.20 and press Enter to ping the Linux-2 device.
+
+In Wireshark, you should see that Linux-1 sends a Broadcast message. All hosts and devices on the local subnet can see a Broadcast message. Next, Linux-2 replies to Linux-1 with its MAC address. Notice that Linux-2 then makes its own ARP request for Linux-1's MAC address. This request is made because Linux-2 assumes more traffic to and from Linux-1 will be forthcoming.
+Embedded image
+
+Note: Remember - because this is a virtual environment, the MAC addresses will change every time GNS3 restarts the network.
+In the terminal window, on the Linux-1 tab, type ping -c 4 192.168.1.10 and press Enter to ping the Linux-3 device.
+
+In the Wireshark window, notice that Linux-1 again sends a Broadcast message looking for the MAC address of the default gateway. The Router responds with its MAC address and then makes its own request for Linux-1's MAC address.
+
+Take note of the total number of ARP requests made in the last two steps. You will need this information to answer one of the questions on the Tasks tab.
+
+
+1.3 Challenge Exercise
+----------------------
+
+Network Device Basics
+=======================
+1.1 Core Concepts
+-------------------
+
+Overview
+
+Modern networking traces its roots to ARPANET, an early prototype designed to connect research institutions and enable communication and resource sharing. Initially, ARPANET employed proprietary, ad hoc methods for connectivity. In the 1970s, it adopted the TCP/IP protocol, establishing a standardized framework for diverse networks to communicate. This innovation laid the foundation for the first global network. Early tools like Gopher and Usenet were limited in functionality, making information retrieval challenging. However, the introduction of HTML and web browsers revolutionized access, allowing users to easily locate information. The implementation of a hierarchical Domain Name System (DNS) further simplified navigation by replacing cryptic IP addresses with intuitive, human-readable names.
+
+As the Internet developed, organizations began creating internal networks using vendor-specific protocols and equipment. Companies like IBM, Novell, and Sun Microsystems pioneered technologies for Local Area Networks (LAN), which connect computers within a limited area. Notable examples of these technologies include Arcnet, Token Ring, and the dominant Ethernet. Today, Ethernet over twisted-pair cables is the most widely adopted wired networking technology. Speeds of 1 Gbps (1000Base-T) to the desktop are now both common and cost-effective. Wireless networks have also evolved significantly, offering speeds ranging from 54 Mbps (802.11g) to an impressive 100 Gbps (802.11ay).
+
+In this lab, we will examine common network devices used in modern networks.
+
+Common Network Devices
+A network device is simply any device that facilitates local or wide-area communication between systems. What kind of devices make up a network? The image below shows some of the most common types of network devices used today.
+
+The network interface card (NIC) connects servers and clients to the network.
+An unshielded twisted pair (UTP) cable plugs directly into the NIC and then to a wall outlet, where another UTP cable will run to a patch panel in a server room. A third UTP cable will then make the connection from the patch panel in the server room to a port on a switch. 
+A switch is a "layer 2" network device that manages local LAN traffic. Devices on the same LAN will simply pass traffic through the switch to other local devices. However, if an IP address outside the LAN is needed, the switch will pass this traffic to a router.
+The router is a "layer 3" device that can move traffic between LANS. The router will traffic to another switch on a connected LAN or another router until the host LAN is found. 
+Wireless access points use a UTP cable to connect to a switch so wireless clients can join the LAN.
+Note: The "layers" mentioned above come from the OSI model. Switches operate at the Data Link Layer, and Routers operate at the Network Layer. There are also “Layer 3" switches that can manage both local LAN traffic and IP routing. Layer 3 switches can create isolated virtual LANs (VLANS) and route between them, all in a single appliance.
+
+Here is how these devices might connect in a small office:
+
+For fun, watch this short video from YouTuber ThioJoe, where he sets up a home/small office network: I Built a Home Server Rack! (And How You Can Too)
+
+Legacy Network Devices
+Although you will rarely encounter them now, older networks commonly included hubs, bridges, and repeaters.
+
+A hub is like a switch, only less intelligent. On a hub, all traffic is sent out to all ports every time a host communicates. This behavior leads to traffic collisions that slow the network down. A switch keeps a mapping of ports to hosts and only sends traffic on a port when it's destined for a specific host. Hubs were popular when switching was expensive, but these days, switching is cheap, and hubs have fallen out of use.
+A bridge is a network device that connects two LAN segments into a single LAN. In many ways, a bridge is the opposite of a router, which is used to separate LANS.
+Lastly, all cables have a maximum length. Repeaters are used to extend network cables when they reach that maximum distance.
+Additional Network Devices
+A modern LAN will also typically include:
+
+Firewall: A firewall controls the flow of traffic from a trusted to an untrusted area (e.g., the Internet) and vice-versa. Firewalls allow required ports and protocols outbound (e.g., HTTPS) and limit inbound traffic to only those servers that provide services to the Internet (e.g., a Webserver). The firewall also provides Network Address Translation (NAT). NAT allows all internal systems to share a public IP for browsing (called many-to-one NAT). NAT is also used to expose internal servers when they need to be reachable from the Internet (called one-to-one NAT).
+Proxy: A proxy accesses content on behalf of a client. Typically, all internal users will be granted Internet access through a proxy. The proxy is application-aware to filter and block traffic from malicious sites using a blocklist. Typically, only the proxy is allowed Internet access by the firewall, and all internal clients must go through the proxy to reach the Internet.
+Virtual Private Network (VPN): A VPN allows clients outside the LAN to access LAN resources as if directly attached. A "virtual network cable" is created using a secure protocol like IPsec.
+Note: Many firewalls come with VPN and Proxy functionality.
+
+Wide Area Networks
+Network devices can also create a Wide-Area Network (WAN). A WAN comprises hardware (e.g., Routers) and protocols that leverage a vendor-purchased connection that spans a long distance. One example of this is Frame Relay. In a frame relay network, routers use serial cards to connect to other routers over special leased telco lines, forming a star or mesh topology. Each endpoint is typically an office in another town or a data center. Note that Traffic over a WAN is generally much slower than over the LAN, so precautions are needed to protect the WAN from becoming saturated.
+
+
+Up Next
+In the next lesson, you will use GNS3 to emulate a small LAN with an Internet connection. You will explore and test the current configuration, then configure parts of the LAN to add a new network. In the process, you will practice setting up Linux IP addresses, testing network connectivity, and configuring a popular open-source firewall (pfSense).
+
+
+
+1.2 Guided Exercise
+
+1.3 Challenge Exercise

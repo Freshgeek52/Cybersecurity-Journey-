@@ -301,33 +301,32 @@ Embedded image
 The file command displays a file's type (e.g. ascii, binary, pdf, etc.) Even if a file has no extension or is intentionally mislabeled (e.g. file1.exe) the file command will reveal the file actual type.
 
 Note: Linux does not require any extension on files. Adding an extension (e.g. txt) is a courtesy to other users on the system and a best practice.
-At the prompt, use the echo command to append This is file 2 to file2.txt and This is file 3 to file3.txt, then use the cat command to confirm.
-At the prompt, use the mkdir command to create three new directories in the labworks directory: red, blue, and green.
+>>At the prompt, use the echo command to append This is file 2 to file2.txt and This is file 3 to file3.txt, then use the cat command to confirm.
+>>At the prompt, use the mkdir command to create three new directories in the labworks directory: red, blue, and green.
 
 Note: It is possible to make all three directories at once. Use ls to confirm your work.
 
 In the next steps, you will practice the commands to copy and move files.
-At the prompt, type cp file1.txt blue/ and press Enter to copy file1.txt to the blue directory.
+>>At the prompt, type cp file1.txt blue/ and press Enter to copy file1.txt to the blue directory.
 Embedded image
 
-At the prompt, type ls -R and press Enter to display all files and folders under the labwork directory.
-Embedded image
+>>At the prompt, type ls -R and press Enter to display all files and folders under the labwork directory.
 
 Notice that file1.txt exists in both the labwork directory and blue directory after executing the copy command.
-At the prompt, type rm -i file1.txt and press Enter to remove file1.txt.
+>>At the prompt, type rm -i file1.txt and press Enter to remove file1.txt.
 
 When prompted, type y and press Enter to confirm.
 Embedded image
 
 Note: Without the -i option, rm would have removed the file without confirmation. This is very dangerous as the Linux CLI does not have a recycle bin like Windows. The rm command does not honor the GUI recycle bin even if you use a Linux GUI desktop. If you delete a file accidentally, you will need to restore that file from a backup. So it is always best to use the rm command with the -i option when you are new to Linux.
-At the prompt, type ls -R and press Enter to confirm that file1.txt is now removed from the labworks folder.
-At the prompt, type mv file2.txt green and press Enter to move the file2.txt file to the green directory, then execute ls -R to confirm that file2.txt only exists in the green directory.
+>>At the prompt, type ls -R and press Enter to confirm that file1.txt is now removed from the labworks folder.
+>>At the prompt, type mv file2.txt green and press Enter to move the file2.txt file to the green directory, then execute ls -R to confirm that file2.txt only exists in the green directory.
 
 Unlike the cp command, the mv command does not leave a copy of the file behind.
 Embedded image
 
 The mv command is also used the rename files.
-At the prompt, type mv file3.txt happypumpkin.moo and press Enter to rename file3.txt.
+>>At the prompt, type mv file3.txt happypumpkin.moo and press Enter to rename file3.txt.
 Execute ls -R to confirm that file3.txt is gone, and in its place is happypumpkin.moo.
 
 It's the same file, but with a new name.
@@ -355,11 +354,9 @@ The pipe ( | ) sends all that text to the head command. We learn more about pipi
 The head command chops off the first 1MB of the file.
 
 The overwrite redirector ( > ) then sends the 1MB worth of text to a file called abigfile.txt. If anything else was in abigfile.txt it would get overwritten.
-Execute ls -la to confirm the creation of abifile.txt.
-Embedded image
+>>Execute ls -la to confirm the creation of abifile.txt.
 
-At the prompt, type more abigfile.txt and press Enter to open abigfile.txt in more.
-Embedded image
+>>At the prompt, type more abigfile.txt and press Enter to open abigfile.txt in more.
 
 You can Press the Enter key to scroll down one line at a time. Use the space bar to scroll down one page at a time. To exit back to the prompt, press q to quit.
 At the prompt, type less abigfile.txt and press Enter to open abigfile.txt in less.
@@ -435,6 +432,7 @@ Linux File System Basics
 1.2 Guided Exercise
 
 Explore the Linux File System
+------------------------------
 In this lab, you will explore the Linux file system and get familiar with the Filesystem Hierarchy Standard (FHS).
 
 On the Linux desktop, right-click anywhere and select Open Terminal Here from the context menu to open a Terminal window.
@@ -487,13 +485,13 @@ At the prompt, type sudo tree /home and press Enter to view the contents of the 
 Notice the michael user has a new home directory named michael. The additional directories you see under cybrary are only created when a user logs in for the first time.
 Embedded image
 
-At the prompt, type ls -l /home/cybrary and press Enter to see the permissions granted to the cybrary user.
+>>At the prompt, type ls -l /home/cybrary and press Enter to see the permissions granted to the cybrary user.
 
 Notice that cybrary is the owner of, and has rwx (full permission) on all directories in their home directory.
-Embedded image
 
-At the prompt, type ls /etc and press Enter to list the files and directories in the /etc directory.
-Embedded image
+
+>>At the prompt, type ls /etc and press Enter to list the files and directories in the /etc directory.
+
 
 The /etc directory contains critical configuration files for the Linux OS. Here is just a small sample:
 
@@ -502,12 +500,13 @@ The /etc directory contains critical configuration files for the Linux OS. Here 
 /etc/crontab - contains commands that run on a schedule
 /etc.rc0.d-rc5.d - contain commands that run at system startup
 /etc/netplan - contains networking information on modern Linux systems
-At the prompt, type ls /var and press Enter to see where Linux stores its variable data files.
-Embedded image
+
+>>At the prompt, type ls /var and press Enter to see where Linux stores its variable data files.
+
 
 One of the most important directories in /var is the log directory.
-At the prompt, type ls /var/log and press Enter to list the objects in the /var/log directory.
-Embedded image
+>>At the prompt, type ls /var/log and press Enter to list the objects in the /var/log directory.
+
 
 This is where Linux keeps logs of everything happening on the system.
 
@@ -522,20 +521,16 @@ Below are a few of the more essential Linux logs:
 /var/log/wtmp - contains logs of who is currently logged on
 
 Note: While most logs are simply text files, you cannot simply open the lastlog log file with a text editor. You must use the last command to read the lastlog file. Similarly, you must use the who command to read the wtmp log file.
-At the prompt, type sudo last and press Enter to view the contents of lastlog.
-Embedded image
+>>At the prompt, type sudo last and press Enter to view the contents of lastlog.
+>>At the prompt, type sudo who to read the wtmp file and see who is currently logged on.
+>>At the prompt, type sudo tail -f /var/log/syslog and Enter to watch live syslog messages.
 
-At the prompt, type sudo who to read the wtmp file and see who is currently logged on.
-Embedded image
-
-At the prompt, type sudo tail -f /var/log/syslog and Enter to watch live syslog messages.
-Embedded image
 
 The tail command shows the "bottom" part of a list or file. Compare this to the head command which shows the "top" part of a list or file. The -f switch tells tail to keep showing any new entries to a list or file. This is very useful for monitoring log files in real time.
 
 Because very little is happening on your lab server, the number of new logs you see may be small - or non-existent. Type CTRL-C to quit tail.
-At the prompt, type tree /usr -L 1 and press Enter to view directories under the /usr directory.
-Embedded image
+>>At the prompt, type tree /usr -L 1 and press Enter to view directories under the /usr directory.
+
 
 Executables and support files are kept under /usr, including:
 
@@ -545,13 +540,12 @@ Executables and support files are kept under /usr, including:
 /usr/share - where documentation is kept (e.g., man pages)
 /usr/local - where admins should compile tools (e.g., using make)
 At the prompt, type ls /opt and press Enter to view directories under /opt.
-Embedded image
+
 
 The /opt directory is currently empty. The /opt directory is where unbundled third-party packages are installed. A popular example is the Oracle database.
 At the prompt, type ls /dev and press Enter to view directories under /dev.
 
 Dev is short for device. In Linux, devices are treated as files. For example, take note of the “file” called xvda. This "file" is a representation of the entire hard drive.
-Embedded image
 
 Other interesting devices in /dev include:
 
@@ -560,7 +554,7 @@ The /dev/null device, which can be used as a black hole to dump unwanted output.
 The /dev/urandom device, which can be used to generate a random number.
 
 Note: The "files" under /dev are device files and are not human-readable.
-At the prompt, type sudo fdisk -l | grep dev | grep -v loop and press Enter to list all storage devices (grep dev) that are not loopback devices (grep-v loop).
+>>At the prompt, type sudo fdisk -l | grep dev | grep -v loop and press Enter to list all storage devices (grep dev) that are not loopback devices (grep-v loop).
 
 You will see a device labeled "Disk". This is the physical drive. Note that it's size is denoted in GiB (1000 bytes) versus GB (1024 bytes).
 
