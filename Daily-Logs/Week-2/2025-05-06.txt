@@ -1,0 +1,502 @@
+**Articles' summaries**
+=======================
+
+1* Update ASAP: Google Fixes Android Flaw (CVE-2025-27363) Exploited by Attackers || May 06, 2025 by Ravie LakshmananVulnerability / Mobile Security
+==================================================================================================================================================================
+
+Google's May 2025 Android security update patches **46 vulnerabilities**, including **CVE-2025-27363**, a critical flaw actively exploited in targeted 
+attacks.  
+
+- **CVE-2025-27363** (CVSS 8.1):  
+  - A high-severity **local code execution** vulnerability in the Android System component.  
+  - Exploits an **out-of-bounds write flaw** in the FreeType font library (versions ≤2.13.0) when parsing TrueType GX/variable fonts.  
+  - Requires **no user interaction** or additional privileges, making it highly dangerous.  
+  - First disclosed by Facebook in March 2025 as under active exploitation.  
+
+- **Additional Fixes**:  
+  - Addresses 8 System and 15 Framework flaws enabling **privilege escalation, data leaks, and denial-of-service**.  
+
+Google urges users to **update immediately**, as newer Android versions include mitigations to hinder exploitation. Exact attack details remain undisclosed.  
+
+**Key Takeaway**: Patch now to defend against unprivileged code execution and other systemic risks.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+* 2.Critical Langflow Flaw Added to CISA KEV List Amid Ongoing Exploitation Evidence || Ravie LakshmananCybersecurity / Vulnerability
+================================================================================================================================================================
+ 
+A critical vulnerability (**CVE-2025-3248**, CVSS 9.8) in the open-source **Langflow platform** has been added to CISA’s Known Exploited Vulnerabilities (KEV)
+ catalog due to active exploitation.  
+
+- **Flaw Details**:  
+  - **Missing authentication** in the `/api/v1/validate/code` endpoint allows **unauthenticated remote code execution (RCE)** via crafted HTTP requests.  
+  - Exploits improper use of Python’s `exec()` function on user-supplied code without sandboxing or authentication.  
+  - Impacts Langflow versions prior to **1.3.0** (patched March 31, 2025). 
+
+- **Exploitation**:  
+  - Public PoC exploit released April 9, 2025; attackers can fully compromise servers.  
+  - **466 internet-exposed instances** detected globally (U.S., Germany, Singapore, India, China).  
+
+- **Action Required**:  
+  - Federal agencies must patch by **May 26, 2025**.  
+  - Zscaler warns of risks in dynamic code execution and urges strict authentication/sandboxing for internet-facing apps.  
+
+**Key Takeaway**: Immediate patching is critical to prevent server takeovers. Organizations must prioritize secure code-validation practices.
+================================================================================================================================================================
+
+**Course content**
+------------------
+
+Network Device Basics
+=====================
+
+1.1 Core Concepts
+------------------
+Covered in yesterday's session
+
+1.2 Guided Exercise
+--------------------
+In this lesson, you will practice examining and configuring a simple LAN topology. You will begin by launching the GNS3 network emulator.
+
+From the dock at the bottom of the screen, click the Terminal icon to open a new Terminal window.
+At the command prompt, type gns3 & and press Enter to open GNS3 in the background.
+
+It will take a few minutes for GNS3 to launch. When GNS3 opens, you will be asked to create a project or open an existing project.
+In the Project window, click the Projects library tab, then select Network Devices Basics and click OK.
+
+When prompted, click No to ignore the update check.
+
+GNS3 will next open the Network Device Basics lab topology. You will see a large window in the center (the topology window). This simulated LAN consists of three hosts (Linux-1, Linux-2, and firefox), two switches, one router, and a firewall. There is also an Internet Service Provider (ISP) and a simulated Internet-facing host called Web.
+Embedded image
+
+Part 1: Examine the Firewall Device
+In this part of the lab, you will examine the pfSense firewall device. In this topology, the pfSense firewall device is a multi-purpose network appliance that provides firewall, router, and DHCP server functionality. In this topology, the pfSense firewall device functions as the LAN's primary router and default gateway.
+
+First, you will need to boot up the firewall and power on the simulated network.
+
+In the topology window, right-click the pfSense firewall device and select Start to power up the firewall.
+Embedded image
+
+When the network interfaces turn green, right-click the pfSense firewall and select Console from the context menu.
+
+A VNC console will open. Wait until you see the following screen before continuing to the next step:
+Embedded image
+
+Note: The firewall can take up to 3 minutes to fully boot up.
+Close the VNC console window.
+On the GNS3 control bar, click the Start button (the large green arrow) to power on all devices.
+
+When prompted, click Yes to continue.
+
+In the GNS3 topology window, you will see all connections turn green, indicating the hosts are powered on and connected to the network.
+Embedded image
+
+In the topology window, right-click the firefox host and select Console to open a VNC console connection to the firefox host.
+
+As the host's name indicates, the TigerVNC console will launch with a Firefox window open. You will use the Firefox browser to connect to the pfSense appliance's web GUI. Although you could interact with the pfSense appliance directly through the command line interface that you saw when you started the device, the web GUI is easier to use for instructional purposes.
+In the web browser, click the pfSense.cybrary.lab bookmark to connect to the pfSense firewall.
+On the pfSense login page, click the Sign In button to sign in using the saved credentials.
+From the menu bar at the top, click Interfaces and select LAN to open the Interfaces / LAN (em1) configuration page.
+Embedded image
+
+On the Interfaces / LAN (em1) configuration page, scroll down to the Static IPv4 Configuration section to see the firewall's internal IPv4 address.
+Embedded image
+
+From the menu bar at the top, click Interfaces and select WAN open the Interfaces / WAN (em0) configuration page.
+On the Interfaces / WAN (em0) configuration page, scroll down see the firewall's external IP address.
+
+You will need this information to answer one of the questions on the Tasks tab.
+
+Take note of the IPv4 Upstream gateway. The firewall will pass all non-local traffic to this gateway, which is the device labeled ISP. This simulated LAN connects to the "Internet" using an Internet Service Provider (ISP). The ISP's job is to route traffic to and from the Internet on behalf of the firewall. The firewall's job is to manage Internet traffic on behalf of the LAN.
+
+In the next steps, you will test your connection to the ISP.
+From the menu bar at the top, click Diagnostics and select Ping to open the Ping diagnostic tool.
+On the Diagnostics / Ping page, type 66.67.68.1 in the Hostname field, then click Ping to ping the ISP device.
+
+At the bottom of the page, you should see a positive result.
+Embedded image
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Part 2: Examine the DHCP Server and Host Network Configurations
+
+In this part of the lab, you will examine the DHCP Server running on the pfSense firewall appliance. DHCP stands for Dynamic Host Configuration Protocol. DHCP grants clients an IP Address (and other networking options) from a predefined pool of addresses. Hosts on the LAN configured to use DHCP will automatically be assigned an IP address when they boot up.
+
+From the menu bar at the top, click Services and select DHCP Server.
+
+On the Services / DHCP Server / LAN page, notice that DHCP is enabled.
+
+Scroll down to see the Range of IP addresses.
+
+This DHCP server will provide IPs from .100 to .200 on the 192.168.1.0/24 network. Scroll down further and note that clients are also sent the firewall's internal LAN address as the Gateway.
+Minimize the TigerVNC console window.
+
+In the GNS3 topology window, right-click Linux-1 and select Console from the context menu.
+
+A new tab called Linux-1 will open in your original Terminal window. You may need to restore the Terminal window.
+
+On the Linux-1 tab, type cat /etc/network/interfaces and press Enter to display the contents of the network configuration file for Linux-1.
+
+
+Notice that the Static configuration is commented out, but the DHCP configuration section is not. Linux-1 should get an IP Address and a gateway from the firewall's DHCP server. Let's confirm.
+On the Linux-1 tab, type ifconfig and press Enter to display the network configuration. Feel free to use the more up to date ip a command as well.
+
+
+Notice that Linux-1 indeed has an IP Address from the address pool on the firewall.
+On the Linux-1 tab, type netstat -rn and press Enter to confirm the default gateway.
+Embedded image
+
+Note: The 0.0.0.0 means "everything". Thus we are sending "everything" not local to the default gateway.
+Restore the TigerVNC console.
+In the TigerVNC console, right-click the M icon in the lower left-hand corner, then select terminal to open a new LXTerminal inside the TigerVNC console.
+Embedded image
+
+Repeat steps 5-7 in the LXTerminal window to confirm the network configuration for the firefox host.
+
+You will see that DHCP has also provided the firefox host an IP address and default gateway.
+Close the LXTerminal window, but leave the web browser inside the TigerVNC console open.
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Part 3: Examine the Firewall Rules
+
+In this part of the lab, you will examine the pfSense appliance's firewall feature. You will begin by reviewing the rules table for the WAN interface.
+
+In the TigerVNC console, scroll up to the menu bar at the top in the open web browser, then click Firewall and select Rules.
+Embedded image
+
+Notice there are no rules configured for the WAN side of the firewall. Although you don't see any rules, there is always one rule present but hidden on every firewall interface: "deny everything". Thus, ALL inbound traffic on the WAN side is blocked.
+
+Note: PfSense is a stateful firewall; as such, it knows when a valid request is made from an internal client and will allow the reply traffic into the WAN interface without needing a written rule. Thus, traffic that is in reply to a valid request (made from an internal client) is allowed.
+Click the LAN tab.
+
+
+You should see three rules on the Firewall / Rules / LAN page. The first rule ensures we can connect to the firewall's web configuration page on port 80. The second rule allows all IPv4 traffic from the LAN network to any destination. The third rule allows all IPv6 traffic from the LAN Network to any destination.
+
+Note: While this default firewall configuration is fine for a lab, a production firewall should limit outbound traffic to only what is needed. For example, many organizations only allow secure web traffic to exit the network. Imagine the havoc malware could wreak if given free outbound Internet access from a contaminated host!
+
+The current firewall ruleset means that clients on the LAN should be able to reach anything on the "Internet." Let's test this.
+Minimize the TigerVNC console.
+In the GNS3 topology window, right-click Web and select Console from the context menu.
+In the Web tab, type ifconfig and press Enter to see the Web device’s IP Address.
+In the Linux-1 tab, ping the Web device’s IP address.
+
+Given the firewall rules table, you should be able to ping the external Web device from the internal Linux-1 device.
+In the Web tab, ping the ISP device (66.67.68.1), then ping the firewall's WAN interface.
+
+Can Web ping our ISP's address? How about the firewall? Did you expect the firewall to allow or deny ping based on the rules seen in Steps 1 and 2?
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Part 4: Configure a New Subnet
+Next, let's focus on the Router and Linux-2 devices in our LAN. Although the Router appears to be connected to the rest of the network via Switch 1, its network configuration file is actually empty. In the next steps, we will configure the Router to accommodate a new network subnet that serves Switch2 and Linux-2: 10.10.10.0/24. The Router will therefore need two NICs: one in the 192.168.1.0/24 network and one in the new 10.10.10.0/24 network.
+
+Let's begin!
+
+In the GNS3 topology window, right-click the Router device and select Auxiliary console (not Console).
+
+A new tab called Router will open in the terminal window.
+On the Router tab, type cat /etc/network/interfaces and press Enter to display the router’s configuration file. You will see that everything is commented out.
+Embedded image
+
+While we could edit /etc/network/interfaces using the vi text editor, let's take advantage of this virtual environment and use a GNS3 shortcut instead.
+
+Note: You are welcome to use the vi editor if you are comfortable with it.
+In the GNS3 topology, right-click the Router device and select Configure from the context menu.
+
+The Node properties window will open.
+At the bottom of the Node properties window, next to Network configuration, click Edit.
+
+The Router interfaces editor will open.
+In the Router interfaces editor, configure the router as follows, then click Save.
+
+Static config for eth0
+eth0 address: 192.168.1.254
+eth0 netmask: 255.255.255.0
+gateway: 192.168.1.1
+
+Static config for eth1
+eth1 address: 10.10.10.1
+eth1 netmask: 255.255.255.0
+
+
+Click OK to close the Node properties window.
+
+In the GNS3 topology, right-click the Router device and select Stop from the context menu, then right-click the Router device again and select Start to restart the router.
+In the GNS3 topology, right-click the Router device and select Auxiliary console from the context menu to re-open the Router tab in the terminal.
+On the Router tab, type ifconfig and Press Enter to confirm the new IPs have been configured for eth0 and eth1 (ignore eth2).
+
+
+On the Router tab, use the netstat -rn command to verify that the firewall LAN address (192.168.1.1) is the default gateway. Where does destination 0.0.0.0 send traffic?
+On the Router tab, ping the firewall's LAN address.
+As you did with the Router, use GNS3 to configure Linux-2 as follows:
+
+Static config for eth0
+eth0 address: 10.10.10.100
+eth0 netmask: 255.255.255.0
+eth0 gateway: 10.10.10.1
+Embedded image
+
+Open a Console for Linux-2.
+In the Linux-2 tab, ping the Router's internal IP address (10.10.10.1), then ping the firewall's LAN IP address (192.168.1.1).
+
+You should find that the Router replies, but the Firewall does not. This does not mean that your ping requests did not reach the firewall - after all, Linux-2 is aware of the Router device as its gateway, and the Router device is aware of the Firewall device as its gateway. Rather, it means that the Firewall does not know where to send its response.
+
+The Firewall device knows about the two networks it’s connected to (192.168.1.0/24 and 66.67.68.0/24) and where to send all other traffic (66.67.68.1), but it does not know about 10.10.10.0/24, nor will 66.67.68.1 know anything about an internal network. To resolve this, we will need to tell the Firewall where to route traffic for 10.10.10.0/24. We will accomplish this by adding a routing statement that instructs the firewall to send all traffic destined for 10.10.10.0/24 to the Router.
+Restore the TigerVNC console.
+In the web browser, from the menu bar at the top, click System, then select Routing to open the System / Routing / Gateways page.
+On the System / Routing / Gateways page, click Add to add a new gateway.
+On the System / Routing / Gateways / Edit page, configure the new gateway as shown below, then scroll down to the bottom and click Save.
+
+Disabled: Off
+Interface: LAN
+Address Family: IPv4
+Name: Router
+Gateway: 192.168.1.254
+
+
+The new gateway should appear on the System / Routing / Gateways page.
+On the System / Routing / Gateways page, click Apply Changes, and wait for the changes to be applied.
+On the System / Routing / Gateways page, select the Static Routes tab.
+On the System / Routing / Static Routes page, click Add to add a new static route.
+Configure the new static route as follows, then click Save.
+
+Destination network: 10.10.10.0 / 24
+Gateway: Router - 192.168.1.254
+
+
+On the System / Routing / Static Routes page, click Apply Changes and wait for the changes to be applied.
+
+It may take 30-60 seconds to add the new route.
+On the menu bar at the top, click Firewall and select Rules, then select the LAN tab.
+
+By default, the firewall allows all traffic from the "LAN net. In our case, the LAN net only includes 192.168.1.0/24, not 10.10.10.0/24. We could add a new rule for the 10.10.10.0/24 network or edit the existing rule to make it more permissive. Because this is a lab environment, we will just revise the current rule.
+On the Firewall / Rules / LAN page, click the Edit button (the Pencil) for the second rule.
+On the Firewall / Rules / Edit page, scroll down and change the Source from LAN net to any, then scroll down and click Save.
+Embedded image
+
+On the Firewall / Rules / LAN page, click Apply Changes.
+
+It may take 30-60 seconds to make the change.
+
+We should now be able to reach the firewall and beyond from the 10.10.10.0/24 LAN.
+In the terminal window, on the Linux-2 tab, try once more to ping the firewall (192.168.1.1).
+
+Note: The first few pings may fail if you try to test too quickly after adding the new network to the firewall.
+On the Linux-2 tab, ping the Web device.
+
+As with the firewall, you should now be able to reach the Web device.
+Close all open consoles and GNS3.
+Summary
+In this lab, you explored and configured a small Local Area Network hosted in GNS3. You learned some basic firewall management for pfSense. You also added a new network segment and tested connectivity to and from the Internet. You are now ready for a challenge.
+
+
+
+1.3 Challenge Exercise
+-----------------------
+
+Launch GNS3 and open the Challenge project from the Projects library. As you did in the lab, power on the pfSense firewall first and wait for it to be fully up.
+
+For this challenge, you will need to complete the following tasks:
+
+Using the same format that you did in Part 4 of the Guided Exercise, configure the Router device as follows:
+
+eth0: 192.168.1.100/24 (set the firewall as the gateway)
+eth1: 172.16.17.1/24
+Using the same format that you did in Part 4 of the Guided Exercise, configure Linux-2 as follows:
+
+eth0: 172.16.17.100/24 (use the Router as the gateway)
+Configure Linux-1 to use DHCP.
+Power everything on and try to ping the Web device from the Linux-2 host.
+After you have configured everything correctly, open a new terminal, change the current directory to the Desktop, and execute bash flag.sh to assess your work. Use the output of the flag.sh script to answer the question on the Tasks tab.
+
+>> The flag was {LayerCake}
+========================================================================================================================================================================
+
+Cryptography Basics
+
+1.1 Core Concepts
+------------------
+
+Cryptography is a mathematical science that transforms human-readable or machine-readable plaintext into ciphertext. This process is called encryption. Once encrypted as ciphertext, the original plaintext cannot be read or understood. To retrieve the original plaintext, the ciphertext must run through the reverse of the encryption process, known as decryption.
+
+The encryption and decryption process is performed using a specialized algorithm called a cipher. Ciphers can range from simple to massively complex. In practice, most ciphers fall into the second category, but simple ciphers can be useful to illustrate how this process works. Consider the example of the Caesar Cipher - a type of shift cipher. When a plaintext alphabetic message is run through a Caesar Cipher, each alphabet letter is shifted by a number (n) between 0 and 25, where that letter is replaced by its equivalent letter n spaces to the right. For example, using shift 3, A becomes D, B becomes E, etc.
+
+In the example above, 3 is the cryptographic key. A cryptographic key is a piece of information which, when taken as an input to the encryption cipher, encodes the plaintext into ciphertext - or, in the case of decryption, decodes the ciphertext into plaintext. In the earlier example, knowing that the cryptographic key is 3 allows us to easily decrypt the ciphertext "frph phhw ph!" into the plaintext message "Come see me!".
+
+Embedded image
+
+The goal of cryptography is to ensure privacy (or confidentiality) for two parties that wish to communicate without being understood by a third party, even if their communication is intercepted (unless that third party possessed the cipher and the key). During World War 2, German forces used a complex physical cipher called an Enigma Machine to generate encoded messages. You could only decode it if you knew the exact settings used to create the coded message. The Enigma cipher was eventually cracked, first by Marian Rejewski and later by Alan Turing. Turing's work helped Allied naval assets avoid German U-boats during the war, providing a significant strategic advantage to the Allied forces.
+
+Embedded image
+
+In modern cryptography, cipher keys are pseudo-random strings of various lengths (bits). Typical key lengths are from 128 bits to 4096 bits. This key is then combined with the cipher, or cryptographic algorithm (a formula generally based on modular mathematics combined with XOR), to convert plaintext into ciphertext. Some common cryptographic algorithms are shown below.
+
+Embedded image
+
+As noted in the table above, there are two types of cryptographic algorithms: symmetric algorithms and asymmetric algorithms. Both symmetric and asymmetric cryptography have their respective advantages and disadvantages, and each one is explored in greater detail in its own lab. For now, just know that the primary difference is in the number of cipher keys used.
+
+
+
+1.2 Guided Exercise
+--------------------
+
+In this guided exercise, you will apply what you have learned by using a simple Python program containing a Caesar Cipher to encrypt and decrypt a message.
+
+On the remote lab desktop, click the Terminal Emulator icon in the dock to open a new terminal window.
+In the terminal window, type python3 caesar.py and press Enter to launch the caesar.py program.
+Embedded image
+
+At the prompt, type encrypt and press Enter to go into encrypt mode.
+
+If you type anything other than encrypt, the program will go into decrypt mode, and you will need to restart.
+At the encrypt prompt, type Bring Caesar a Salad! and press Enter.
+When asked for the key, type 5 and press Enter.
+
+You will see your new ciphertext displayed.
+Highlight the ciphertext, then right-click the ciphertext and select Copy from the context menu.
+Embedded image
+
+In the terminal window, type python3 caesar.py and press Enter to relaunch the caesar.py program.
+At the prompt, type decrypt (or anything other than encrypt) and press Enter to go into decrypt mode.
+At the terminal prompt, right-click and select Paste from the context menu to paste the ciphertext from Step 5, then press Enter.
+
+Embedded image
+
+When asked Do you have the key?, type y and press Enter.
+At the key prompt, type 5 and press Enter to decrypt the cipher text.
+Embedded image
+
+Note: Only letters A-Z are encrypted and decrypted, which is why the exclamation mark appears in both the plaintext and ciphertext. The program also disregards capitalization, which is why all letters in the output are capitalized by default.
+In the terminal window, type python3 caesar.py and press Enter to relaunch the caesar.py program.
+At the prompt, type decrypt (or anything other than encrypt) and press Enter to go into decrypt mode.
+At the decrypt prompt, type SLAAJ AFAAJ and press Enter.
+When asked Do you have the key?, type n and press Enter.
+
+The caesar.py program will try all possible keys and show the resulting plaintext for each one. Most will be nonsense, but you should see at least one plausible result. At a very basic level, this is how cryptanalysis (the process of breaking encrypted messages) works.
+
+1.3 Challenge Exercise
+-----------------------
+
+In this challenge exercise, you will use the caesar.py tool to decrypt several examples of ciphertext.
+
+From the Desktop, open the ciphers.txt file. Launch the caesar.py tool and paste each instance of ciphertext at the appropriate prompt, then use the results to answer the questions on the Tasks tab.
+
+1. What is the plaintext for the first ciphertext?
+Type your answer here
+>>>BE SURE TO DRINK YOUR OVALTIN 
+
+2. What is the plaintext for the second ciphertext?
+Type your answer here
+>>> THE ONLY THING WE HAVE TO FEAR IS FEAR ITSELF  
+
+3. What is the plaintext for the third ciphertext?
+Type your answer here
+>>> MR WATSON COME HERE I WANT YOU 
+
+4. What key was used for the first ciphertext?
+Type your answer here
+>>>24
+
+5. What key was used for the second ciphertext?
+Type your answer here
+>>>15
+
+6. What key was used for the third ciphertext?
+>>>3
+==================================================================================================================================================================================================================
+
+Symmetric Cryptography
+=======================
+1.1 Core Concepts
+------------------
+There are two types of cryptographic algorithms: symmetric and asymmetric. Symmetric cryptography uses a single cryptographic key to encrypt plaintext and decrypt ciphertext. This key is typically called a secret key or shared secret. Symmetric cryptography is fast and efficient, and modern algorithms like AES are incredibly secure. For this reason, symmetric cryptography is commonly used for bulk data encryption, at-rest database encryption, and for payment applications.
+
+If User A wishes to send a private message to User B, both must have a copy of the secret key. Therefore, User A would need to (1) generate a key and (2) share it with User B. The two users are then able to (3) encrypt and (4) decrypt messages using the shared key.
+
+Embedded image
+
+There are two primary drawbacks with symmetric key encryption. The first issue is key management. Symmetric key encryption does not scale well, as each pair of users requires a unique secret key if they wish to communicate privately. In the above example, if User A wanted to share a private encoded message with User C, without allowing User B to read the message, User A would have to generate a new secret key. As you can imagine, this becomes quite unwieldy after only a few users. Given the formula (N * (N-1)) /2, 10 users would need to manage (10 * (10-1))/2 = 45 keys between them.
+
+The second issue is key distribution. Before a user pair can begin securely communicating, the user that generates the secret key must share that key with the other user, therefore opening the door to key theft.
+
+Symmetric cryptographic systems can be used along with asymmetric cryptographic systems to create a hybrid cryptographic solution. The most prominent example of a hybrid cryptographic solution is TLS (Transport Layer Security), the cryptographic protocol that enables secure web browsing (HTTPS).
+
+
+1.2 Guided Exercise
+-----------------------
+Part 1: Create and Share a Secret Key
+In this lesson, the cybrary user will create and share a secret key with another Linux user named john. As john you will use the shared secret key to encrypt and send message to cybrary. As cybrary you will then decrypt the encrypted message using the shared secret key.
+
+On the dock at the bottom of the screen, click the Terminal Emulator icon to open a Terminal window.
+At the cybrary@localhost prompt, type openssl genpkey -algorithm rsa -out keyforjohn.key and press Enter to create a new secret key that you will share only with john.
+Embedded image
+
+Note: The algorithm used in the operation above, RSA, is actually an asymmetric cipher. However, when used in this manner - to generate a single private key, without its public key companion - the result is functionally equivalent to a symmetric cipher.
+At the cybrary@localhost prompt, type cat keyforjohn.key and press Enter to display the secret key.
+Embedded image
+
+At the cybrary@localhost prompt, type base64 keyforjohn.key > keyforjohn.send and press Enter to encode the new key to base64.
+
+Encoding the key will make it easier to send via tools like mail.
+At the cybrary@localhost prompt, type cat keyforjohn.send | mail -s "For John" john and press Enter to mail the secret key to the user john.
+Part 2: Encrypt a Secret Message
+In this part of the lab, you switch user accounts and become the local user john - to whom you just sent a secret key. You will use this secret key to encrypt a secret message and send that message back to the cybrary user.
+
+At the cybrary@localhost prompt, type su - john and press Enter to become the local user john.
+
+When prompted for the password, type password and press Enter.
+Embedded image
+
+Notice that the prompt changes, indicating you are now the john user.
+At the john@localhost prompt, type mail and press Enter to read John's local system mail.
+Embedded image
+
+You should see a new message from Cybrary.
+At the ? prompt, type 1 and press Enter to open the message.
+Embedded image
+
+Take note of the version of GNU Mailutils listed in the User-Agent field. You will need this information to answer one of the questions on Tasks tab.
+
+If you see the More prompt, press the space bar to see the entire message.
+Highlight the message body (only the message body), then right-click and select Copy from the context menu.
+Embedded image
+
+At the ? prompt, type exit and press Enter to close the mail application.
+At the john@localhost prompt, type echo " and paste the copied message contents, then continue typing " > keyforjohn.base64 and press Enter.
+Embedded image
+
+This may look strange on screen, but the paste operation should work fine.
+At the john@localhost prompt, type base64 -d keyforjohn.base64 > keyfromcybrary.key and press Enter to decode the shared key.
+At the john@localhost prompt, type cat keyfromcybrary.key and press Enter.
+
+The key should look the same as the first key did in Part 1, Step 3.
+
+Now that we have a shared key from cybrary, we can send cybrary an encrypted message!
+At the john@localhost prompt, type echo "Be sure to drink your ovaltine!" > message.txt and press Enter to create the message.txt file.
+At the john@localhost prompt, type openssl pkeyutl -encrypt -inkey keyfromcybrary.key -in message.txt -out message.enc and press Enter to encrypt the text message using the shared key from cybrary.
+At the john@localhost prompt, type cat message.enc and press Enter to display the encrypted message.
+Embedded image
+
+It should appear as though the file contains gibberish. You cannot simply cut and paste the encrypted file contents as you would from a text file. We must encode this encrypted file to base64 before sending it to cybrary using mail.
+At the john@localhost prompt, type base64 message.enc > message.send and press Enter to encode the encrypted message.
+At the john@localhost prompt, type cat message.send | mail -s "Secret Message from John" cybrary and press Enter to mail the encoded message to cybrary.
+
+Note: Encoding and encrypting are not the same thing. Encoding allows us to send things using mail that would not be possible otherwise.
+Part 3: Decrypt the Secret Message
+In the final part of the lab, you will become the cybrary user again and decrypt the secret message sent by john.
+
+At the john@localhost prompt, type exit and press Enter to become the cybrary user.
+At the cybrary@localhost prompt, as the cybrary user, type mail and press Enter to open the mail application.
+
+You will see a new message from user john.
+At the ? prompt, type 2 and press Enter to read the message from John.
+Highlight the message body (only the message body), then right-click and select Copy from the context menu.
+At the ? prompt, type exit and press Enter to quit the mail application.
+At the cybrary@localhost prompt, type echo " and paste the copied message contents, then continue typing " > message.base64 and press Enter.
+At the cybrary@localhost prompt, type base64 -d message.base64 > message.enc and press Enter to decode the encrypted message.
+
+You now have a decoded (but not decrypted) copy of the encrypted message.
+At the cybrary@localhost prompt, type openssl pkeyutl -decrypt -inkey keyforjohn.key -in message.enc -out message.txt and press Enter to decrypt the message from john.
+At the cybrary@localhost prompt, type cat message.txt to and press Enter to read john's message.
+Summary
+Success! You have now encrypted and decrypted a simple message using symmetric cryptography. Be sure to answer the questions on the Tasks tab, then continue to the optional challenge exercise.
+
+1.3 Challenge Exercise
+-----------------------
