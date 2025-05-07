@@ -1,0 +1,94 @@
+
+Assignment on Securing Accounts for CS50 Cybersecurity
+All assignments in CS50 Cybersecurity are out of 10 points. A score of 7 points or better (70%) is required to be considered to have "passed" an assignment in this course. Please do not resubmit an assignment if you have already obtained a passing score--we consider that spam, and if detected, the submission will be deleted, meaning you will not receive the score back anyway. You don't receive a final grade at the end of the course, so it will have no bearing on your certificate, and it will only slow down our graders!
+
+Submitting this assignment more than twice in a single grading cycle constitutes spamming the staff, as well. Upon your third submission, all of your submissions from the current grading cycle are automatically deleted from the system. You will, therefore, not receive any feedback and will need to wait at least three weeks before you submit again.
+
+Unlike CS50x, assignments in this course are graded on a set schedule, and depending on when you submitted, it may take up to three weeks for your work to be graded. Do be patient! Project scores and assignment status on cs50.me/cybersecurity (e.g. "Your submission has been received...") will likely change over time and are not final until the scores have been released.
+tresorgoursam@gmail.com Changer de compte
+ 
+Brouillon enregistré
+* Indique une question obligatoire
+Adresse e-mail
+*
+tresorgoursam@gmail.com
+Name
+*
+NOUBA-ASRA GOURSAM TRESOR
+edX Username
+*
+NOUBASRATRESOR
+What is your GitHub username?
+*
+If you do not already have a GitHub account, you can sign up for one at https://github.com/join. You can then use this account to log in to cs50.me/cybersecurity to track your progress in the course (your progress will only show up after you have received at least one score release email from CS50 Bot, so do be patient!). Don't worry about seeing a 'No Submissions' message on submit.cs50.io, if you find that. The course collects submissions using Google Forms, and only the gradebook on cs50.me/cybersecurity is important!
+Be certain the username you provide is correct! If you provide the wrong username, you will not be able to see your scores. 
+Your GitHub username should not be changed while you are taking this course. The current gradebook system is not designed to accommodate name changes.
+Be sure to remove extraneous characters, such as an @ prefix. Do not input a URL or email address, just your username.
+Freshgeek52
+City, State, Country
+*
+Kigali, Rwanda  
+Acknowledgement
+*
+Unlike our course CS50x, grading in this course is not done automatically, and there are human reviewers for each assignment. Grading may, depending on exactly when in our grading cycle you submit, take up to three weeks from the time you submit. Your grade status may change in your gradebook at cs50.me/cs50cy in the interim, but grades are never final until you receive a score release email from CS50 Bot (on this first assignment, in fact, your gradebook may not even become active until that score release email). The staff cannot entertain requests for expedited grading under any circumstance. Your patience is appreciated.
+I understand.
+This course is graded by human graders, and has a ZERO TOLERANCE plagiarism and collaboration policy. If *any* of your answers are copied and pasted from, or obviously based on (a) an online source, including non-course-sanctioned generative AI tools or (b) another student's work in the course, in *any* of the course's five assignments or the final project, you will be reported to edX and removed from the course immediately. There is no opportunity for appeal. There are no warnings or second chances.
+*
+It is far better, we assure you, to leave an answer blank rather than risk it. This may be an online course, but it is offered by Harvard, and we're going to hold you to that standard. The full essence of all work you submit to this course should be your own.
+I understand this policy and agree to its terms; I hereby affirm that I will not plagiarize any answers in this course.
+Why might being required to change our passwords regularly actually pose a threat to our security?
+1 point
+Regularly changing our password pose a threat to our security because this practice could provide hints to a threat actor in guessing what our next password might be. Also, as a human being, we would always want to have something easy remember so by regularly updating our password, we would choose something not complex. For example, if my password was tresor123, next time when prompt for changing, I would go for something like tresor12345 - which allows an attacker to easily predict my next password and across other platforms too.
+If I have a six-character password consisting of uppercase (English) letters and (decimal) digits only, how many seconds might it take an adversary to crack, assuming they make one attempt per second?
+1 point
+2176782336
+Humor us for a moment, and play The Password Game, trying to get through at least Rule 12.
+
+While obviously the game itself is in many ways meant to be humorous, it also critiques the experience many of us have setting up new passwords. Explain how there's a trade-off between usability and security in the context of passwords.
+1 point
+While setting up strong/complex passwords is likely good to keep us secure, we should also keep in mind that a password should not slow down the operation of our system. Complex passwords are difficult to remember, thus harder to manage. We should find a balance between password complexity and usability.
+Consider the below comic for the next two questions.
+Source: xkcd.com/936/
+Consider the top row of the comic above. Why are passwords like those easy (for a computer) to guess but hard (for a human) to remember?
+1 point
+Computer
+Now consider the bottom row of the comic above. Why are passwords like those hard (for a computer) to guess but easy (for a human) to remember?
+1 point
+  vm
+What is a "credential stuffing" attack?
+1 point
+Provide a specific example of something that would be considered a type of knowledge factor for authentication purposes.
+Do NOT provide any of your own knowledge factors (or anything resembling them) themselves as an answer to this question. We are looking for you to answer the question in the general sense (a "type of").
+
+If you provide an answer that is, or appears to be, an actual specific knowledge factor, the answer WILL be marked incorrect, without exception, and you should consider that knowledge factor to have been compromised.
+1 point
+Provide a specific example of something that would be considered a type of inherence factor for authentication purposes.
+1 point
+Why are phishing attacks so difficult to prevent?
+1 point
+Suppose that your boss asks you whether the company should require use of password managers for all employees.
+
+Explain in a short paragraph why you might want everyone in the company to use a password manager. 
+1 point
+Feedback
+How did you find the difficulty of this assignment?
+*
+Too easy
+1
+2
+3
+4
+5
+Too hard
+About how many MINUTES would you say you spent on this assignment?
+*
+Just to set expectations for future students.
+Une copie de vos réponses sera envoyée par e-mail à l'adresse indiquée.
+N'envoyez jamais de mots de passe via Google Forms.
+reCAPTCHA
+Confidentialité
+Conditions d'utilisation
+Ce formulaire a été créé dans CS50.
+Ce formulaire vous semble suspect ? Signaler
+
+Google Forms

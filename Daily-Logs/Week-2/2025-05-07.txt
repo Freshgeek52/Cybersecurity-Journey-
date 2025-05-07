@@ -1,0 +1,605 @@
+**Articles'Summary**
+---------------------
+
+1* NSO Group Fined $168M for Targeting 1,400 WhatsApp Users With Pegasus Spyware || by Ravie LakshmananVulnerability / Spyware
+===================================================================================================================================
+
+**Who is NSO Group?**  
+NSO Group is an Israeli company that develops **Pegasus**, a sophisticated spyware tool sold to governments and law enforcement agencies. It claims its technology aids in combating terrorism and serious crime, but it has repeatedly faced allegations of enabling surveillance of journalists, activists, and political dissidents.  
+
+**What is Pegasus?**  
+Pegasus is a **zero-click exploit** spyware that can infect smartphones (iOS/Android) via vulnerabilities (e.g., WhatsApp’s CVE-2019-3568, CVSS 9.8) without user interaction. Once installed, it grants full access to messages, calls, location data, and device microphones/cameras.  
+
+**Key Details from the Case:**  
+- **Lawsuit Outcome**: A U.S. federal jury ordered NSO Group to pay **$168 million** in damages ($167.25M punitive, $444K compensatory) for exploiting WhatsApp servers in 2019 to target **1,400+ individuals** across 51 countries.  
+  - Top targeted nations: Mexico (456), India (100), Bahrain (82), Morocco (69), Pakistan (58).  
+- **NSO’s Defense Rejected**: The court ruled NSO cannot evade liability by claiming ignorance of client actions. Evidence showed NSO spends millions annually to develop spyware installation methods.  
+- **Meta’s Response**: WhatsApp plans to seek a permanent injunction against NSO and will donate to digital rights organizations.  
+
+**Broader Implications**:  
+- **Legal Precedent**: The ruling challenges the spyware industry’s accountability and deters misuse against civilians.  
+- **Apple’s Withdrawal**: Apple dropped a similar lawsuit in 2024 to avoid exposing sensitive security protocols, underscoring the complexity of prosecuting spyware firms.  
+
+**Key Takeaway**:  
+NSO Group’s Pegasus exemplifies the dual-use risks of surveillance tools—while marketed for crime prevention, they are weaponized against civil society. This case marks a critical step in curbing unchecked spyware abus
+e.
+--------------------------------------------------------------------------------------------------------------------------------
+
+2* Hackers Exploit Samsung MagicINFO, GeoVision IoT Flaws to Deploy Mirai Botnet || Ravie LakshmananInternet of Thing / Vulnerability
+===================================================================================================================================
+
+### **1. GeoVision EoL IoT Devices Compromised**  
+- **Vulnerabilities**:  
+  - **CVE-2024-6047** & **CVE-2024-11120** (CVSS 9.8): OS command injection flaws in the `/DateSetting.cgi` endpoint.  
+  - Exploited via `szSrvIpAddr` parameter to execute arbitrary commands.  
+- **Attack Chain**:  
+  - Infects devices with **LZRD**, an ARM variant of **Mirai botnet**, for DDoS attacks.  
+  - Overlaps with **InfectedSlurs** campaign; leverages legacy flaws (e.g., Hadoop YARN’s CVE-2018-10561).  
+- **Impact**:  
+  - GeoVision devices are end-of-life (EoL), meaning **no patches available**.  
+- **Recommendation**: Replace EoL devices with newer models.  
+
+### **2. Samsung MagicINFO Flaw (CVE-2024-7399) Exploited**  
+- **Vulnerability**:  
+  - **CVSS 8.8**: Path traversal flaw allowing **arbitrary file writes** as system authority.  
+  - Weaponized post-PoC release (April 2025) to deploy Mirai via malicious JSP files.  
+- **Impact**:  
+  - Enables **remote code execution (RCE)** for botnet recruitment.  
+- **Recommendation**: Upgrade to **MagicINFO 21.1050+**.  
+
+### **Broader Implications**  
+- **Mirai Botnet**: Continues targeting poorly secured, outdated devices (e.g., EoL IoT, unpatched servers).  
+- **Key Insight**: Cybercriminals prioritize legacy systems lacking vendor support, emphasizing the need for proactive upgrades and patch management.  
+
+**Key Takeaway**:  
+Outdated firmware and unpatched vulnerabilities remain prime targets for botnet campaigns. Organizations must retire EoL hardware and prioritize timely updates to mitigate DDoS risks.  
+
+=================================================================================================================================
+
+**Symetric Cryptography**
+==========================
+1.2 Guided Exercise
+-----------------------
+Part 1: Create and Share a Secret Key
+In this lesson, the cybrary user will create and share a secret key with another Linux user named john. As john you will use the shared secret key to encrypt and send message to cybrary. As cybrary you will then decrypt the encrypted message using the shared secret key.
+
+On the dock at the bottom of the screen, click the Terminal Emulator icon to open a Terminal window.
+At the cybrary@localhost prompt, type openssl genpkey -algorithm rsa -out keyforjohn.key and press Enter to create a new secret key that you will share only with john.
+Embedded image
+
+Note: The algorithm used in the operation above, RSA, is actually an asymmetric cipher. However, when used in this manner - to generate a single private key, without its public key companion - the result is functionally equivalent to a symmetric cipher.
+At the cybrary@localhost prompt, type cat keyforjohn.key and press Enter to display the secret key.
+Embedded image
+
+At the cybrary@localhost prompt, type base64 keyforjohn.key > keyforjohn.send and press Enter to encode the new key to base64.
+
+Encoding the key will make it easier to send via tools like mail.
+At the cybrary@localhost prompt, type cat keyforjohn.send | mail -s "For John" john and press Enter to mail the secret key to the user john.
+Part 2: Encrypt a Secret Message
+In this part of the lab, you switch user accounts and become the local user john - to whom you just sent a secret key. You will use this secret key to encrypt a secret message and send that message back to the cybrary user.
+
+At the cybrary@localhost prompt, type su - john and press Enter to become the local user john.
+
+When prompted for the password, type password and press Enter.
+Embedded image
+
+Notice that the prompt changes, indicating you are now the john user.
+At the john@localhost prompt, type mail and press Enter to read John's local system mail.
+Embedded image
+
+You should see a new message from Cybrary.
+At the ? prompt, type 1 and press Enter to open the message.
+Embedded image
+
+Take note of the version of GNU Mailutils listed in the User-Agent field. You will need this information to answer one of the questions on Tasks tab.
+
+If you see the More prompt, press the space bar to see the entire message.
+Highlight the message body (only the message body), then right-click and select Copy from the context menu.
+Embedded image
+
+At the ? prompt, type exit and press Enter to close the mail application.
+At the john@localhost prompt, type echo " and paste the copied message contents, then continue typing " > keyforjohn.base64 and press Enter.
+Embedded image
+
+This may look strange on screen, but the paste operation should work fine.
+At the john@localhost prompt, type base64 -d keyforjohn.base64 > keyfromcybrary.key and press Enter to decode the shared key.
+At the john@localhost prompt, type cat keyfromcybrary.key and press Enter.
+
+The key should look the same as the first key did in Part 1, Step 3.
+
+Now that we have a shared key from cybrary, we can send cybrary an encrypted message!
+At the john@localhost prompt, type echo "Be sure to drink your ovaltine!" > message.txt and press Enter to create the message.txt file.
+At the john@localhost prompt, type openssl pkeyutl -encrypt -inkey keyfromcybrary.key -in message.txt -out message.enc and press Enter to encrypt the text message using the shared key from cybrary.
+At the john@localhost prompt, type cat message.enc and press Enter to display the encrypted message.
+Embedded image
+
+It should appear as though the file contains gibberish. You cannot simply cut and paste the encrypted file contents as you would from a text file. We must encode this encrypted file to base64 before sending it to cybrary using mail.
+At the john@localhost prompt, type base64 message.enc > message.send and press Enter to encode the encrypted message.
+At the john@localhost prompt, type cat message.send | mail -s "Secret Message from John" cybrary and press Enter to mail the encoded message to cybrary.
+
+Note: Encoding and encrypting are not the same thing. Encoding allows us to send things using mail that would not be possible otherwise.
+Part 3: Decrypt the Secret Message
+In the final part of the lab, you will become the cybrary user again and decrypt the secret message sent by john.
+
+At the john@localhost prompt, type exit and press Enter to become the cybrary user.
+At the cybrary@localhost prompt, as the cybrary user, type mail and press Enter to open the mail application.
+
+You will see a new message from user john.
+At the ? prompt, type 2 and press Enter to read the message from John.
+Highlight the message body (only the message body), then right-click and select Copy from the context menu.
+At the ? prompt, type exit and press Enter to quit the mail application.
+At the cybrary@localhost prompt, type echo " and paste the copied message contents, then continue typing " > message.base64 and press Enter.
+At the cybrary@localhost prompt, type base64 -d message.base64 > message.enc and press Enter to decode the encrypted message.
+
+You now have a decoded (but not decrypted) copy of the encrypted message.
+At the cybrary@localhost prompt, type openssl pkeyutl -decrypt -inkey keyforjohn.key -in message.enc -out message.txt and press Enter to decrypt the message from john.
+At the cybrary@localhost prompt, type cat message.txt to and press Enter to read john's message.
+Summary
+Success! You have now encrypted and decrypted a simple message using symmetric cryptography. Be sure to answer the questions on the Tasks tab, then continue to the optional challenge exercise.
+
+
+1.3 Challenge Exercise
+-----------------------
+In this challenge exercise, you will use OpenSSL to decrypt a secret message. In the open terminal
+window, type ./.challenge.sh and press Enter, then check your mail. You should find a key (email message 3) 
+and a secret message (email message 4). Decode the key and the message, then decrypt the message using the key.
+
+Steps followed to find the flag:
+1. type mail and press Enter to open the mail application.
+2. read the message from John.
+3. Highlight the message body (only the message body), then right-click and select Copy from the context menu.
+4. type exit and press Enter to quit the mail application.
+5. type echo " and paste the copied message contents, then continue typing " > message.base64 and press Enter.
+6. type base64 -d message.base64 > message.enc and press Enter to decode the encrypted message.
+7. type mail and press Enter to open the mail application.
+8. If you see the More prompt, press the space bar to see the entire message.
+9. Highlight the message body (only the message body which is the key), then right-click and select Copy from the context menu.
+10. type exit and press Enter to close the mail application.
+11. type echo " and paste the copied message contents, then continue typing " > keyfromsally.base64 and press Enter.
+12. type base64 -d keyfromsally.base64 > keyforcybrary.key and press Enter to decode the shared key.
+13. type cat keyfromcybrary.key and press Enter.
+14. type openssl pkeyutl -decrypt -inkey keyforcybrary.key -in message.enc -out message.txt and press Enter to decrypt the message from john.
+15. type cat message.txt to and press Enter to read john's message.
+ Success! You have now decrypted the message which is "The Scott Farkus Affair 1983"
+===========================================================================================================
+
+Asymmetric Cryptography
+
+1.1 Core Concepts
+------------------
+There are two types of cryptographic algorithms: symmetric and asymmetric. Asymmetric cryptography (also known as public key cryptography) uses two mathematically-related cryptographic keys to encrypt plaintext and decrypt ciphertext: a public key and a private key. As the name implies, the public key can be widely distributed and used to encrypt messages. Those encrypted messages can only be decrypted using the private key, which is never distributed beyond the key owner, and ensures the confidentiality of any messages sent to the key owner.
+
+The private key can also be used to sign messages, which can be verified by anyone with the public key. While messages signed with the private key are not confidential, they do provide the additional security properties of authenticity and non-repudiation. Authenticity refers to the security property of an entity demonstrably possessing the identity that they claim. Non-repudiation refers to the security property of an entity being unable to deny having sent a message. Of course, this requires that the private key owner keep their key secure.
+
+Compared to symmetric cryptography, asymmetric cryptography solves the problems of both key distribution (the private key is never distributed) and key management (a single key pair can facilitate communications between one individual and others). However, these improvements come at a cost, as asymmetric cryptography is slower and less efficient than symmetric cryptography. For this reason, asymmetric cryptography is not suitable for extended communication sessions.
+
+One of the most important applications of asymmetric cryptography is its role in creating a digital signature, which enables e-signing services like DocuSign. A digital signature is created using the sender’s private key and sent to the desired recipient. Upon receipt, the recipient can use the sender’s public key to verify the digital signature, confirming the legitimacy of the sender’s identity (authenticity).
+
+When combined with additional information about the owner, digital signatures can be used to create digital certificates - electronic documents used to prove the authenticity of a public key. At scale, these digital certificates are networked to create a Public Key Infrastructure (PKI). In a PKI, entities such as people, organizations, and servers register their public keys with a trusted Certificate Authority (or CA) to obtain a digital certificate. PKI is what enables secure communications on the Internet.
+
+Up Next
+In this lab, you will use OpenSSL to demonstrate how asymmetric cryptography works. OpenSSL is a software library used to provide secure communications over computer networks and is widely used by the Internet servers that service HTTPS websites.
+
+
+1.2 Guided Exercise
+--------------------
+Part 1: Create a New Public/Private Key Pair and Share a Public Key
+In this part of the lab, you will create an asymmetric key pair using OpenSSL and share the public key.
+
+On the dock at the bottom of the screen, click the Terminal Emulator icon to open a Terminal window.
+
+In the next step, you will use OpenSSL’s genpkey subcommand to generate a private key. The syntax to create a new private key is:
+openssl genpkey -algorithm rsa -out [private].key
+At the cybrary@localhost prompt, type openssl genpkey -algorithm rsa -out cybraryprivate.key and press Enter to create a new private key.
+Embedded image
+
+You should never share a private key with anyone.
+At the cybrary@localhost prompt, type cat cybraryprivate.key and press Enter to display your private key.
+Embedded image
+
+In the next step, you will use OpenSSL's rsa subcommand to derive a public key from the private key. The syntax to create a new public key is:
+openssl rsa -pubout -in [private].key -out [public].key
+At the cybrary@localhost prompt, type openssl rsa -pubout -in cybraryprivate.key -out cybrarypublic.key and press Enter to create a new public key based on your private key.
+Embedded image
+
+Public keys are safe to share with anyone. In this lab, we will use a simple web page to share public keys.
+On the dock at the bottom of the screen, click the Web Browser icon to open a browser window.
+
+Note: It can take up to 30 seconds for the browser to open for the first time. There is no need to click the browser icon more than once.
+In the browser window, click on the keyserver bookmark.
+Embedded image
+
+Notice that both John and Sally have published their public keys. Anyone can download a public key to create encrypted content for John or Sally.
+In the terminal window, type sudo cp cybrarypublic.key /var/www/html and press Enter to copy the public key to the /var/www/html directory.
+
+In a production key-sharing system, you would likely have a web-based tool to manage sharing public keys, but the copy command will do for our purposes.
+In the web browser, refresh the keyserver page.
+Embedded image
+
+You will see Cybrary’s public key has been added to the keyserver. Now that we can access public keys, let's send Sally an encrypted message.
+Part 2: Send an Encrypted Message
+In this part of the lab, you will download Sally's public key and use it to send her an encrypted message.
+
+In the browser window, click the sallypublic.key to download it.
+In the terminal window, type echo "Sally, I have an ice cream cake at home for John's surprise birthday party!" > message.txt and press Enter.
+
+In the next step, you will use OpenSSL's pkeyutl subcommand to encrypt your message.
+
+The syntax to encrypt a message is:
+openssl pkeyutl -encrypt -inkey [public].key -pubin -in [filename].txt -out [filename].enc 
+-inkey = the cipher key to use
+-pubin = designates you are using a public key
+-in = the message to encrypt, can be anything (text is just an example)
+-out = the name of the encrypted file
+
+Conversely, the syntax to decrypt a message is:
+openssl pkeyutl -decrypt -inkey [private].key -in [filename].enc -out [filename].txt
+At the cybrary@localhost prompt, type openssl pkeyutl -encrypt -inkey Downloads/sallypublic.key -pubin -in message.txt -out message.enc and press Enter to encrypt your message to Sally.
+Embedded image
+
+Because we are using the local mail application to send email, we have to encode the encrypted message before we can send it.
+At the cybrary@localhost prompt, type base64 message.enc > message.base64 and press Enter to encode the encrypted message for sending.
+At the cybrary@localhost prompt, type cat message.base64 | mail -s "For Sally" sally and press Enter to mail Sally the encrypted (and base64 encoded) message.
+Part 3: Decrypt an Encrypted Message
+In this part of the lab, you will become the Sally user and decrypt the encrypted message using Sally's private key.
+
+At the cybrary@localhostprompt, su - sally and press Enter to become user sally.
+
+When prompted for the password, type password and press Enter.
+Embedded image
+
+Notice that the prompt changes, indicating you are now the sally user.
+At the sally@localhost prompt, type mail and press Enter.
+Embedded image
+
+You should see a new message from cybrary.
+At the ? prompt, type 1 and press Enter to read the message.
+
+Take note of the email address in the From line. You will need it to answer the final question on the Tasks tab.
+Embedded image
+
+Highlight the message body (only the message body), then right-click and select Copy from the context menu.
+Embedded image
+
+At the ? prompt, type exit and press Enter to close the mail application.
+At the sally@localhost prompt, type echo " and paste the copied message contents, then continue typing " > message.base64 and press Enter.
+Embedded image
+
+At the sally@localhost prompt, type base64 -d message.base64 > message.enc to decode (but not decrypt) the message.
+At the sally@localhost prompt, type openssl pkeyutl -decrypt -inkey sallyprivate.key -in message.enc -out message.txt and press Enter to decrypt the message.
+At the sally@localhost prompt, type cat message.txt and press Enter to read the decrypted message from Cybrary.
+
+Note: You can also read the encrypted message directly by using the command openssl pkeyutl -decrypt -inkey sallyprivate.key -in message.enc.
+Summary
+In this lesson, you practiced creating a private key pair using OpenSSL. You then used a shared public key to encrypt a secret message, and then used a private key to decrypt that message. Be sure to answer the questions on the Tasks tab, then continue to the optional Challenge Exercise.
+
+
+1.3 Challenge Exercise
+-----------------------
+
+In this challenge exercise, you will use OpenSSL to decrypt a secret message.
+
+If necessary, type exit in the open terminal window and press Enter to become the cybrary user. Next, type ./.challenge.sh and press Enter.
+
+John has just sent Sally an encrypted message using mail. Become Sally and decrypt John's message.
+
+What is John's message?
+>>Did anyone remember it's my birthday next week?
+==========================================================================================================================
+
+Cryptographic Hash Functions
+============================
+1.1 Core Concepts
+-----------------
+A hash is a mathematical representation of a digital object, such as a text file, an email, or an executable file. The concept is fairly straightforward: you take a given object and run a hash function on it, which produces an alpha-numeric string that is unique to that object.
+
+Embedded image
+
+As long as the digital object remains unchanged, the hash function will always produce the same result. However, even a tiny change will result in a completely new hash. Notice below we only added a period, yet the hash is dramatically different.
+
+Embedded image
+
+It's important to note that, unlike encryption, hashing is a one-way function. Hashes are not ciphertext - instead, they are more like digital fingerprints. There is no formula to take a hash value and derive the original file content. That does not make hashing invincible to hackers, however. Tactics such as a dictionary attack can discover a hashed password by hashing an extensive database of words and comparing the hashes against the target hash. Tools like John the Ripper and Hashcat can perform attacks like this.
+
+Embedded image
+
+There are many hash functions, with Message Digest 5 (MD5), Cyclic Redundancy Check (CRC), and Secure Hash Algorithm (SHA) being the most commonly used.
+
+However, not all hash functions are created equal. Given that there are an infinite number of digital assets, and only a finite number of hashes, there is a chance that eventually two files will generate the same hash. This event is called a collision. The stronger the hash function, the less chance of a collision in a given sample of files. Thus MD5, being weaker than SHA2, is more likely to produce a collision than SHA2. Nonetheless, MD5 is still very fast and popular for hashing.
+
+For IT and cybersecurity practitioners, hashes have many practical uses:
+
+System administrators use hashes to validate installers and executables downloaded from the Internet.
+A SOC analyst creates hashes for suspected files to see if the hash values match known malware. An attacker will often change the name of malware to look trusted, but simply changing the name will not change the value of the hash!
+An Incident responder will create hash values for every indicator of compromise (IOC) discovered on a compromised system.
+Forensic analysts will generate hashes for each tool they run on a compromised host to prove the tools used are known and safe and do not contaminate a digital crime scene.
+
+
+1.2 Guided Exercise
+-------------------
+In this lesson, you will generate and compare several hash values. You will use your findings to answer the questions on the Tasks tab.
+
+On the dock at the bottom of the screen, click the Terminal Emulator icon to open a Terminal window.
+At the cybrary@localhost prompt, type mkdir hash1 and press Enter to create a folder called hash1 on the Desktop.
+Using the mkdir command, create hash2 and hash3.
+At the cybrary@localhost prompt, type touch hash1/file1 and press Enter to create a file called file1 in the hash1 directory.
+Using the touch command, create a file called file2 in the hash2 directory and a file called file3 in the hash3 directory.
+At the cybrary@localhost prompt, type echo "moo" > hash1/file1 and press Enter to add the text "moo" to file1, then type cat hash1/file1 and press Enter to verify the contents of file1.
+Embedded image
+
+Using the echo command, add moo to file2 and woof to file3, then use the cat command to verify the contents of file2 and file3.
+
+There are many tools available to create hash values. For example, Linux comes with md5sum and sha556sum to create an MD5 or SHA556 hash respectively. Windows users can run the Get-FileHash PowerShell command, or use the built-in certutil command. In this lab, we will use OpenSLL.
+At the cybrary@localhost prompt, type openssl dgst -md5 hash1/file1 and press Enter to use the digest utility in OpenSSL to create an MD5 hash of file1.
+Embedded image
+
+Using the openssl dgst command, create an md5 hash of hash2/file2.
+
+Notice the MD5 hash values of hash1/file1 and hash2/file2 are identical, even though file2 has a different name and is in a separate directory. Hash values do not care what a file is called, nor where a file is located. Hash values only change if the contents of a file change.
+At the cybrary@localhost prompt, type mv hash1/file1 hash1/happypuppy.exe and press Enter to rename file1 to happypuppy.exe.
+Using the openssl dgst command, create an md5 hash of happypuppy.exe.
+
+Notice the hash value of happypuppy.exe is precisely the same as when the file was named file1. Again, it does not matter what we name a file, what extension we add to a file, or where we place it; the hash value will always be the same if the content of the file is the same.
+Using the openssl dgst command, create an md5 hash of file3.
+
+You will see that the hash value is very different from happypuppy.exe and file2.
+Using the openssl dgst -sha256 command, create sha256 hashes for happypuppy.exe, file2, and file3.
+
+Notice that, once again, the hashes for happypuppy.exe and file2 are still the same as the file contents are the same. As long as a file contains the same content, it will always create the same hash value.
+At the cybrary@localhost prompt, type base64 /dev/urandom | head -c 1M > abigfile.txt and press Enter to create a large text file filled with random text.
+At the cybrary@localhost prompt, type cat abigfile.txt and press Enter to see the contents of the file.
+At the cybrary@localhost prompt, type openssl dgst -sha256 abigfile.txt and press Enter to create a SHA256 hash of abigfile.txt.
+At the cybrary@localhost prompt, type echo " " >> abigfile.txt and press Enter to add a single space to the end of the file.
+At the cybrary@localhost prompt, type openssl dgst -sha256 abigfile.txt and press Enter to create a new SHA256 hash of abigfile.txt.
+
+Even though we added only a single space to this massive file, it still dramatically changed the hash value for the file.
+Summary
+In this lesson, you practiced creating and comparing several md5 and sha256 hashes. Be sure to answer the questions on the Tasks tab, then continue to the optional challenge exercise.
+
+1.3 Challenge Exercise
+----------------------
+1. Which of the three directories has the same file?
+A. test1 and test2
+B. test1 and test3 === correct
+C. test2 and test3
+B
+2. True or False: the nc program on the desktop and /usr/bin/nc are identical.
+A. True === correct
+B. False
+A
+
+3. What are the first five characters of the md5 hash of the nc file on the desktop?
+Answer === 59b26
+
+=================================================================================================================
+
+Windows CLI Basics
+==================
+
+1.1 Core Concepts
+-----------------
+For over two decades, Microsoft Windows has been the most widely used operating system for desktop computers. While Windows is primarily known for its Graphical User Interface (GUI), its origins trace back to a command-line-driven predecessor: PC-DOS. Developed by Microsoft in 1981 as a re-engineering of Seattle Computer Products’ 86-DOS, DOS stands for Disk Operating System. Like its predecessor, CP/M, DOS was entirely command-line-based, with no GUI or mouse support. Users interacted with the system by typing commands directly into a terminal or keyboard.
+
+In 1992, Microsoft released Windows 3.1, the true predecessor to all modern Windows operating systems. This version introduced a GUI that allowed users to interact with the system using both a keyboard and a mouse. Instead of relying solely on typed commands, users could now click, drag, and manipulate graphical elements on the screen. However, Windows 3.1 still required DOS as its underlying operating system. This changed in 1995 with the release of Windows 95, the first version of Windows that no longer depended on DOS as a separate entity. Nevertheless, DOS persisted as the default command-line interface within Windows.
+
+Embedded image
+
+Today, PowerShell —Microsoft's powerful command-line shell and scripting language—has largely replaced the traditional Windows Command Prompt (CLI) for most administrative and automation tasks. However, the Windows CLI remains available and useful for executing quick commands, automating system tasks, and even aiding cybersecurity professionals during Red Team exercises, where attackers attempt to exploit systems using built-in tools—a tactic known as “living off the land.”
+
+For those familiar with Linux, the Windows CLI shares some common commands, such as cd, echo, more, and mkdir. However, Windows also includes unique utilities like net, tasklist, and sc, which have no direct Linux equivalents. As with Linux, the best way to learn the Windows CLI is through hands-on experience.
+
+
+1.2 Guided Exercise
+-------------------
+Part 1: Navigation
+In this lesson, you will learn and practice several common commands using PowerShell on a Windows system. We will begin with some basic commands for navigation.
+
+On the taskbar, right-click the Windows Start icon, and select Windows PowerShell (Admin) to open a new PowerShell window.
+
+When prompted, click Yes to continue.
+At the PowerShell prompt, type cmd and press Enter to drop into the Windows CLI.
+
+While you can run Windows commands directly in PowerShell, there are cases where the PowerShell interpreter gets in the way.
+Embedded image
+
+Notice first that the Windows prompt tells you where you are on the system: C:\Windows\System32.
+At the command prompt, type whoami and press Enter to see your user name.
+Embedded image
+
+The format will be servername\username. In this case, you are on the EC2AMAZ-MVQDHPB server as the cybrary user.
+At the command prompt, type cd %HOMEPATH% and press Enter to change directory to the home directory (C:\Users\cybrary).
+At the command prompt, type dir and press Enter to display the contents of the current directory.
+Embedded image
+
+You can also view files and folders using the tree command.
+At the command prompt, type help dir and press Enter to display the help manual for the dir command.
+Embedded image
+
+You can use the help command to find interesting command line switches. Notice that even this simple command has a wealth of options.
+At the command prompt, type dir /S /P and press Enter to see all files and folders under C:\Users\cybrary.
+
+The /P will apply a pause between each screen. Press any key to see the next screen. Press CTRL-C to break out of the dir listing.
+Embedded image
+
+Note: Most of the time, you can use a lowercase letter as a command switch, as Windows is case-insensitive. So, dir /s /p would also work.
+Part 2: File Operations
+In this part of the lab, we will move on to practicing some commands related to manipulating files.
+
+At the command prompt, type mkdir apple1 apple2 apple3 and press Enter to make three new directories under the cybrary directory.
+At the command prompt, type dir apple* and press Enter to see the new directories.
+Embedded image
+
+Note: The * character is a wildcard. In the example above, apple* will find anything starting with "apple".
+At the command prompt, type echo The cow says moo. > apple1\cow.txt and press Enter to create a text file in the apple1 directory called cow.txt.
+
+Notice there are no quotes needed when using echo.
+
+Note: The “>” character means redirect. We are redirecting the output of the echo command to the cow.txt file. There are two redirectors: ">" and ">>" where ">" will overwrite an existing file while ">>" will append to an existing file.
+At the command prompt, type dir apple1 and press Enter to confirm the existence of cow.txt in the apple1 directory.
+At the command prompt, type type apple1\cow.txt and press Enter to display the contents of the cow.txt file.
+At the command prompt, type type apple1\cow.txt >> apple3\manycows.txt and press Enter to send the contents of apple1\cow.txt to apple3\manycows.txt.
+
+Repeat this two more times. Will manycows.txt be appended to or overwritten?
+At the command prompt, type type apple3\manycows.txt and press Enter to see the contents of manycows.txt.
+
+Notice "The cow says moo." was appended three times. If you had used ”>” instead of “>>”, the file would have been overwritten each time.
+Embedded image
+
+At the command prompt, type copy apple1\cow.txt apple2\notacow.txt and press Enter to create a copy of the cow.txt text file into a new file called notacow.txt in the apple2 directory.
+
+Execute type apple2\notacow.txt to confirm that notacow.txt contains the exact text as cow.txt.
+Embedded image
+
+At the command prompt, type dir /s /b | findstr apple | findstr .txt and press Enter to run a search for any .txt files with the word apple in the file name or directory name.
+Embedded image
+
+Here is how this command breaks down:
+
+dir /s /b - list all files and subfolders.
+| - pipes the output of the dir command into findstr.
+findstr apple - looks for any file with apple in the file name or directory name
+| - pipes the output of the first findstr command to the second findstr command.
+findstr .txt - looks for any file or directory with .txt in the name
+
+The findstr command is a versatile tool that's used to search the contents of files from the command line. The basic syntax of the command is findstr "keyword" filename. For example, you could run findstr "moo" notacow.txt to look up the string "moo" in the notacow.txt file. If you're trying to locate a file in your current directory containing a specific string, but you don't know which file, you can run findstr "keyword" *. The wildcard character will instruct findstr to search all files in the current directory.
+
+It's also worth noting that while the Windows command line is not case sensitive, findstr is.
+
+Note: One great learning exercise is first to run dir /s /b, then dir /s /b | findstr apple, and finally dir /s /b | findstr apple | findstr .txt to see how the piping helps filter down to the data we want. Try it!
+At the command prompt, type dir /s /b | findstr apple | findstr .txt | find /c ".txt" and press Enter to count the number of .txt files with the word apple in the file name or directory name.
+
+While findstr is very useful, it does not have an easy way to count the number of files found. The legacy find command does have this feature ( /c ). We will revisit the find command later in the lab.
+At the command prompt, type dir /s /b | find /c ".txt" and press Enter to count the number of .txt files in c:\users\cybrary and all subfolders.
+At the command prompt, type rename apple2\notacow.txt reallyacow.txt and press Enter to rename notacow.txt to reallyacow.txt.
+
+Execute dir /s /b | findstr apple | findstr .txt to confirm your work.
+Embedded image
+
+At the command prompt, type move apple3\manycows.txt apple2 and press Enter to move manycows.txt from the apple3 directory to apple2.
+
+Execute dir /s /b | findstr apple | findstr .txt to confirm your work.
+Embedded image
+
+At the command prompt, type copy apple2\manycows.txt apple3 and press Enter to copy manycows.txt to the apple3 directory. Notice we did not rename the file for this copy.
+
+Execute dir /s /b | findstr apple | findstr .txt to confirm your work.
+Embedded image
+
+At the command prompt, type del apple2\manycows.txt and press Enter to delete manycows.txt from the apple2 directory.
+
+Execute dir /s /b | findstr apple | findstr .txt to confirm your work.
+Embedded image
+
+Note: You were not prompted to confirm the deletion and notice the file is not in the Recycle bin. When you use the del command, the file is removed and gone. To be safe, use the del /p option to prompt for confirmation before deleting files.
+
+You can also use the erase command, which is identical to the del command.
+At the command prompt, type mkdir one\two\three and press Enter to create a nested set of directories.
+
+Execute tree one to confirm your work.
+Embedded image
+
+At the command prompt, type rmdir one and press Enter to remove the "one" directory.
+
+Notice you cannot remove one because it is not empty.
+Embedded image
+
+At the command prompt, type rmdir /s one and press Enter to remove one and all subdirectories.
+
+When asked to confirm, type Y and press Enter, then execute tree one and take note of the error, as one and all subdirectories are now gone.
+Embedded image
+
+At the command prompt, type doskey /history to view all the commands you have issued thus far.
+Embedded image
+
+Unlike the Linux history command, the doskey /history is cleared when the command window is closed. On the other hand, PowerShell will remember all commands even between reboots.
+Part 3: System Administration
+In this part of the lab, we will move into some useful system administration commands.
+
+At the command prompt, type systeminfo and press Enter to display detailed information about the server's system configuration including OS Name, OS Version, Registered Owner, Product ID, Processor Information, BIOS information, Memory Information and the number of Hotfixes installed.
+Embedded image
+
+At the command prompt, type tasklist and press Enter to view all the processes running currently on your lab server. Try tasklist /v as well.
+Embedded image
+
+At the command prompt, type date /t and press Enter to see the current date, then type time /t and press Enter to see the current time.
+Embedded image
+
+Note: If you do not use the /t option, you will be prompted for a new date and time. You can just hit Enter to accept the current date and time.
+At the command prompt, type sc query | more and press Enter to view active services and drivers. Press Enter to advance one line or the Space Bar to advance one page at a time.
+Embedded image
+
+Note: The sc command can stop and start Windows services. Explore this command with care. The more command is similar to its Linux counterpart.
+
+
+You can also use sc query to find the state of one particular service.
+At the command prompt, type sc query wscsvc and press Enter to view the state of the Security Center service.
+
+As seen above, the sc query command requires the service name (e.g. wscsvc) as opposed to its display name (e.g. Security Center).
+At the command prompt, type net and press Enter to display Windows's special "net" commands.
+Embedded image
+
+The net command can view and modify users, groups, shares, and more.
+At the command prompt, type net share and press Enter to list all folders shared on the lab server.
+
+By default you will see three shares: C$, IPC$ and ADMIN$. The "$" designates a hidden administrative share. These administrative shares are designed for administrators and software to remotely manage and access resources on a network-connected Windows system. Under Resource, you will see the actual drive and or folder that is shared.
+At the command prompt, type net user and press Enter to list all local user accounts.
+Embedded image
+
+At the command prompt, type net help user and press Enter to display the help guide for the net user command.
+Embedded image
+
+At the command prompt, type net localgroup and press Enter to list all groups on the lab server.
+Embedded image
+
+At the command prompt, type net accounts and press Enter to view the current password requirements.
+Embedded image
+
+Note: The net command is a "Swiss army knife" for Windows command line system administration. Aspiring Red Teamers should master everything this command can do.
+
+What if we wanted to count the number of local accounts? We could combine the net command, plus the find command we learned earlier.
+At the command prompt, type net user | find /c /v "" and press Enter to count all local user accounts.
+
+The find /c /v "" part of the above command essentially tells find to count everything that is not empty. This function is very similar to the wc -l command in Linux.
+
+Sadly, the answer we get back is incorrect. There are only 6 user accounts, but the find command is reporting 8. This is because find simply counts every non-empty line output to the screen, not the number of users. For find to work correctly, it needs something unique in the output to filter on.
+At the command prompt, type net localgroup and press Enter to list all groups on the lab server again.
+
+Notice that in the command output, each local group is prefaced by a star ( * ). We can certainly use that to accurately count the number of local groups.
+At the command prompt, type net localgroup | find /c "*" and press Enter to count the number of local groups on the lab server.
+
+Recall that administrative shares have a $ in the share name. We could use this to count the number of hidden/administrative shares there are on the system.
+At the command prompt, type net share | find /c "$" and press Enter to count the number of hidden shares.
+
+Unfortunately, the net user output gives us nothing we can use to designate a user account. If we want to count the number of users, we must use another tool, like PowerShell.
+
+Next, we will learn some basic networking commands for Windows systems.
+At the command prompt, type ipconfig and press Enter to view the IP address, subnet mask, and gateway.
+
+In the output below, the IP address is 10.91.17.58, the network is 10.91.17.0/24, and the gateway is 10.91.17.1.
+Embedded image
+
+An IP address is written first_octet.second_octet.third_octet.fourth_octet. Take note of the first three octets in your output. You will need it for the next step.
+At the command prompt, type for /L %a in (1,1,255) do @ping -n 1 -w 10 x.y.z.%a > null && echo x.y.z.%a is up! and press Enter, replacing x.y.z with the first three octets you noted in the step above.
+Embedded image
+
+This command is referred to as a ping sweep. Ping stands for packet internet groper. Its purpose is to see if a host is reachable. By using a for loop and ping together, it is possible to find out if there are other hosts on a given network.
+
+Let’s break this command down:
+
+for /L %a (1,1,255) means "count from 1 to 255 and assign that value to a variable called %a"
+do @ping -n 1 -w 10 x.y.z.%a means "ping each address one time and wait 10 milliseconds"
+> null means "discard the output"
+&& checks to see if the ping is successful and if it is, echo x.y.z.%a is up!
+
+The ping sweep will take a few minutes to complete. The command prompt will return when it's finished.
+At the command prompt, type ping 8.8.8.8 and press Enter to verify if Google's public DNS servers are reachable from the lab server.
+
+At the command prompt, type nslookup www.moo.com 8.8.8.8 and press Enter to look up the IP address for the www.moo.com web server using the 8.8.8.8 public DNS server.
+
+At the command prompt, type netstat -ant and press Enter to view all the current TCP and UDP network connections to and from your lab server.
+
+The netstat command is used to display network statistics for the Windows host. Netstat shows both established connections and ports that are listening.
+
+
+1.3 Challenge Exercise
+----------------------

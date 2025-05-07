@@ -14,3 +14,9 @@
 - [FIDO Security Guidelines](https://fidoalliance.org/)
 - [NIST Business Continuity Framework](https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-34r1.pdf)
 - [Linux Filesystem Hierarchy Standard](https://refspecs.linuxfoundation.org/FHS_3.0/fhs-3.0.pdf)
+
+# Day-6
+- [OpenSSL Documentation](https://www.openssl.org/docs/)  
+- [CVE Details: Pegasus Spyware](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3568)  
+- [Mirai Botnet Analysis](https://www.unit42.com/mirai-botnet-analysis/)  
+- [Windows CLI Cheat Sheet](https://cheatography.com/jasonchan/cheat-sheets/windows-command-line/)  
