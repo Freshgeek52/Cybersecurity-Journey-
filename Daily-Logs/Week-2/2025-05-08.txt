@@ -1,0 +1,305 @@
+# Cybersecurity News Summary - May 8, 2025 🚨
+
+## 🎯 **Russian Hackers Using ClickFix Fake CAPTCHA to Deploy New LOSTKEYS Malware || by Ravie Lakshmanan on Cyber Espionage / Malware**  
+### *Targeted Espionage Campaign by COLDRIVER (Callisto/Star Blizzard)*  
+
+### **Key Details**:  
+- **Malware**: **LOSTKEYS**  
+  - Steals files (specific extensions/directories), system info, and running processes.  
+  - Deployed selectively in highly targeted attacks.  
+  - First observed in January 2025; older samples (Dec 2023) masqueraded as **Maltego** binaries.  
+- **Targets**:  
+  - Western government/military advisors, journalists, NGOs, Ukraine-affiliated individuals.  
+
+### **Attack Chain**:  
+1. **Social Engineering**:  
+   - Fake CAPTCHA prompts on decoy websites.  
+   - Victims tricked into pasting malicious PowerShell commands (via Windows Run dialog).  
+2. **Payload Delivery**:  
+   - PowerShell script checks for VM environments to evade detection.  
+   - Downloads Base64-encoded payload leading to LOSTKEYS execution.  
+
+### **Broader Campaigns Using ClickFix Tactics**:  
+1. **Lampion Banking Trojan**:  
+   - Targets Portuguese-speaking sectors (gov, finance, transport) via phishing emails with ZIP files.  
+   - Multi-stage, non-consecutive processes complicate detection.  
+2. **Atomic Stealer (macOS)**:  
+   - Uses **EtherHiding** (Binance Smart Chain contracts) to hide payloads.  
+   - Compromised 2,800+ websites in "MacReaper" watering hole attacks.  
+
+### **Key Takeaways**:  
+- **COLDRIVER’s Evolution**: Shifted from credential phishing (SPICA malware) to advanced espionage tools.  
+- **Defense Recommendations**:  
+  - Avoid executing unsolicited PowerShell/Terminal commands.  
+  - Monitor for fake CAPTCHA prompts and phishing lures.  
+  - Update endpoint detection for multi-stage, obfuscated attacks.  
+
+**#CyberEspionage #Malware #ClickFix #CyberThreats**  
+
+=========================================================================================================
+
+**Cisco Patches CVE-2025-20188 (10.0 CVSS) in IOS XE That Enables Root Exploits via JWT**  
+
+- **Vulnerability**:  
+  - **CVE-2025-20188** (CVSS 10.0): A **hard-coded JSON Web Token (JWT)** in Cisco IOS XE Wireless Controller allows unauthenticated attackers to:  
+    - Upload arbitrary files.  
+    - Perform path traversal.  
+    - Execute **root-level commands** via crafted HTTPS requests.  
+  - Requires **Out-of-Band AP Image Download** feature to be enabled (disabled by default).  
+
+- **Affected Products**:  
+  - Catalyst 9800-CL, 9800 Series Wireless Controllers.  
+  - Embedded Wireless Controllers on Catalyst 9300/9400/9500 switches and APs.  
+
+- **Mitigation**:  
+  - **Update** to patched software versions immediately.  
+  - **Temporary Fix**: Disable the Out-of-Band AP Image Download feature (reverts to CAPWAP method for AP updates).  
+
+- **Discovery**: Found internally by Cisco ASIG researcher; no active exploitation observed.  
+
+**Key Takeaway**: Organizations using affected Cisco devices should prioritize patching or disable the vulnerable feature to prevent potential root-level compromise.  
+============================================================================================================================
+
+Windows File System Basics
+==========================
+1.1 Core Concepts
+-----------------
+In basic terms, a file system is the way the OS organizes files, folders, storage, and peripherals. The computer’s operating system (OS) stores and manages data in several places. The OS continuously moves volatile data between the central processing unit (CPU) and system memory. When not in use, data must be kept in slower, larger storage devices like hard drives and solid-state drives (SSD / NVMe). Users access and manage this long-term storage through the OS file system.
+
+The Microsoft Windows File System
+The Microsoft Windows OS uses a hierarchical system of volumes, folders, and files. Volumes can be physical devices or logical partitions on a physical device. Windows assigns letters to volumes (see below). Under each volume are folders (directories) containing other folders and files.
+
+Embedded image
+
+The most common Windows file systems are FAT16, FAT32, exFAT, and NTFS. FAT stands for File Allocation Table. Once used for hard disk storage, the FAT file system - specifically FAT32 and exFAT - is commonly used today for USB drives. NTFS stands for New Technology File System. Initially developed by Microsoft in 1993 for Windows NT, NTFS is the primary file system used in modern Windows systems. Compared to FAT, the NTFS file system allows for more extensive storage (16TB to 8PB), better fault tolerance, encryption, compression, user quotas, and richer security features.
+
+Microsoft Windows - Key Folders
+The top-most level of the Windows file system is the local volume (typically C:\) where the Windows operating system is installed. In modern Windows installations, the C:\ drive contains seven folders.
+
+Embedded image
+
+EFI stands for Extensible Firmware Interface. The EFI folder contains files needed at boot time and works with the hidden EFI partition on your hard drive. The most important file in the EFI folder is the BCD (Boot Configuration Data) file stored in C:\EFI\Microsoft\Boot\BCD. The BCD holds information about the boot options on your computer.
+The PerfLogs folder is where the Performance Monitor saves its data. The Performance Monitor is used to find system bottlenecks and troubleshoot issues. If you delete the PerfLogs folder, Windows will simply recreate it.
+Program Files and Program Files (x86) are where the files for installed programs are stored. The (x86) directory is for 32-bit programs, and the other is for 64-bit programs. While not every application will install under these folders, it will place its files in one of the two directories if the program comes with a Windows installer (.exe or .msi).
+
+Note: When navigating the Windows file system using the command prompt, Windows allows you to use quotes when referencing long file names with spaces. For example, to navigate to the Program Files (x86) directory, you would execute cd "Program Files (x86)". Windows also generates an 8-character version of the file or directory name for backward compatibility with older versions of the OS. To see the short name for a file or directory, execute dir /x. In the example below, PROGRA~2 is the short name for Program Files (x86).
+Embedded image
+
+The Program Data folder is where applications can store data that is not user-specific. Otherwise, applications will use the C:\Users\[ username]\AppData folder, where [ username] is each user's name.
+
+Note: The ProgramData and AppData folders are both hidden by default. To see them, you must check Hidden Items in the File Explorer View tab. By default, Windows will also hide file name extensions (e.g., .txt, .bat, .doc, etc.). To see file extensions, check File name extensions in the View tab.
+Embedded image
+
+The Users directory is where users with a local account on the system keep their files. When a user logs in for the first time, Windows creates folders for them. Below we see the folder structure created for the user Cybrary.
+Embedded image
+
+Note: Before a user logs in, no folders are created under C:\Users.
+The Windows directory contains everything else needed by the operating system to function. Some say the Windows directory IS the operating system. As you can see below, there is a massive number of folders to explore.
+Embedded image
+
+Up Next
+In the next lesson, you will explore the Windows file system. You will examine the key locations where Windows stores data, as well as some of the more interesting features that make Windows unique.
+
+
+1.2 Guided Exercise
+-------------------
+In this lab, you will explore the Windows file system. You will examine the key locations where Windows stores data, and discover some of the more interesting features that make Windows unique.
+
+First, we will examine the Startup folder. The Startup folder is used to automatically run scripts and programs when a given user logs in.
+
+On the taskbar, click the File Explorer icon, then navigate to c:\Users\Cybrary\AppData\Roaming
+\Microsoft\Windows\Start Menu\Programs.
+Embedded image
+
+Within the Programs folder, you should see another folder titled Startup. Windows will run any program, batch file, or script in the Startup folder when user Cybrary logs in.
+
+Note: An alternative way to get to the Startup folder is to right-click the Windows Start icon, select Run, then type shell:startup and press Enter.
+In the File Explorer, open the Startup folder, then right-click anywhere inside the Startup folder and select New > Text Document from the context menu.
+
+Name the new document test.bat (and remove the .txt extension), then click Yes when prompted to rename the file.
+
+Note: The .bat extension designates this file as a batch file, which is a script file consisting of a sequence of commands stored in plain text.
+On the taskbar, click the Search icon and type startup, then select Startup Apps from the results to open a Settings window.
+
+On the Startup page of the Settings window, you should see that test.bat is now a startup application. This means that Windows will try to run test.bat every time user Cybrary logs in.
+Embedded image
+
+Note: Test.bat is empty and will therefore have no effect at startup.
+Close the Settings window.
+
+Next, we will examine the Security Accounts Manager (SAM) database. The SAM database is where Windows stores sensitive information such as user accounts, passwords, and security descriptors.
+In the File Explorer, navigate to C:\Windows\System32\config.
+
+When prompted, click Continue to continue. Only an administrator can access this folder, but because the cybrary user is an administrator, they can grant themselves access permission.
+
+In the config folder, you should see a file titled SAM. SAM is a unique and highly secure database file. It is impossible to open or read this file while Windows is running. Only the operating system can read and write to the SAM database.
+Embedded image
+
+Note: What if Windows is not running? Using a Linux boot disk, it is possible to alter the SAM database using a tool called chntpw. Even in the cloud, a person with sufficient permission can detach a Windows volume, mount it to a Linux instance, and run chntpw to modify the SAM database.
+
+In the config folder, take note of three other files: SECURITY, SOFTWARE, and SYSTEM. These files store critical registry data.
+
+Note: The Windows Registry is a hierarchical database used to store data for programs and hardware installed on the Windows operating system. The registry is composed of two basic elements: keys and values (typically referred to as key-value pairs). A registry hive is a logical grouping of keys and values.
+On the taskbar, click the Search icon and type regedit, then select Registry Editor from the results to open the Registry Editor.
+
+When prompted, click Yes to continue.
+In the Registry Editor navigation tree, expand HKEY_LOCAL_MACHINE.
+
+Notice the corresponding SECURITY, SOFTWARE, and SYSTEM registry hives.
+Embedded image
+
+Close the Registry Editor.
+
+Next, we will examine the folder where Windows stores the logs used to keep track of events and errors. We will begin by launching the Windows Event Viewer - the tool used for viewing these logs.
+On the taskbar, click the Search icon and type event, then select Event Viewer from the results to open the Event Viewer.
+In the Event Viewer navigation tree, expand the Windows Logs folder.
+
+You should see separate folders for Application, Security, and System logs.
+Embedded image
+
+In the Event Viewer navigation tree, right-click the Application log and select Properties to open the Properties window.
+
+Take note of the Log Path field. You will need this information to answer one of the questions on the Tasks tab.
+Copy the log path, then close the Properties window.
+In the File Explorer, navigate to the parent folder of the Application log.
+
+You can paste the log path you copied into File Explorer (and remove Application.evtx from the end of the copied path) if you like.
+
+Note: %SystemRoot% is shorthand for "C:\Windows".
+
+Take note of all the .evtx files. These are the primary Windows logs. These files use a proprietary format and can only be read using a special tool like the Event Viewer.
+In the File Explorer, double-click any .evtx file.
+
+Notice that the .evtx file will open a copy under Saved Logs in the Event Viewer.
+Close all Event Viewer windows.
+
+Next, we will examine the folder where Windows keeps most of its critical files and configuration settings.
+In the File Explorer, navigate to C:\Windows\System32.
+
+Scroll down and take note of all the .dll and .exe files. The System32 folder is where Windows keeps Dynamic Link Libraries (code and data other applications can use) and tools like Event Viewer (eventvwr.exe), Calc (calc.exe), Command (cmd.exe), Netstat (NETSTAT.exe), and Paint (mspaint.exe).
+Embedded image
+
+In the File Explorer, navigate up one directory (C:\Windows).
+
+Here you will find the location of other applications like Registry Editor (regedit.exe), File Explorer (explorer.exe), Notepad (notepad.exe), and WordPad (write.exe).
+Embedded image
+
+Next, we will examine the PATH environmental variable. The PATH environmental variable is a user-definable value that determines where Windows will look for files, DLLs, and programs.
+On the taskbar, right-click the Windows Start icon and select Windows PowerShell (Admin) to open a PowerShell window with Admin privileges.
+
+When prompted, click Yes to continue.
+At the PowerShell prompt, type cmd and press Enter to switch to the Windows command prompt shell.
+At the command prompt, type echo %PATH% and press Enter to view the PATH environmental variable and the corresponding values.
+
+Windows will look for files, DLLs, and programs in each directory path listed and separated by a semicolon.
+Embedded image
+
+At the command prompt, type sysdm and press Enter to open the System Properties window.
+In the System Properties window, click the Advanced tab, then click Environment Variables to open the Environment Variables window.
+Under System Variables, scroll down and select Path, then click Edit… to open the Edit Environment Variables window.
+Embedded image
+
+In the Edit Environment Variable window, you can add or delete directory paths where you want Windows to look for files and applications.
+
+Compare the list shown to the output of the echo %PATH% command. You will notice that the %PATH% variable has one more entry specifically related to the Cybrary account that is not shown in the "Edit environment variable" window.
+Click Cancel to close the Edit Environment Variable page.
+On the Environmental Variables page, review the User variables for cybrary.
+
+Take note of the User variable path for Cybrary. You will need this information to answer one of the questions on the Tasks tab.
+
+As you can see, the output from the type %PATH% command includes both the system and user paths.
+Close the Environment Variables and System Properties windows.
+
+Next, we will examine the manner in which Windows will often refer to the same location using different terminology. As an example, let’s look at the Cybrary Desktop.
+In the File Explorer, under Quick Access, click Desktop to open the Desktop folder.
+
+Note the path is This PC > Desktop.
+From the taskbar, right-click the File Explorer icon and select File Explorer from the menu to open a second File Explorer window, then navigate to C:\Users\cybrary\Desktop.
+
+Compare what you see in the two File Explorers. Note that the navigation paths are different, but they both point to the same location.
+Right-click anywhere on the Desktop and select New > Text Document.
+
+Notice that the file appears on the Desktop in both File Explorers. While Windows may reference this location differently, it is still a single location.
+Close the File Explorer windows and restore the PowerShell window.
+====================================================================================================================================================
+
+Next, we will examine a unique feature in the Windows NTFS file system known as Alternate Data Streams (ADS). With ADS, you can hide data inside other data. The original goal of ADS was to make NTFS compatible with Apple's HFS file system. Windows currently uses the ADS feature for encryption, the Windows Resource Manager, and the Windows Attachment Manager. However, hackers can also use ADS for more nefarious purposes.
+At the command prompt, type cd %HOMEPATH% and press Enter to move into Cybrary's home directory.
+
+Note: You can also use the more Linux like command cd ~ (tilde) to navigate to your home directory.
+At the command prompt, type echo This is not a secret. > notasecret.txt and press Enter to create a new text file, then type type notasecret.txt and press Enter to validate the contents of the new text file.
+
+At the command prompt, type dir notasecret.txt and press Enter to display its size.
+At the command prompt, type echo The password is MUSTARD1234 > notasecret.txt:secret and press Enter to place a secret message into an Alternate Data Stream.
+Use the dir and type commands to confirm that the original file is the same size and content as before.
+At the command prompt, type exit and press Enter to leave the command prompt shell and return to the PowerShell prompt, then type cd C:\Users\cybrary and press Enter to change directories.
+At the PowerShell prompt, type Get-Item .\notasecret.txt -Stream * and Press Enter to reveal all alternate data streams in the notasecret.txt file.
+
+Notice there is a stream called secret.
+Embedded image
+
+At the PowerShell prompt, type Get-Item .\notasecret.txt | Get-Content -Stream secret and press Enter to see the ADS text.
+
+Note: If you already know the stream's name (e.g., secret), you can use the following from a CMD window to see the stream content: type notasecret.txt:secret. You must be in a PowerShell window (not a command window) for this to work.
+
+Next, we will examine a critical file used for networking.
+==========================================================
+
+At the PowerShell prompt, type cmd and press Enter to switch to the Windows command prompt shell.
+At the command prompt, type type C:\Windows\System32\drivers\etc\hosts and press Enter to display the contents of the hosts file.
+
+You will see that every line is commented out currently. The hosts file maps IP Addresses to host names/URLs. The format used is IP Address space/tab Hostname —for example, 10.10.10.10 www.happypuppy.com.
+Embedded image
+
+Normally, when Windows needs an IP Address, it will query the domain name system (DNS). However, the hosts file takes precedence over DNS. Hackers sometimes exploit this fact and add entries into your hosts file to send you to hostile sites that you think are safe (e.g., Google). Be aware of what is in your hosts file!
+
+Take note of the IP address for rhino.acme.com. You will need this information to answer one of the questions on the Tasks tab.
+
+Finally, we will examine Windows file types. Windows uses file extensions to determine a file’s contents. For example, “.txt” is a text file, and “.wav” is an audio file. How does Windows know what application it should use for a given file type?
+On the taskbar, click the Search icon and type default, then select Default apps from the results to open the Default apps page in the Settings window.
+On the Default Apps page, scroll down and click Choose default apps by file type to open the Choose default apps by file type page.
+
+You should see Windows file types on the far left and all the applications associated with each file type on the right. The file types are listed alphabetically, and you will need to scroll down to view them.
+
+Take note of the default app for a “.gif” file. You will need this information to answer one of the questions on the Tasks tab.
+
+Note: You will see that not every file type has an application mapped.
+
+1. What is the log path for the Application log?
+%SystemRoot%\System32\Winevt\Logs\Application.evtx
+Hide Hint
+
+2. What is the User variable Path for Cybrary?
+C:\Users\cybrary\AppData\Local\Microsoft\WindowsApps
+
+3. In the hosts file example, what is the IP address of rhino.acme.com?
+102.54.94.97
+
+4. What application is associated with .gif files?
+Paint
+
+
+1.3 Challenge Exercise
+----------------------
+Overview
+In the open PowerShell window, execute cd C:\Users\cybrary\Desktop, then execute ./challenge.bat to start the challenge. You will need to answer all of the questions on the Tasks tab.
+
+Note: If you closed your PowerShell window from the Guided Exercise, be sure that when you open a new one, you open one with Admin privileges.
+
+1. On the Desktop are three text files. One of them has a flag hidden in an ADS. What is the flag?
+ADSROKCS!
+
+2. What IP / URL pair has been added to your hosts file?
+1.2.3.4 www.flooby.com
+
+
+3. A flag is hidden in a folder where Windows finds files needed at boot time. This folder works in conjunction with a hidden partition on your hard drive. What is the flag?
+SLYEFI
+
+
+4. A flag is hidden where applications on Windows can store data that is not user-specific. What is the flag?
+DATA4U
+
+
+5. A flag is hidden where Windows installs 32-bit programs. What is the flag?
+32BITONLY

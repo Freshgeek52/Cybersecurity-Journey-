@@ -391,7 +391,10 @@ For those familiar with Linux, the Windows CLI shares some common commands, such
 
 1.2 Guided Exercise
 -------------------
+=======================================================================================================================
+
 Part 1: Navigation
+
 In this lesson, you will learn and practice several common commands using PowerShell on a Windows system. We will begin with some basic commands for navigation.
 
 On the taskbar, right-click the Windows Start icon, and select Windows PowerShell (Admin) to open a new PowerShell window.
@@ -422,7 +425,10 @@ The /P will apply a pause between each screen. Press any key to see the next scr
 Embedded image
 
 Note: Most of the time, you can use a lowercase letter as a command switch, as Windows is case-insensitive. So, dir /s /p would also work.
+========================================================================================================================
+
 Part 2: File Operations
+
 In this part of the lab, we will move on to practicing some commands related to manipulating files.
 
 At the command prompt, type mkdir apple1 apple2 apple3 and press Enter to make three new directories under the cybrary directory.
@@ -512,7 +518,12 @@ At the command prompt, type doskey /history to view all the commands you have is
 Embedded image
 
 Unlike the Linux history command, the doskey /history is cleared when the command window is closed. On the other hand, PowerShell will remember all commands even between reboots.
+====================================================================================================================================================
+
 Part 3: System Administration
+=====================================
+### System Administration
+
 In this part of the lab, we will move into some useful system administration commands.
 
 At the command prompt, type systeminfo and press Enter to display detailed information about the server's system configuration including OS Name, OS Version, Registered Owner, Product ID, Processor Information, BIOS information, Memory Information and the number of Hotfixes installed.
@@ -571,8 +582,10 @@ Recall that administrative shares have a $ in the share name. We could use this 
 At the command prompt, type net share | find /c "$" and press Enter to count the number of hidden shares.
 
 Unfortunately, the net user output gives us nothing we can use to designate a user account. If we want to count the number of users, we must use another tool, like PowerShell.
+====================================================================================================================
 
 Next, we will learn some basic networking commands for Windows systems.
+====================================================================================================================
 At the command prompt, type ipconfig and press Enter to view the IP address, subnet mask, and gateway.
 
 In the output below, the IP address is 10.91.17.58, the network is 10.91.17.0/24, and the gateway is 10.91.17.1.
@@ -603,3 +616,21 @@ The netstat command is used to display network statistics for the Windows host. 
 
 1.3 Challenge Exercise
 ----------------------
+Your first challenge is to use the command line to answer the questions on the Tasks tab.
+
+For the first question, you will first need to create the following directories and files.
+
+C:\Users\Cybrary\Blue\
+C:\Users\Cybrary\Blue\file1.txt
+C:\Users\Cybrary\Blue\Red
+C:\Users\Cybrary\Blue\Red\file2.txt
+C:\Users\Cybrary\Blue\Red\Green
+C:\Users\Cybrary\Blue\Red\Green\file3.txt
+When you have created the directories and files above, open a PowerShell window, change to the C:\Users\cybrary\Desktop directory, and run .\flag.bat to retrieve the flag.
+>>The flag is ZUBBIE
+
+For the second question, use the correct command to locate the file in the Popcorn folder on the desktop that contains the word POPCORN.
+>>kix130fl.txt
+
+For the third question, use the correct command to look up the network shares on the lab server.
+>>3
