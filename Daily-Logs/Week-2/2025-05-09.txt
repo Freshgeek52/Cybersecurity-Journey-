@@ -1,0 +1,285 @@
+##Article's summaries 
+
+1. **Chinese Hackers Exploit SAP RCE Flaw CVE-2025-31324, Deploy Golang-Based SuperShell**  
+==========================================================================================
+### **Key Details**:  
+- **Vulnerability**: **CVE-2025-31324** (CVSS 10.0) in **SAP NetWeaver** — an integration and application platform used by enterprises to manage business processes, data, and applications across systems — allows **remote code execution (RCE)** via the `/developmentserver/metadatauploader` endpoint.  
+  - Exploited to upload web shells and deploy post-exploitation frameworks like **Brute Ratel C4**.  
+
+### **Attack Campaign**:  
+- **Threat Actor**: **Chaya_004** (China-linked), using **SuperShell**, a Golang-based reverse shell hosted at `47.97.42[.]177`.  
+- **Infrastructure**:  
+  - Tools include **Cobalt Strike**, SoftEther VPN, and Chinese-language tools (ARL, Pocassit).  
+  - Self-signed certificate impersonating Cloudflare detected.  
+- **Targets**:  
+  - Hundreds of SAP systems across **energy, manufacturing, pharmaceuticals, government**, and more.  
+  - First exploitation observed March 12, 2025; reconnaissance traced back to January 2025.  
+
+### **Broader Impact**:  
+- Multiple threat actors now exploit the flaw for **web shell deployment, crypto mining**, and other attacks.  
+
+### **Mitigation Recommendations**:  
+1. **Patch immediately** to address CVE-2025-31324.  
+2. Restrict access to the vulnerable endpoint and disable unused services (e.g., Visual Composer).  
+3. Monitor for suspicious HTTPS requests and anomalous certificates.  
+
+**Key Takeaway**:  
+This critical SAP flaw poses systemic risks to enterprises reliant on SAP NetWeaver for business integration. Advanced Chinese threat actors are leveraging custom malware, underscoring the urgency of patching and network hardening.  
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+2. **Google Rolls Out On-Device AI Protections to Detect Scams in Chrome and Android || Ravie Lakshmanan on Artificial Intelligence / Online Fraud**
+================================================================================================================================================
+
+Google has launched a series of **AI-powered security updates** across Chrome, Search, and Android to better detect and block scams. Central to this initiative is **Gemini Nano**, Google’s lightweight on-device large language model (LLM), now integrated into **Safe Browsing in Chrome 137 for desktops**. It analyzes websites locally to identify new and evolving scam patterns—especially tech support scams—by evaluating suspicious behaviors like misuse of the keyboard lock API.
+
+Running the AI locally ensures **instant detection, privacy protection, and efficient resource use**, with features like throttling, asynchronous processing, and token limits to reduce device strain. These tools will expand to Chrome on Android and cover other scams such as **fake package tracking alerts and unpaid toll notices**.
+
+In addition, Google’s AI-driven enhancements have resulted in a dramatic reduction in scam content in search results:
+
+* **80% decrease in scams impersonating airline support**
+* **70% reduction in fake visa/government service websites**
+
+A **new machine learning feature in Chrome on Android** now flags deceptive website notifications, warning users about spam or scams and giving them the option to unsubscribe or review the message.
+
+These updates build on previous AI integrations in Android’s Messages app and signal Google's move toward stronger mobile protections, including a forthcoming **Advanced Protection mode in Android 16**. This may include automatic disabling of JavaScript and 2G, plus enhanced anti-theft and scam prevention features.
+
+
+### **Key Takeaways:**
+
+* **Gemini Nano**, Google’s on-device AI model, now powers scam detection in Chrome 137.
+* AI runs locally for **instant, private detection** of suspicious websites.
+* Expanding to cover more scams (e.g., package tracking, unpaid tolls) and to **Chrome on Android**.
+* Search results now block **20x more deceptive pages**.
+* New feature in Chrome Android warns users of **malicious push notifications**.
+* Broader anti-scam protections align with future **Android 16 security upgrades**.
+===========================================================================================================================
+
+Windows Services
+================
+1.1 Core Concepts
+-----------------
+In the Microsoft Windows operating system, Services are special programs designed to perform essential tasks without user interaction. Unlike conventional programs, services are designed to work silently in the background. Services are typically made to run on system startup, though a service can also be triggered to run by another service. Services run in their own session (Session Zero) which allow them to run independently from any logged on user. Services typically run as the Local System Account, but it is common to create a dedicated service account with "just enough privilege" to provide a unique security context for a given service.
+
+The two most common types of Windows services are Win32OwnProcess, which are started and controlled by the Service Control Manager (SCM), and Win32ShareProcess, which store their service application within a dynamic link library (DLL) loaded by the Service Host. A user with sufficient permission can open the SCM to start, stop, pause, resume, and restart a service. A paused service maintains information about its state for when it is resumed. A stopped service loses all information about its state and starts "clean".
+
+Services can be set to start automatically, start manually, or not start at all (disabled). Below we see the status of Windows services using the Services Microsoft Management Console (MMC).
+
+Embedded image
+
+Notable Services
+The following list contains some key Windows services. You'll notice that each service includes two names. Services have both a display name and a service name. For example, “Windows Update” is the display name of the Windows Update service, while “wuauserv” is the service name. When referencing a service using PowerShell, you typically use the service name (not the display name).
+
+Windows Update (wuauserv): Responsible for checking for and installing Windows updates and patches to keep the system up to date.
+Print Spooler (spooler): Manages print jobs and queues, allowing users to send documents to printers for printing.
+Windows Defender Antivirus Service (WinDefend): Provides real-time protection against viruses, malware, and other security threats.
+Background Intelligent Transfer Service (BITS): Facilitates the transfer of files in the background, commonly used for tasks like Windows updates and downloading files in the background.
+Cryptographic Services (CryptSvc): Provides cryptographic operations such as encryption, decryption, and certificate management.
+Windows Audio (Audiosrv): Manages audio-related functions, ensuring audio playback and recording work correctly.
+Task Scheduler (Schedule): Enables the scheduling of tasks and processes to run at specific times or under certain conditions.
+Remote Desktop Services (TermService): Allows users to connect to a remote desktop or application session on another computer over a network connection.
+Windows Time (w32time): Synchronizes the system clock with a time server to maintain accurate time across the network.
+Windows Management Instrumentation (winmgmt): Provides a framework for managing and querying system information and settings.
+Distributed Link Tracking Client (TrkWks): Maintains links between files and their locations when files are moved or renamed within the same volume.
+Windows Firewall (MpsSvc): Manages the built-in firewall, which controls incoming and outgoing network traffic.
+Windows Event Log (eventlog): Manages and records events, errors, and information about the system, applications, and security.
+Server (LanmanServer): Provides file and print sharing services for network clients.
+Remote Procedure Call (RpcSs): Provides an essential component for communication between processes and systems.
+Windows Services as Attack Vectors
+Because most Windows services run with elevated privileges, they are prime targets for hackers. Attackers can attempt to replace a valid service with a hostile one, or hijack an existing service using a hostile DLL.
+
+There are three primary attack modes for Windows services: unquoted service paths, user-writable service paths, and user-modifiable service paths.
+
+In the unquoted service path attack, the attacker takes advantage of how Windows will look for files when a space is encountered in the file path. For example, if the service path for the MyService service is C:\Program Files\myservice.exe (note the space), an attacker could create a Windows Service called C:\Program.exe, which would load instead of myservice.exe when MyService starts.
+In the user-writable service path attack, the attacker can try to overwrite a known good service executable. For example, if the path C:\Program Files is writable, an attacker can simply replace the myservice.exe service executable with hostile code that uses the same same.
+In the user-modifiable service path attack, an attacker can unregister the MyService service and re-register it using a new service path containing the hostile service executable.
+Note that none of the above attack vectors are trivial. In the case of the unquoted service path, the attacker must be able to write a malicious Windows Service using Visual Basic. Next, they have to find an unquoted service path where they have write permissions. Finally, they have to be able to restart the victim service, trick an administrator into restarting the service, or wait until the system reboots. In the real world, many stars must align to service attacks work.
+
+
+1.2 Guided Exercise
+-------------------
+Part 1: Explore Windows Services with the Service Control Manager
+In this part of the lab, you will explore Windows Services using the Service Control Manager.
+
+On the Windows taskbar, click the Search icon and type services, then select the Services Desktop App to open the Service Control Manager (SCM).
+At the bottom of the SCM window, select the Standard tab.
+Embedded image
+
+In the Service Listing Pane (right), you should see the following headers:
+
+Name: The display name and sometimes even the service name in parentheses.
+Description: Details about the service.
+Status: A service will be Running or blank.
+Startup Type: A service will be either Automatic, Manual, or Disabled.
+Log On As: The credentials used by the service.
+
+Note: The Startup Type may also designate Delayed Start, Trigger Start, or both. Delayed Start means that the service will start after the boot process. This delay improves boot performance. Services with a Trigger Start sit dormant until some other event or service wakes them up.
+
+The default sort is by the Display Name header, but you can click on any header to sort services.
+Click the Status column header to sort the services list by Running or blank.
+
+The initial sort will be blank, then Running. Click Status again to reverse the sort.
+Click the Startup Type column header.
+
+Take note of any services with a Startup Type of Automatic that are not Running. You will need this information to answer one of the questions on the Tasks tab.
+Sort the services by Name (A-Z).
+Right-click the Background Intelligent Transfer Service and select Properties to open the Background Intelligent Transfer Service (Local Computer) Properties window.
+
+You should see four tabs: General, Log On, Recovery, and Dependencies.
+Embedded image
+
+The General tab shows the Service Name, Display Name, and the Description.
+
+Under that is the Path to executable, which shows the location and name of the executable along with any startup parameters.
+
+Under the path is the Startup type, which you can set to Automatic, Automatic Delayed, Manual, or Disabled.Under the Startup type drop-down is the Service status. Here, you can choose to Start a stopped service, Stop a running service, Pause a running service, or Resume a paused service.
+
+Lastly, a text field for Startup parameters is used if you manually start a service.
+
+Note: Startup Parameters should match the Path to executable section parameters.
+Click the Log On tab.
+Embedded image
+
+The Log On tab is where we set the credentials used for the service. A service will either use the Local System Account or another account set by the administrator. In a perfect world, every service would have a separate account with just enough rights to perform the required tasks. In the real world, most services run as the Local Service Account, which is a very powerful account.
+Click the Recovery tab.
+Embedded image
+
+The Recovery tab is used to take actions when a service stops. Typically, a service will be retried two times, and then no action will be taken. Notice that you can even run a custom program when a service fails. While one may be tempted to make changes here, the default settings are generally correct for most services.
+Click the Dependencies tab.
+Embedded image
+
+As the name suggests, this tab shows what system components this service requires. This tab is useful when troubleshooting a stopped service that should be running.
+Close the Background Intelligent Transfer Service (Local Computer) Properties window.
+In the navigation pane (left), right-click Services (Local), and select Connect to another computer.
+Embedded image
+
+This feature allows you to connect to another computer (assuming you have permission) using the SCM, which can be used to manage service on remote systems if needed.
+Click Cancel to return to the SCM.
+Close the SCM.
+Part 2: Explore Windows Services with PowerShell
+In the next steps, you will explore Windows Services using PowerShell.
+
+Right-click the Windows Start icon and select Windows PowerShell (Admin).
+
+When prompted, click Yes to continue.
+At the PowerShell prompt, type Get-Service and press Enter to display a list of all Windows services.
+
+The Status, Name, and DisplayName are shown in table format by default.
+Embedded image
+
+At the PowerShell prompt, type Get-Service | Where-Object Status -EQ "Running" and press Enter to get a list of running services.
+Embedded image
+
+At the PowerShell prompt, type Get-Service | Where-Object Status -NE "Running" and press Enter to see services in other states (Starting, Stopped, Paused).
+Embedded image
+
+At the PowerShell prompt, type Get-Service | select -Property * | FT and press Enter to display all available properties for Windows services in PowerShell.
+Embedded image
+
+Note: If you don't see all the table columns, make the PowerShell widow wider and re-run the command.
+
+The FT stands for Format Table, making it easier to read the output. Notice that the path to the service executable is not shown in any of this output. It was easy to find the service path using SCM. How can we find it using the command line?
+
+To find the service path from a the command line, we must use Windows Management Instrumentation Command (WMIC).
+At the PowerShell prompt, type wmic service | more and press Enter to see all the available service information WMIC provides.
+
+Hit the space bar to page through the information (or press q when done).
+Embedded image
+
+Although messy, you can see that the service path is viewable in the output. Next we will learn how to pull out the service details we want using the get and where clauses.
+
+Here is a list of the available service details we can pull from wmic using the get clause:
+AcceptPause, AcceptStop, Caption, CheckPoint, CreationClassName, DelayedAutoStart, Description, DesktopInteract, DisplayName, ErrorControl, ExitCode, InstallDate, Name, PathName, ProcessId, ServiceSpecificExitCode, ServiceType, Started, StartMode, StartName, State, Status, SystemCreationClassName, SystemName, TagId, WaitHint
+At the PowerShell prompt, type wmic service get name,pathname and press Enter to see all services and their associated executable path.
+
+We can use the where clause to filter the wmic output. Scroll up to the top of the list and review the results.
+
+Take note of the executable path for the ALG service. You will need this information to answer one of the questions on the Tasks tab.
+At the PowerShell prompt, type wmic service where Started=True get name,pathname and press Enter to filter on running services.
+At the PowerShell prompt, type wmic service where Started=False get name,pathname and press Enter to filter on non-running services.
+At the PowerShell prompt, type wmic service get name,displayname,started,processid,pathname and press Enter to display additional details about each service, including the Process ID.
+
+Notice that only running services have a Process ID.
+Part 3: Explore Unquoted Service Paths
+As discussed in the Core Concepts, hackers will attempt to find vulnerable services with unquoted service paths. As an administrator, you should know if this attack vector exists. In this part of the lab, you will run a command to check for unquoted service paths. You will then create your own unquoted service path.
+
+At the PowerShell prompt, type cmd and press Enter to switch to the command prompt.
+At the command prompt, type the following command and press Enter to check for unquoted service paths.
+
+wmic service get name,pathname,startmode | findstr /i "auto" | findstr /i /v "c:\windows\\" | findstr /i /v """
+Embedded image
+
+This command breaks down as follows:
+
+wmic service get name,pathname,startmode - List the service name, path, and start mode.
+findstr /i "auto" - Look for services that are set to start automatically.
+findstr /i /v "c:\windows" - Ignore C:\Windows as it is not writable.
+findstr /i /v """ - Look for unquoted paths.
+
+Note: There is a file on the Desktop called Find Unquoted Service Paths.txt with this command inside. Feel free to copy and paste.
+
+After running the command, you should find that it returns no results, which means it did not identify any unquoted service paths. To further demonstrate how this command works, we will now create our own unquoted service path.
+At the command prompt, type exit and press Enter to return to the PowerShell prompt.
+
+On the Desktop are two executables: WindowsService1.exe and EvilWindowsService.exe. These are simple Windows Services created using C#. Both services send messages to the Application Log every ten seconds.
+At the PowerShell prompt, type cd C:\Users\cybrary\Desktop and press Enter to change your current directory to the Desktop.
+At the PowerShell prompt, type mkdir "C:\Program Files\my service" and press Enter to create a new directory titled “my service”.
+At the PowerShell prompt, type copy WindowsService1.exe "C:\Program Files\my service" and press Enter to copy the WindowsService1.exe to the "my service" directory.
+At the PowerShell prompt, type New-Service -Name MyService -BinaryPathName "C:\Program Files\my service\WindowsService1.exe" and press Enter to create a new Windows service called "MyService" that runs C:\Program Files\my service\WindowsService1.exe.
+Embedded image
+
+You might be thinking, “Wait a second… I am using quotes in the BinaryPathName; how is this unquoted?” The answer is that the quotes themselves are not included in the BinaryPathName.
+
+To fix an unquoted service path, you will need to find the service in the Registry (HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services), double-click on the name, and then edit the ImagePath by adding quotes to the path.
+
+For the purposes of this lab, however, we want to create a vulnerable BinaryPathName.
+At the PowerShell prompt, type Get-Service -Name MyService and press Enter.
+
+You should see MyService exists, but is in the stopped state.
+Embedded image
+
+At the PowerShell prompt, type Start-Service -Name MyService and press Enter to start the service.
+
+Confirm using Get-Service.
+Embedded image
+
+At the PowerShell prompt, type eventvwr.msc and press Enter to open the Event Viewer.
+In the Event Viewer, navigate to Windows Logs / Application and look for the log entries with EventID 0 and the Source SimpleService.
+
+Take note of the event message in the General tab. You will need this information to answer one of the questions on the Tasks tab.
+
+Note: Leave the Event Viewer open during the next steps.
+At the PowerShell prompt, type cmd and press Enter to switch to the command prompt.
+Use the WMIC command again to see if any additional unquoted service paths can be exploited.
+
+You should find that C:\Program Files\my service\WindowsService1.exe is found by WMIC. This unquoted service path means an attacker with sufficient privilege can replace WindowsService1.exe with a malicious service titled C:\Program.exe or C:\Program Files\my.exe.
+At the command prompt, type exit and press Enter to return to PowerShell mode.
+At the PowerShell prompt, type copy EvilWindowsService.exe C:\Program.exe and press Enter to copy the EvilWindowsService.exe to the C:\ directory as a new file titled Program.exe.
+At the PowerShell prompt, type Stop-Service -Name MyService and press Enter to restart the service.
+
+Confirm with Get-Service.
+At the PowerShell prompt, type Start-Service -Name MyService and press Enter to restart the service.
+
+Confirm with Get-Service.
+
+Now that MyService has been restarted, it should be running using the malicious C:\Program.exe
+In Event Viewer, click Action > Refresh and look for new log entries with EventID 0 and the Source SimpleService.
+
+Take note of the event message in the General tab. You will need this information to answer one of the questions on the Tasks tab.
+
+1. What is the display name of the service that’s set to Automatic (only) but not running?
+Type your answer here
+Show Hint
+
+2. What is the executable path for the ALG service?
+Type your answer here
+Show Hint
+
+3. When MyService is first started, it writes "The ______ is running and doing some work…" to the Application Log.
+Type your answer here
+Show Hint
+
+4. When you replaced WindowsService1.exe with EvilService.exe, the logs for MyService changed to "You have been hacked! _____".
+
+
+1.3 Challenge Exercise
+----------------------

@@ -1,4 +1,3 @@
-
 Assignment on Securing Accounts for CS50 Cybersecurity
 All assignments in CS50 Cybersecurity are out of 10 points. A score of 7 points or better (70%) is required to be considered to have "passed" an assignment in this course. Please do not resubmit an assignment if you have already obtained a passing score--we consider that spam, and if detected, the submission will be deleted, meaning you will not receive the score back anyway. You don't receive a final grade at the end of the course, so it will have no bearing on your certificate, and it will only slow down our graders!
 
@@ -51,44 +50,27 @@ Consider the below comic for the next two questions.
 Source: xkcd.com/936/
 Consider the top row of the comic above. Why are passwords like those easy (for a computer) to guess but hard (for a human) to remember?
 1 point
-Computer
+Because computers can easily automate substitution, special for passwords. They can guess known patterns using brute-force tools or dictionaries. such complex rules don't really act as additional security layer that fight against modern attacks. However, humans go through a lot just to recall some arbitrary rules which mostly lead to forgotten passwords or sometimes writing them down (commonly cited as a bad practice in password security). Complex password's rules can be cause of users' frustration, typos error, frequent password's reset, or a reuse of a weak password.
 Now consider the bottom row of the comic above. Why are passwords like those hard (for a computer) to guess but easy (for a human) to remember?
 1 point
-  vm
+In the bottom row of the comic, passphrases are used instead of a short complex password. Using multiple combine words creates a huge possible number of combinations which will basically take a bunch years for a brute-force to succeed - The guess of the correct combination will be almost impossible for traditional computers. Here, humans feel more ease because they can easily recall meaningful word sequence better than some arbitrary characters.
 What is a "credential stuffing" attack?
 1 point
+We talk about Credential stuffing when a threat actor tries to use stolen credentials across different platforms in order to exploit the reusability flaw. It is mostly done thanks to automation.
 Provide a specific example of something that would be considered a type of knowledge factor for authentication purposes.
 Do NOT provide any of your own knowledge factors (or anything resembling them) themselves as an answer to this question. We are looking for you to answer the question in the general sense (a "type of").
 
 If you provide an answer that is, or appears to be, an actual specific knowledge factor, the answer WILL be marked incorrect, without exception, and you should consider that knowledge factor to have been compromised.
 1 point
+Password
 Provide a specific example of something that would be considered a type of inherence factor for authentication purposes.
 1 point
+voice recognition
 Why are phishing attacks so difficult to prevent?
 1 point
+Phishing attacks are so difficult to prevent because they exploit human psychology rather that technical vulnerabilities. They always adapt according to their targets using different approaches and try to be as legitimate as possible. 
 Suppose that your boss asks you whether the company should require use of password managers for all employees.
 
 Explain in a short paragraph why you might want everyone in the company to use a password manager. 
 1 point
-Feedback
-How did you find the difficulty of this assignment?
-*
-Too easy
-1
-2
-3
-4
-5
-Too hard
-About how many MINUTES would you say you spent on this assignment?
-*
-Just to set expectations for future students.
-Une copie de vos réponses sera envoyée par e-mail à l'adresse indiquée.
-N'envoyez jamais de mots de passe via Google Forms.
-reCAPTCHA
-Confidentialité
-Conditions d'utilisation
-Ce formulaire a été créé dans CS50.
-Ce formulaire vous semble suspect ? Signaler
-
-Google Forms
+Using password manager will enhance security by providing unique and strong passwords, allow everyone to avoid writing their passwords down. It will prevent from remembering complex passwords, facilitates logging in to different sites and keep the company's employees away from password reuse.
