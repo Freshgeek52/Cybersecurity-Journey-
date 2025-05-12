@@ -268,18 +268,20 @@ Take note of the event message in the General tab. You will need this informatio
 
 1. What is the display name of the service that’s set to Automatic (only) but not running?
 Type your answer here
-Show Hint
-
+>>Amazon SSM Agent
 2. What is the executable path for the ALG service?
-Type your answer here
-Show Hint
+>>C:\Windows\System32\alg.exe
 
 3. When MyService is first started, it writes "The ______ is running and doing some work…" to the Application Log.
 Type your answer here
-Show Hint
+>>Safe Service
 
 4. When you replaced WindowsService1.exe with EvilService.exe, the logs for MyService changed to "You have been hacked! _____".
-
+>>LOL LOL LOL
 
 1.3 Challenge Exercise
 ----------------------
+There are two ways to attack the unquoted service path for MyService. You used one of those ways in the Guided Exercise 
+- now it's time to use the other. When you complete this challenge, navigate to the Desktop in an elevated PowerShell window and execute ./Flag.bat to retrieve the flag.
+
+Flag is: ServiceStar

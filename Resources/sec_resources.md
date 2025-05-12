@@ -20,3 +20,7 @@
 - [CVE Details: Pegasus Spyware](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3568)  
 - [Mirai Botnet Analysis](https://www.unit42.com/mirai-botnet-analysis/)  
 - [Windows CLI Cheat Sheet](https://cheatography.com/jasonchan/cheat-sheets/windows-command-line/)  
+
+# Day-9
+- [Microsoft icacls Documentation](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/icacls)  
+- [Access Control Models Explained](https://www.techtarget.com/searchsecurity/definition/access-control)  

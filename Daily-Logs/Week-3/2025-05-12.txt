@@ -1,0 +1,262 @@
+1. *Google Pays $1.375 Billion to Texas Over Unauthorized Tracking and Biometric Data Collection || by Ravie Lakshmanan on Biometric Data / Privacy
+===================================================================================================================================================
+**Date**: May 10, 2025 | **Source**: Ravie Lakshmanan, Cybersecurity Reporter 
+
+### Key Takeaways: Google's $1.375 Billion Settlement with Texas
+
+- **Record-Breaking Settlement**:  
+  Google agreed to pay **$1.375 billion** to Texas to resolve lawsuits alleging unauthorized **location tracking** and **biometric data collection** (e.g., facial recognition, voiceprints) without user consent. This dwarfs prior settlements:
+  - $391 million (40 states, Nov. 2022)
+  - $29.5 million (Indiana & Washington, Jan. 2023)
+  - $93 million (California, Sept. 2023)
+
+- **Allegations**:  
+  - Tracked users' locations even when "Location History" was disabled.  
+  - Collected biometric data (facial geometry, voiceprints) without informed consent.  
+  - Monitored private searches and movements through Google services.
+
+- **Texas AG's Statement**:  
+  Ken Paxton called the settlement a "major win for Texans' privacy," emphasizing that companies will "pay for abusing our trust."
+
+- **Google's Privacy Updates**:  
+  - **Maps Timeline Data**: Now stored locally on users' devices instead of Google accounts.  
+  - **Auto-Delete Feature**: Allows users to automatically erase location data when Location History is enabled.
+
+- **Context**:  
+  - Comparable to Meta's **$1.4 billion Texas settlement** (2023) over biometric data misuse.  
+  - Google faces ongoing **antitrust scrutiny** in the U.S. and EU, including calls to break up parts of its business.
+
+ 
+
+This summary highlights the financial impact, legal context, user privacy implications, and broader regulatory challenges facing Google.
+------------------------------------------------------------------------------------------------------------------------------------------
+
+2. * Germany Shuts Down eXch Over $1.9B Laundering, Seizes €34M in Crypto and 8TB of Data || Ravie Lakshmanan on Cryptocurrency / Cybercrime
+=============================================================================================================================================
+
+**Date**: May 10, 2025 | **Source**: Ravie Lakshmanan, Cybersecurity/Cryptocurrency Reporter  
+
+### Key Takeaways: Germany Shuts Down eXch Over $1.9B Laundering Scheme
+
+- **Major Crackdown**:  
+  Germany’s **Federal Criminal Police Office (BKA)** seized infrastructure, **€34 million ($38.25M)** in crypto (Bitcoin, Ether, Litecoin, Dash), and **8TB of data** from the **eXch** cryptocurrency exchange. The platform was accused of laundering **$1.9 billion**, including funds tied to North Korean hackers from the **2025 Bybit hack**.
+
+- **Exchange Overview**:  
+  - Operated since **2014**, offering **no-KYC crypto swaps** on clearnet and dark web.  
+  - Advertised **no anti-money laundering (AML) measures** and did not store user data.  
+  - Enabled "concealing financial flows" for criminal activities.
+
+- **Criminal Activity & Investigations**:  
+  - **TRM Labs** linked eXch to **$300,000+ in CSAM-related funds** and accused it of obstructing accountability (e.g., refusing to freeze Bybit hack funds).  
+  - **Dutch FIOD** is investigating individuals tied to money laundering via eXch, emphasizing this is **"not an attack on privacy"** but a crackdown on criminal misuse.
+
+- **Exchange’s Response**:  
+  - Announced shutdown on **April 17, 2025**, claiming it was targeted in a **"transatlantic operation"** for alleged money laundering/terrorism financing.  
+  - Denied facilitating illicit activities: **"We have absolutely no motivation to operate as criminals."**
+
+- **Authorities’ Stance**:  
+  - **BKA**: Highlighted eXch’s role in enabling **"criminal underground economy"** transactions.  
+  - **Dutch FIOD**: Warned, **"Privacy is not the problem – criminal misuse is."**
+
+This summary captures the scale of the operation, eXch’s role in facilitating crime, investigative findings, and the tension between privacy and law enforcement in crypto ecosystems.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Access Control Basics
+=====================
+1.1 Core Concepts
+-----------------
+Access control is the process of authorizing a subject (such as a user, group, or computer) to access an object (such as a file or folder) on a network or computer. Access control occurs after authentication - the process by which that subject proves their asserted identity. Once they are authenticated, the subject is referred to as a security principal. Security principals - identified by a unique value called an SID - perform actions (if permitted) on objects. Through this process, access control systems help maintain confidentiality by ensuring only authenticated subjects with permission can create, view, or modify objects stored on the network and the local system.
+
+Access Control Models
+There are three primary access control models:
+
+Mandatory Access Control (MAC)
+Discretionary Access Control (DAC)
+Role-Based Access Control (RBAC)
+MAC is the strictest of the access control models. With MAC, two security labels (classification and category) get assigned to each subject and object. These security labels must match before a subject gains access to an object. For example, if a file is classified as high security with a category of top secret, then only subjects granted top secret clearance to high-security documents would have access to said object. Outside of the government or military, MAC access control is rarely used.
+
+In DAC, subjects are granted direct permissions to objects. The operating system uses a list of access control entries (ACE) that map a given permission for a given object. In other words, SID + Permission = ACE. Permissions are access representations like read, write, and modify. Thus user John having Allow Read access to an object is one ACE. The complete list of all ACEs is called an access control list (ACL).
+
+ In RBAC, subjects are granted access to objects based on the subject’s role. In this access control implementation, user John would have no access to any object based on his SID alone. Instead, a role is created, and ACEs are granted to this role. In Windows, RBAC is typically implemented using groups. For example, a group called Editors is permitted access to files and folders. John is then added to the Editor's group. Note that simply adding users to groups is not RBAC. The key to RBAC is that groups represent job functions. RBAC works best when there are clearly defined job roles in the organization.
+
+Inheritance 
+Security objects can contain other security objects. For example, a folder typically contains other folders. ACEs mapped to the parent folder flow to the child folders, which may be parent objects to additional folders. This downward flow of ACEs is called inheritance. Children inherit security mappings from their parents. Thus if subject John has “ALLOW Read” access to folder C:\Documents, John will also have “ALLOW Read” access to all folders and files created under the C:\Documents folder.
+
+What happens to ACEs when an object is moved or copied to another parent object (e.g., another folder)? On Windows, the object will typically retain any explicit permissions. However, if an object is moved to a new parent folder on a different volume, it will lose all explicit permissions and inherit them from the new parent. 
+
+Embedded image
+
+Note: A copied or moved object will inherit permission from the new parent folder and lose inherited permission from the old parent folder.
+
+Windows Permissions
+In Windows, there are six standard security permissions:
+
+Full Control
+Modify
+Read & Execute
+List Folder Contents
+Read
+Write
+Each permission can be Allowed or Denied. A Denied permission takes precedence over an Allowed permission. Thus if subject John has ALLOW Modify but DENY Read, John cannot open the file to modify it. Explicit DENYs often have unforeseen consequences. In most cases, it is better to not grant permission than to use a DENY permission.
+
+Note: In addition to the six standard security permissions, there are 14 advanced permissions. However, changing advanced permissions can easily cause permission knots that are difficult to unwind. It is almost always best to stick with the six standard permissions.
+
+To view the Security permissions for a given file or folder in the Windows GUI, you can right-click the object and select Properties from the context menu. Within the Properties window, the Security tab shows the full ACL on the object. This tab is a great tool to visualize and modify ACEs.
+
+Embedded image
+
+Windows also provides a command line tool called icacls. Icacls can display, copy, or modify ALCs on an object. Icacls can show ALCs across all child objects under a parent, making it an ideal tool for validating access permissions.
+
+Up Next
+In the next lesson, you will apply permissions to folders and files using the Security tab and verify those permissions using icacls
+
+
+1.2 Guided Exercise
+-------------------
+Part 1: Review Permissions
+In this lesson, you will use the Security tab and icacls tool to get some hands-on practice with access control. You will begin by reviewing the current structure and permissions for the folders you will manipulating.
+
+On the taskbar, click the File Explorer icon to open a File Explorer window.
+In the File Explorer window, navigate to Local Disk (C:).
+In the address bar, type cmd and press Enter to open a new command window on the root of the C:\ drive.
+Embedded image
+
+At the command prompt, type tree Hall_of_Justice /F and press Enter to see all the folders and files under the Hall_of_Justice folder.
+Embedded image
+
+At the command prompt, type tree Hall_of_Doom /F and press Enter to see all the folders and files under the Hall_of_Doom folder.
+Embedded image
+
+At the command prompt, type icacls Hall_of_Justice and press Enter to view the current permissions on the Hall_of_Justice folder.
+
+You should see that CREATOR OWNER, the SYSTEM account, the Administrators group, and the local cybrary user all have FULL access (F).
+Embedded image
+
+Note: In icacls notation, the (OI) and (CI) tell us that files and subfolders will inherit permissions. The (IO) means that those who create files and folders will inherit Full (F) access to the files and folders they create.
+
+Next, let's see what this ACL looks like in the Security tab of an object’s properties.
+In the File Explorer window, right-click the Hall_of_Justice folder and select Properties from the context menu to open the Properties window.
+In the Properties window, click the Security tab to view the security permissions for the Hall_of_Justice folder.
+Embedded image
+
+On the Security tab, select each user and take note of the permissions granted.
+
+Again we see that the SYSTEM account, the Administrators group, and the cybrary user all have FULL access (ALLOW Full Control). CREATOR OWNER has “Special permissions” - which means that its permissions are configured using advanced permissions.
+
+Leave the Hall_of_Justice Properties window open.
+In the Command Prompt window, type icacls Hall_of_Justice /t and press Enter to see all permissions on all folders and files under Hall_of_Justice.
+Embedded image
+
+As nice as the Security tab is for viewing ACLs on a single object, it cannot show ACLs across all files and folders the way icacls can.
+Part 2: Modify Permissions
+In this part of the lab, you will manipulate the permissions on the Hall_of_Justice and Hall_of_Doom folders.
+
+On this server, there are two existing groups: Heroes and Villains. We want members of the Heroes group to have Modify access to all files and folders under the Hall_of_Justice folder. We want members of the Villains group to have Read and List Folder Contents access to all files and folders under Hall_of_Doom. Heroes can create new files and folders, while Villains can only read what others with more access make for them.
+
+Note: For a complete list of icacls permissions, see https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/icacls.
+
+In the Hall_of_Justice Properties window, click the Edit button to open the Permissions window.
+In the Permissions window, click the Add… button to open the Select Users or Groups window.
+In the Select Users or Groups window, type Heroes in the Enter the object names to select field and click Check Names, then click OK to add the Heroes group to the Hall_of_Justice folder.
+Embedded image
+
+In the Permissions window, select the Heroes group and click the Allow Modify checkbox in the Permissions section, then click OK to close the window.
+Embedded image
+
+In the Hall_of_Justice Properties window, select the Heroes group and verify the group has Modify access, then click OK to close the window.
+Embedded image
+
+In the Command Prompt window, type icacls Hall_of_Justice /t and press Enter to view the updated security permissions for the Hall_of_Justice folder.
+
+Notice that members of the Heroes Group have Modify (M) access to the Hall_of_Justice folder and have inherited (I) Modify access to all folders and files under Hall_of_Justice.
+Embedded image
+
+Repeat the process above for the Hall_of_Doom folder, adding the Villains group with Allow Read & Execute, List Folder Contents, and Read access, then verify the updated security permissions with icacls.
+At the command prompt, type icacls Hall_of_Justice\Leadership and press Enter to see the permissions on the Leadership folder.
+Embedded image
+
+In the output above, notice that the Heroes group has Modify (M) permission on the Leadership folder and that this permission is inherited (I) from the Hall_of_Justice folder. 
+
+Suppose the Justice League and the Legion of Doom want a place where their leaders can share and collaborate. They wish to use RBAC to grant access to this resource. There is already a group created for the role of a leader called Leaders, and only this group should have Allow Modify access to the Leadership folder and its contents.
+At the command prompt, type net localgroup Leaders and press Enter to get the members of the Leaders group. Take note of the group members.
+
+Lex Luthor is a member of the Leaders group. If we simply grant the Leaders group Allow Modify permissions to the Leadership folder under the Hall_of_Justice folder, will Lex Luthor be able to modify files in the Leadership folder? Consider that Lex Luthor is not a member of the Heroes group; therefore, he has no permission granted on the parent folder (Hall_of_Justice). Let's test and see.
+In the File Explorer window, open the Hall_of_Justice folder, then right-click the Leadership folder and select Properties.
+Follow the same process as before to grant Allow Modify, Read & Execute, List Folder Contents, Read, and Write access to the Leaders group.
+
+When finished, leave the Leadership Properties window open.
+In the Command Prompt window, use icacls to validate permissions on the Leadership folder.
+
+Notice that the Modify (M) permissions granted to Leaders are not inherited (I) from the parent.
+Embedded image
+
+In the Leadership Properties window, click the Advanced button to open the Advanced Security Settings window.
+In the Advanced Security Settings window, click the Effective Access tab, then click the Select a user link to open the Select User or Group window.
+In the Select User or Group window, type lex.luthor in the Enter the object names to select field and click Check Names, then click OK to add the lex.luthor user to the Effective Access view for the Leadership folder.
+
+As noted in the Advanced Security Settings window, Effective Access allows you to view the effective permissions for a user, group, or device account. Effective permissions are determined by calculating the user's complete permissions profile, including group permissions and permissions inherited from the parent object.
+In the Advanced Security Settings window, click the View Effective Access button.
+
+Notice that Lex Luthor has many permissions to the Leadership folder and all its objects.
+Embedded image
+
+Close the Advanced Security Settings and Leadership Properties windows.
+Repeat the process above to view Lex Luthor's effective access for the parent folder (Hall_of_Justice).
+
+Notice that Lex Luthor has no access to traverse the parent folder. As such, Lex has no path to any of the child objects, including the Leadership Folder.
+Embedded image
+
+We want leaders, including Lex, to have Modify access to the Leadership folder. One solution would be to grant Lex Luthor granular access (Traverse Folder) to the Hall_of_Justice parent folder. However, "solving" permissions issues in this way becomes problematic as new access requests lead to new pinholes in our access control model. Instead, we will move the Leadership folder and all its contents to Local Disk (C:). We will then change access permissions on the Leadership folder as needed.
+Close the Advanced Security Settings and Hall_of_Justice Properties windows.
+In the File Explorer window, navigate to the Hall_of_Justice folder, then right-click the Leadership folder and select Cut.
+In the File Explorer window, navigate to Local Drive (C:) and, in any open space, right-click and select Paste to move the Leadership folder and its contents to Local Disk (C:).
+Using icacls, check the current permissions on the Leadership folder.
+Embedded image
+
+Notice that the BUILTIN\Users group has inherited (I) permissions from the new parent container Local Disk (C:). As all users are part of the built-in Users group, this would grant unwanted access to all local users. We need to remove this unwanted access.
+
+You may also have notice that the Heroes group permission is gone. The Heroes group inherited permission from the Hall_of_Justice folder. Windows removed the Heroes group permission when the folder relocated to Local Drive (C:). The Leaders group permission, however, was explicitly granted and thus carried over in the move.
+In the File Explorer window, right-click the Leadership folder and select Properties from the context menu to open the Properties window.
+In the Leadership Properties window, click the Security tab to view the security permissions for the Leadership folder.
+In the Properties window, click the Edit button to open the Permissions window.
+In the Permissions window, select the Users group and click Remove.
+
+Take note of the error message shown. We will need to block inheritance on the Leadership folder before we can make permission changes to the Leadership folder. Click OK to close the error.
+In the Permissions window, click Cancel.
+In the Leadership Properties window, click the Advanced button.
+In the Advanced Security Settings window, click the Disable inheritance button.
+
+When prompted, click Convert inherited permissions to explicit permissions on this object
+
+Note: When disabling inheritance, you must copy the existing rules or start with a clean slate. We want to copy the existing rules.
+In the Advanced Security Settings window, click OK to apply your changes and close the window.
+Repeat the process above to remove the Users group from the Leadership folder.
+In the Command Prompt window, use icacls to validate permissions on the Leadership folder.
+
+Notice that all inherited permissions are gone along with the Users group. Members of the Leaders group have Allow Modify (M) access as before.
+Embedded image
+
+As you did earlier in this lab, use the Effective Access feature to check Lex Luthor's permissions for the Leadership folder (this should look as it did before).
+Navigate to This PC, then use the Effective Access feature to check Lex Luthor's permissions for the Local Disk (C:).
+
+Notice that this time Lex Luthor has just enough permission on the parent object to access the child object (the Leadership folder). No access pinholes are required to get Lex to the Leadership folder.
+
+1.3 Challenge Exercise
+----------------------
+Someone has hacked the Windows server and made some unwanted changes. The hacker wants access to the Leadership folder and the administrator to suspect the Justice League is behind the attack.
+
+Right-click the Start icon and launch a Windows PowerShell (Admin) window. In the PowerShell window, execute C:\Users\cybrary\Desktop\challenge.ps1, then answer the questions on the Tasks tab.
+
+1. What user was added to the Leaders group?
+Type your answer here >>> Bizarro
+
+2. What group was granted access to the Hall_of_Doom folder?
+Type your answer here >>> Cheaters
+
+
+3. How many users are in the group above?
+Type your answer here >>> 3
+
+
+4. What undesired permission does this group have on the Hall_of_Doom folder?
+Type your answer here >>> Full
