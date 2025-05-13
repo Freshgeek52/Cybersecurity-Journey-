@@ -1,0 +1,250 @@
+Data Backup and Recovery Basics
+===============================
+1.1 Core Concepts
+-----------------
+Data backup and recovery refers to the process of creating copies of computer data for the purpose of restoring the original data in the event that it is lost, damaged, or otherwise rendered unavailable. This process is critical to supporting the Availability pillar of the CIA Triad (Confidentiality, Integrity, and Availability) - meaning that data should always be accessible to those with permission to use it.
+
+Likewise, data backup and recovery is also key to Business Continuity - the ability of an organization to continue functioning at acceptable levels during and after a disruptive event. One of the most important functions of Business Continuity is Disaster Recovery, which deals specifically with maintaining or restoring critical IT infrastructure following a disaster (whether natural or man-made) with as little loss of function and data as possible. When developing a Business Continuity Plan (BCP) or Disaster Recovery Plan (DRP) - formal documents created to contemplate an organization’s business continuity and disaster recovery functions - detailed data backup and recovery processes and procedures are among the first and most important details that must be accounted for, including what data must be backed up, with how many copies, in how many locations, and with which type of backup.
+
+Types of Backups
+There are six types of backups:
+
+Full
+Differential
+Incremental
+Synthetic full
+Continuous
+Bare metal
+
+>>> Full backups are the easiest to understand: all files and folders on a given system are backed up. However, full backups are time- and resource-intensive, in terms of disk, tape, cloud storage, network bandwidth, etc. required to support the backup. For this reason, full backups are commonly combined with both differential and incremental backups.
+
+>>> A differential backup backs up all files that are new or have changed since the last full backup. Incremental backups are the most granular. The first incremental backup backs up all files that are new or have changed since the previous full backup, then all subsequent incremental backups only back up what is new or has changed since the last incremental backup.
+
+In the example above, admins take a full backup on Friday, then differential backups are taken Monday through Thursday. If there is an issue on Thursday, Friday’s backup plus the differential from Wednesday is used to restore data. Any data created after Wednesday’s backup is lost in this scenario. Only the full backup plus a single differential backup is needed to restore files.
+
+>>> In this next example, admins again create a full backup on Friday, then incremental backups are taken Monday through Thursday. If data is lost on Thursday, the full backup from Friday plus the incremental backups from Monday, Tuesday, and Wednesday are used to restore the data. Any data created after Wednesday’s backup is also lost in this scenario. It takes the full backup plus all the incremental backups to restore data.
+
+Note: The risk tolerance for data loss is part of the organization's Recovery Point Objective (RPO). The RPO dictates how much data loss is acceptable. If the system in this example does not change frequently, losing a day or more may have no real consequences. However, suppose the risk of losing a full day’s data is too great. In that case, the organization can augment daily backups with hourly backups - for example, weekly full backups, daily differential backups, and hourly incremental backups. Ultimately, the organization must balance the cost and time of backing up systems and data with the risk of data loss.
+
+Some backup providers, especially cloud providers, offer continuous and synthetic full backups. Continuous backups push new data to storage on an ongoing basis once a single full backup is taken. Synthetic full backups are created by combining past backups (last full plus any differential or incremental backups) and only grabbing the most recent new or changed files. In other words, data in storage is duplicated into a new full backup so that only the most recent files are needed from the server. In this way, you get the benefit of a full backup (only one backup to restore) for the cost of an incremental backup. 
+
+>>> Bare metal backups are a type of full backup. A bare metal backup can restore a complete server (OS, applications, and data) to new hardware or virtual machine. The primary use for this today is when the application running on the server or virtual machine cannot be reinstalled easily (if at all). Bare metal backups are also used to upgrade end-user desktops and laptops. Administrators use bare metal backups to migrate from physical hardware to virtual or cloud-based images.
+
+
+1.2 Guided Exercise
+-------------------
+Part 1: Back Up Data using Windows Server Backup
+In this first part of the lab, you will practice backing up data using the Windows Server Backup (wbadmin) tool.
+
+First, you will need to install the Windows Server Backup feature. You can install the Windows Server Backup feature using the Server Manager GUI or PowerShell. For the purposes of this lab, you will use PowerShell.
+
+On the taskbar, right-click the Windows Start icon and select Windows PowerShell (Admin) to open a PowerShell window.
+
+When prompted, click Yes to continue.
+At the PowerShell prompt, type Install-WindowsFeature Windows-Server-Backup and press Enter to install the Windows Server Backup feature.
+
+You will see a confirmation when the installation is complete.
+Embedded image
+
+At the PowerShell prompt, type wbadmin.msc and press Enter to open the wbadmin console.
+Embedded image
+
+In the left pane, click Local Backup, then wait for the center pane to refresh.
+Embedded image
+
+In the Actions pane, select Backup Schedule to open the Backup Schedule Wizard.
+On the Getting Started page, click Next to continue.
+On the Select Backup Configuration Page, select the Custom radio button, then click Next to continue.
+Embedded image
+
+On the Select Items for Backups page, click Add Items to open the Select Items dialog box.
+In the Select Items dialog box, expand Local disk (C:) and click the checkbox for the Sales folder, then click OK.
+Embedded image
+
+On the Select Backup Configuration page, you should now see C:\Sales is selected for backup.
+On the Select Backup Configuration page, click Next to continue.
+On the Specify Backup Time page, change the Time of Day field to 12:00 AM, then click Next.
+
+The backup of C:\Sales will run once a day at 12:00 AM.
+Embedded image
+
+On the Specify Destination Type page, select the Back up to a volume radio button, then click Next to continue.
+Embedded image
+
+On the Select a Destination Volume page, click Add to open the Add Volumes dialog box.
+In the Add Volumes dialog box, select Backups (D:) and click OK.
+Embedded image
+
+On the Select a Destination Volume page, you should now see the Backups (D:) volume is selected as the backup destination for the C:\Sales folder.
+On the Select a Destination Volume page, click Next to continue.
+
+Take note of the Used Space on the D: drive. You will need this information to answer one of the questions on the Tasks tab.
+On the Confirmation page, click Finish to continue.
+On the Summary page, click Close to close the Backup Schedule Wizard.
+
+In the wbadmin console, you should see that there is now a scheduled backup in the Status section (you may need to scroll down).
+Embedded image
+
+In the Actions pane, click Backup Schedule… to open the Backup Schedule Wizard.
+
+You can use this wizard to change your scheduled backup or stop your backup from running. For the purposes of this lab, you will cancel your scheduled backup and run a one-time backup instead.
+On the Modify Scheduled Backup Settings page, select the Stop backup radio button and click Next to continue.
+Embedded image
+
+On the Confirmation page, click Finish to continue.
+
+When prompted, click Yes to continue.
+On the Summary page, click Close to continue.
+
+In the wbadmin console, you should no longer see a scheduled backup in the Status section.
+
+You can also run back ups from the command line. In the next steps, you will perform a one-time backup of the Sales folder using a PowerShell command.
+In the PowerShell window, type wbadmin start backup -backupTarget:D: -include:C:\Sales and press Enter to create a one-time backup of the Sales folder on C:\ .
+Embedded image
+
+When prompted, type Y and press Enter to continue. Wait for the backup to complete.
+
+Take note of the directory where the backup log file was saved. You will need this information to answer one of the questions on the Tasks tab.
+Part 2: Recover Data using Windows Server Backup
+In the next steps, you will delete the Sales folder, as well as the backup you created. You will then restore the Sales folder using an existing backup on the D: drive.
+
+Open the File Explorer, then navigate to the C:\ drive and delete the Sales folder.
+In the File Explorer, navigate to the D:\ drive and delete the WindowsImageBackup file.
+In the File Explorer, right-click the WindowsImageBackup.zip file and select Extract All… from the context menu.
+In the Select a Destination… dialog box, replace the file path with D:\ and click Extract.
+Embedded image
+
+Note: Be sure that you've replaced the default file path with D:\ - you will not be able to complete the lab otherwise.
+In the wbadmin console, click Recover… to open the Recovery Wizard.
+On the Getting Started page, click the A backup stored on another location radio button, then click Next to continue.
+On the Specify Location Type page, click Next to accept the default and continue.
+On the Select Backup Location page, click Next to accept the default and continue.
+On the Select Server page, select the EC2 Server, then click Next to continue.
+On the Select Backup Date page, click Next to accept the default and continue.
+On the Select Recovery Type page, click Next to accept the default (Files and Folders) and continue.
+On the Select Items to Recover page, navigate to the C:\Sales folder and select it, then click Next to continue.
+Embedded image
+
+On the Specify Recovery Options page, under Recovery Destination, type C:\ and click Next to continue.
+On the Confirmation page, note the location where files will be recovered, then click Recover.
+When the recovery is complete, click Close to close the Recovery Wizard.
+
+In the wbadmin console, you should see the file recovery job was successful.
+In the File Explorer, open the Company Holidays.rtf file to retrieve the flag for one of the questions in the Tasks pane.
+
+1. According to the Backup Schedule Wizard, how much space is used on the backup destination drive?
+>>>355.79
+
+2. According to the wbadmin command line tool, where was the log file for your one-time backup of the Sales folder saved?
+>>> C:\Windows\Logs\WindowsServerBackup
+
+3. Given the following command, what is being backed up? wbadmin start backup -backupTarget:D: -include:C:\Users\Administrator
+>>> C:\Users\Administrator
+
+
+4. What was the flag in the Company Holidays.rtf file that you recovered from the Sales folder backup?
+>>> nodaysoff365
+
+1.3 Challenge Exercise
+----------------------
+In the File Explorer, navigate to the Backups (D:) drive. Extract the contents of the Challenge.zip file directly to the D: drive.
+
+Using the Recovery Wizard, restore the flag.txt file from the extracted Challenge folder.
+
+The Flaf is: FLARNDIP
+===========================================================================================================================
+
+Antivirus Basics
+================
+1.1 Core Concepts
+-----------------
+he term malware is short for malicious software - typically, that means software that is designed to disrupt the normal operations of a computer or computer network, or otherwise compromise one or more elements of the CIA triad (Confidentiality, Integrity, Availability). Malware has many varieties, including: worms, viruses, trojans, spyware, adware, keyloggers, ransomware, and cryptojacking software. However, software does not need to be destructive to be considered malware. Broadly speaking, any software that acts for the purpose of another and not for the user is considered malware.
+
+Software that detects and removes malware is known as antivirus or anti-malware. Antivirus software can scan files, monitor a system in real-time, quarantine files, and even work with AI and EDR systems to automate a response.
+
+Malware Detection Techniques
+There are four major types of malware detection techniques employed by antivirus solutions:
+
+Signature-based antivirus is the most common. Signature-based antivirus looks for patterns in known malware and quarantines files based on those patterns. New signatures must be added to the local antivirus engine as new viruses are developed. Thus signature-based antivirus needs to be updated regularly to stay effective and current. 
+Heuristic antivirus uses static and dynamic analysis to determine if software contains malware. Heuristic antivirus runs suspected code in a sandbox to see how it behaves. The advantage of heuristic antivirus is that it can detect new or novel malware. The disadvantage is that heuristic analysis is resource intensive and prone to false positives. Many vendors combine signature-based detection with heuristic detection to reduce the impact on performance.
+Behavior-based antivirus is a heuristic antivirus that focuses more on what the malware does than the malware code itself. If the code says "cow", yet the malware quacks, then behavioral analysis says it is a duck. A behavioral engine will also try to establish a baseline for what is "normal" and take action when something deviates from this. A purely heuristic system is more concerned with indicators of compromise (e.g., evil IPs, known libraries, etc.)
+Adaptive antivirus has many marketing names. Some vendors tout machine learning, and others claim to have artificial intelligence. Adaptive antivirus is both heuristic and behavioral. It can learn and adapt to new forms of malware and create new signatures as needed. Adaptive antivirus systems can also share information so that new malware signatures created on one system are shared with other systems.
+Microsoft Defender Antivirus
+The default antivirus solution for Windows systems is Microsoft Defender Antivirus. Microsoft has come a long way regarding endpoint protection, which makes sense given that Windows systems are generally the preferred malware target. The current incarnation of Microsoft Antivirus is primarily signature-based. Those who buy Microsoft 365 E3 or E5 get Microsoft Defender for Endpoint included. Endpoint adds adaptive analysis, EDR features, and central management to Windows Defender. Microsoft Defender is lightweight and very effective for most users as a stand-alone anti-virus. 
+
+
+1.2 Guided Exercise
+-------------------
+In this lesson, you will practice using Microsoft Defender Antivirus to detect and remove malware from a Windows system.
+
+From the taskbar, launch the File Explorer and navigate to C:\Evil.
+In the Evil directory, right-click Sample1.zip and select 7-Zip > Extract Here.
+
+When prompted, use the password infected to extract the malware.
+On the taskbar, click the Search icon and type virus, then select Virus & threat protection from the search results to open the Windows Security application.
+
+Take note of the Current threats section on the Virus & Threat Protection page. Here you will see the last scan, the type of scan, if any threats were found, how long the previous scan took, and how many files were last scanned.
+Embedded image
+
+Under Virus & threat protection settings, click Manage settings, then confirm that Real-time protection is on.
+
+The Real-time Protection function is responsible for actively scanning the file system for malware and removing any suspicious files that it detects. In the next steps, you will copy the malicious executable file from Sample1 to the C:\ drive and watch as Microsoft Defender Antivirus flags and removes the file.
+Embedded image
+
+In the File Explorer, copy the extracted .exe file and paste it to the C:\ drive.
+
+When prompted, click Continue to continue.
+
+After pasting the file in the C:\ drive, you should see an alert in the lower-right corner indicating that a virus was detected. The file will disappear from the C:\ drive in a few seconds.
+
+Note: The same malicious file was not detected in the C:\Evil folder because the Evil folder is excluded from Real-Time Protection.
+In the Windows Security window, in the sidebar, click Virus & threat protection to return to the Virus & Threat Protection page.
+Under Current threats, click Threat history to view previously detected threats.
+
+Take note of the Quarantined Threats section, which includes a record of the malware that Windows Defender Antivirus just removed from the C:\ drive.
+Under Quarantined Threats, click the arrow to expand the malware record, then click See details to see more information about the malware.
+
+When prompted, click Yes to continue.
+In the malware details window, click Learn more to open the Microsoft Security Intelligence page in Firefox.
+
+Note: Firefox may take up to 60 seconds to open the first time.
+
+Microsoft does not have much information about this malware sample. In the next step, you will run a search in Google to attempt to gather more information.
+Copy the malware name, then paste the name into Google and run a search.
+
+Review the Google results to learn more about this particle piece of malware.
+
+It is also possible to run Windows Defender Antivirus scans using PowerShell. In the next steps, you will un-zip the malware sample in Sample2.zip, then remove the exclusion on C:\Evil and run a Windows Defender scan from PowerShell.
+In the File Explorer, return to the Evil directory, then right-click Sample2.zip and select 7-Zip > Extract Here.
+
+When prompted, use the password infected to unzip the malware.
+In the Windows Security window, return to the Virus & Threat protection page and click Manage settings.
+On the Settings page, click the toggle under Real-Time Protection to temporarily deactivate the Real-Time Protection feature.
+
+This will prevent Windows Defender Antivirus from immediately flagging the Sample2 malware when we remove the exclusion on the Evil directory.
+On the Settings page, scroll down to Exclusions and click Add or remove exclusions.
+
+When prompted, click Yes to continue.
+On the Exclusions page, click the down arrow to the right of the C:\Evil exclusion, then click Remove.
+Embedded image
+
+Right-click the Windows Start icon, and select Windows PowerShell (Admin) to open a new PowerShell window.
+
+When prompted, click Yes to continue.
+At the PowerShell prompt, type Start-MPScan -ScanPath C:\Evil\ -ScanType CustomScan and press Enter to start a Windows Defender scan.
+Embedded image
+
+Check the contents of the Sample1 and Sample2 folders.
+
+Notice that the extracted malware has been removed.
+In the Windows Security window, return to the Threat History page and review the malware record for Sample2 under Quarantined Threats.
+
+Take note of the malware name, then run a Google search to learn more about its purpose.
+
+
+
+1.3 Challenge Exercise
+----------------------
+In this challenge, you will run another Windows Defender Antivirus scan on the third malware sample (Sample3) in the C:\Evil directory. Follow the same steps as before to un-zip the sample, then use Windows Defender Antivirus to scan it.
+
+>>> Backdoor:Win32/Generic
