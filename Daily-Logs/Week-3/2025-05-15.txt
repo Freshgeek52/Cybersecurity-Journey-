@@ -1,0 +1,354 @@
+Wireshark Basics
+================
+1.1 Core Concepts
+-----------------
+Wireshark is a network inspection tool - commonly referred to as a traffic, protocol, or packet analyzer. Packet Analysis refers to the process of intercepting network data (packets) and examining those packets to extract relevant information about their contents, the parties involved in the exchange, or the network itself.
+
+Embedded image
+
+To draw a simple comparison, Wireshark is like an X-ray machine for computer networks - and a powerful one at that. Much like how a doctor uses an X-ray machine to see inside a patient’s body, Wireshark provides visibility into a computer network and the packets streaming across it to understand what’s happening at each protocol layer.
+
+Embedded image
+
+A Note on Protocols: Before we lose you – protocols are just networking languages. Where programs have programming languages for describing their function and behavior (like C, Java, Python), network communications are made possible by networking languages called protocols (like HTTP and IPv4), that dictate how systems communicate with one another. In the technology world, it’s languages all the way down to the wire. All computer systems must agree on a specific way of communicating before they can get anything done; there is no room for creative interpretation. On the bright side, that makes them easy to understand – you just need to know the rules in place. If packets are the words, protocols are the grammar, syntax, and diction.
+
+However, this lab isn’t about rules, it’s about the practical applications of Wireshark. A doctor does not need to understand the physics of high-energy electromagnetic radiation to gain insights from an X-ray machine; they only need to understand the information that the tool is providing and how that information might be useful. Furthermore, you’re not about to get your MD here - you’re about to become the equivalent of an X-ray technician. But, with a little practice, you will be on your way to residency soon enough.
+
+Embedded image
+
+In practice, Wireshark can be used for a variety of different purposes. To name a few, Wireshark allows:
+
+Network Engineers to troubleshoot network performance problems.
+Security Analysts to review intrusion attempts and validate internal controls.
+Forensic Analysts to gain insights into security breaches and malware distributions.
+Penetration Testers to search for sensitive information that may give them a foothold in a target network.
+Now, let’s get a closer look at this incredibly versatile tool.
+
+The Wireshark GUI
+Welcome to Wireshark - You won’t be spending a lot of time on this first screen, but you will see it each time you start the application. Featured in the middle is a list of available interfaces to capture on.
+
+Embedded image
+
+This includes any interfaces Wireshark recognizes on your device, as well as some special implementations like capturing from remote devices over SSH. In fact, Wireshark has a varied diet, and can capture more than just Ethernet data. Some additional media types include Bluetooth (yes – also a Wireless-shark), USB, and wireless LANs. You can find a matrix of supported media by operating system here.
+
+Above these interfaces you’ll find the Wireshark capture filter bar.
+
+Embedded image
+
+Part of what makes Wireshark so powerful is its filter expressions. These allow you to select for packets that satisfy specific criteria, such as protocol, IP and MAC addresses, TCP flags, and so on (we’ll touch on these a little more at the end of this lesson). This capture filter bar allows you to specify such criteria before starting your capture, so that only packets which satisfy it are recorded. Neat!
+
+However, you are more often going to be filtering packets after or during your capture using the display filter bar, located just underneath the menu ribbon.
+
+Embedded image
+
+This lets you capture all traffic and then selectively display what matters most. 
+
+Basically, you’ve got two places you utilize Wireshark's filter expressions:
+
+Capture filter - Only capture packets that match your filter.
+Display filter - Capture everything, but only display packets that match your filter.
+Got it? Easy.
+
+The Main Window - Once you start your capture, you’ll land in the main Wireshark window. Get used to this view. This is your new home, where you’ll spend the majority of your analysis time.
+
+Embedded image
+
+This screen consists of three panes, each providing a different level of detail about captured packets.
+
+Packet List - This pane displays a chronological list of captured packets. Each row represents a packet and contains various columns showing identifying information, such as protocol type, destination addresses, and summary information. The Info column provides a quick-glance overview of each packet’s role in the exchange.
+
+Embedded image
+
+Selecting a packet populates the panes below with more details.
+
+Packet Details - Here, you’ll see a breakdown of the selected packet, displayed as a hierarchy of encapsulated protocols. Network data is structured like nesting dolls, where lower-level protocols (like IPv4) wrap around higher-level protocols (like HTTP). While this pane might seem intimidating at first, it becomes invaluable as you progress in your Wireshark journey.
+
+Embedded image
+
+Selecting a field in the packet details pane highlights the corresponding bytes in the next pane.
+
+Packet Bytes - This area shows the raw data of the selected packet, displayed in hexadecimal (base 16) and ASCII (text) format. Most of the data may look like gibberish, but when dealing with unencrypted (cleartext) traffic, you can often extract valuable information such as credentials and file contents.
+
+Embedded image
+
+Hovering over specific bytes in the Packet Bytes pane highlights the corresponding field in the Packet Details pane. Pretty sweet, right?
+
+At first glance, Wireshark might seem complex. But once you get comfortable reading packets, it will open up a world of possibilities. This isn’t just an academic exercise—it’s a power tool for understanding what’s happening on the wire or over the airwaves. No matter what cybersecurity role you land in, knowing your way around Wireshark will serve you well. You can find additional details about the UI in Wireshark’s User Interface documentation.
+
+Now, a little more about those filter expressions...
+
+Wireshark Filter Expressions
+Much of your time in Wireshark will be spent using filters to refine your captures, so it’s worth getting comfortable with them. We’ll practice them in the next lesson, but let’s prime you with a few examples:
+
+http - Show me all HTTP traffic
+ip.src == 192.168.0.1 - Show me packets sent from the IP address 192.168.0.1
+ip.dst == 192.168.0.1 - Show me packets sent to the IP address 192.168.0.1
+ether.addr == 00:01:02:03:04:05 - Show me packets sent to the MAC address 00:01:02:03:04:05
+tcp.port == 22 - Show me packets sent to or from TCP port 22 (SSH)
+We can also combine these filters using various logical operators.
+
+http or dns - Show me all traffic that is either HTTP or DNS
+!(arp or icmp or dns) - Exclude all packets that are ARP, ICMP, or DNS
+Wireshark even provides shorthand filters for common combinations.
+
+ip.addr == 192.168.0.1 - show me packets sent to or from 192.168.0.1. Equivalent to ip.src == 192.168.0.1 or ip.dst == 192.168.0.1
+Handy, right? Wireshark uses filters for much of its functionality. Sometimes you’ll perform an action, and Wireshark will automatically populate your display filter bar with the appropriate expression. Other times, it’s using expressions behind the scenes to improve your Wireshark experience.
+
+For example, those colored rows in your Packet List view? The colors are applied according to filter rules, which you can confirm by selecting View > Coloring Rules... from the Wireshark toolbar.
+
+
+
+1.2 Guided Exercise
+-------------------
+In this lesson, you will apply what you learned in the Core Concepts lesson to capture and analyze network traffic using Wireshark.
+
+Before we proceed, we will need to set up the emulated network that we will be using in this lab. In the next steps, you will start the network, open a terminal on an in-network host, and launch Wireshark.
+
+On the dock at the bottom of the screen, click the Terminal Emulator icon to access the command prompt.
+At the root@clabber prompt, type clabnet and press Enter to start the emulated network.
+Embedded image
+
+The emulated network topology consists of three servers (webserver, fileserver, utilserver) and a workstation (h1). That last one is yours.
+At the mininet> prompt, type xterm h1 and press Enter to open a terminal for the h1 host.
+In your new terminal, type wireshark& and press Enter to start Wireshark.
+Embedded image
+
+The Wireshark GUI will appear shortly.
+Part 1: Generate Network Traffic
+In this part of the lab, you will generate the network traffic that you will use to practice your packet analysis skills in the next part of the lab.
+
+You will start as they all start, with ping, the “Hello World” of networking. Like the sonar ping of submarines and depth finders, you will bounce some electricity off targets to see if they respond. You will make each host ping every other host in the environment to confirm everyone is online.
+
+Next, you will conduct a file transfer, gain remote access to a machine, and login to a web application – three fairly canonical operations in the world of networking. This should provide a balanced meal for a new wire shark. Time to liven up the wires.
+
+Ready. Set. Go.
+
+From the Wireshark menu, select Capture > Options to open the Capture Interfaces dialog box.
+In the Capture Interfaces dialog box, select the h1-eth1 interface, then click Start to begin capturing traffic sent and received by the h1 machine.
+
+When prompted, click Continue without Saving.
+Embedded image
+
+Note: Don't see the interface you're looking for? Make sure you're working in the emulated network - not directly on the lab VM.
+
+Typically, captures will be run on network nodes, like switches and routers, rather than endpoints. And these devices are usually configured with a special port that pumps out a copy of (mirrors) every packet that passes through that device, no matter which interface they were received on.
+Restore the cybrary@clabber terminal.
+At the mininet> prompt, execute pingall to ping every device on the network.
+Embedded image
+
+Next, you will return to your workstation, h1, from which you’ll be transmitting the rest of your network traffic.
+Restore the "Node: h1" terminal.
+
+In the next steps, we will start with a file transfer.
+In the Node: h1 terminal, execute ftp fileserver to open a connection to the file server in the network.
+At the Name (fileserver:root) prompt, type cybil and press Enter.
+At the Password prompt, type unr3st and press Enter.
+Embedded image
+
+At the ftp> prompt, execute ls to view the files in the current directory.
+
+Passwords.txt – yes please. Grab that. Or, in the words of the FTP, ‘get’ that (a command joke…).
+Execute get passwords.txt to transfer the file from the remote fileserver to your local machine.
+Embedded image
+
+Confirm you get a 226 Transfer complete message. If not, ensure your command was typed correctly.
+
+Next, clean up after yourself – it’s not safe to leave that file hanging around.
+Execute delete passwords.txt to delete the passwords.txt file.
+Execute exit to close your file transfer session with the fileserver.
+
+Next, you will generate traffic related to remote access protocols. For the purposes of this lab, you will use a primitive remote access protocol called telnet.
+
+In practice, you should use a secure connection protocol like SSH so that your communication with the remote server is encrypted. Telnet delivers data in plaintext, so anyone sniffing the wires can see your every move. Poor security, but excellent for demonstrations.
+At the root@clabber prompt, execute telnet utilserver to initiate a telnet connection to the utility server in your topology.
+At the login: prompt, type tuser as your username and press Enter.
+At the password prompt, type tugood as your password and press Enter.
+At the $ prompt, execute pwd to print the current working directory to the console.
+At the $ prompt, execute ls to list files in this directory.
+
+Look, a servers.txt to go with your passwords.txt. Let’s see what’s in it.
+At the $ prompt, execute cat servers.txt to print the contents of the servers.txt file.
+Embedded image
+
+Tasty! No need to bring that with you – Wireshark will remember the details, so go on and get out of this telnet session.
+Execute exit to end your telnet session.
+
+That was fun, let’s do it one more time, but just a quick log-in and exit. This will provide fodder for demonstrating how Wireshark can distinguish different sessions.
+Repeat steps 13-15.
+Execute exit to end your second telnet session and return to the root@clabber prompt.
+
+In the next steps, you will generate some web traffic - your window to the wide and wondrous digital world, the second best place to catch some malware (the first being your inbox… silly humans, love to click stuff).
+At the root@clabber prompt, execute firefox to open a web browser.
+
+This may take up to 30 seconds. You can disregard any warnings that appear in the terminal.
+In the browser location bar, type http://webserver.com and press Enter to head to the webserver in the topology.
+Embedded image
+
+No affiliation to the Internet-accessible webserver.com. This is a local webserver in your topology.
+Click the Click here to log in link.
+Enter the following credentials in their corresponding fields:
+
+Username: esper
+Password: psybrary
+Click the Login button to complete the login.
+Embedded image
+
+What?! A file downloaded, one called ComputerCleaner.elf? Bet that title is ironic. Unfortunately, you can’t check it out because it looks like it was immediately deleted. Looks like a case of “user downloads bad file, panics, deletes, and hopes no one brings it up.” Well, that’s going to make it difficult for the forensics team… jk, your capture will make that a cinch.
+
+Go ahead and log out – that’s plenty of traffic for your purposes. Don’t forget to save your capture like a good wire shark! That’s some helpful forensic or diagnostic information you have there—ensure it gets recorded. Then, head over to the analysis phase to see what you can see.
+Click the Click here to log out link, then close the browser.
+Restore the Wireshark window.
+On the Wireshark toolbar, click the red square icon to stop your capture.
+Embedded image
+
+From the Wireshark menu, select File > Save As… to save your capture.
+
+Name it however you like. Now go look at what you did.
+Part 2: Analyze Network Traffic
+It’s not often you will be looking through packets in a live capture. Analysis is usually conducted after the fact, such as a SOC Analyst reviewing a capture file to investigate an alert generated by their Intrusion Detection or Prevention System (IDS/IPS). That computer whiz in popular media, lines of program output racing by on their computer screen? They’re just waiting for the execution to complete before consulting the logs. Wait until you’ve captured a full transcription of the network activity, then you can review it on-demand.
+
+In the Wireshark display filter, type icmp and press Enter.
+Embedded image
+
+ICMP is the protocol that ping speaks, so this filter is showing that radical ping party you started your traffic generation session with.
+
+You can also use some common logical operators in your filter expressions to include multiple types of traffic.
+In the Wireshark display filter, change your filter expression to the following and press Enter:
+
+icmp or arp
+Embedded image
+
+ARP is a way of discovering the MAC address of a host with a given IP. You need to know the target’s MAC address for delivery on a local network, so you should only see ARP traffic for hosts in your network (192.168.1.0). Meanwhile, the ICMP shows delivery to several networks (172.16.0.0 and 10.0.0.0).
+
+Looking at ARP traffic is a good way to discover all live hosts on a network. Close analysis of these packets can lead to discoveries of nefarious behaviors such as MAC spoofing, MITM attacks, and NAC (Network Access Control) failures.
+
+Next up: remote access.
+In the display filter, change the expression to telnet to view all telnet traffic.
+Embedded image
+
+Remember, you had two telnet sessions here. Can you tell which is which? Wireshark can, using Streams. You could filter for streams by entering an expression into the filter bar, but Wireshark makes it easy for you.
+In the Packet List pane, right-click on the first packet in the list, then select Follow > TCP Stream to view only the telnet packets related to your first session.
+Embedded image
+
+Woah, look at this – a full record of that initial exchange you had with utilserver. Wireshark colors client transmissions in red and server transmissions in blue to make exchanges easy to follow.
+Embedded image
+
+Here you can see the credentials you used to login, the commands you issued, and even the contents of the server.txt file you checked out while you were there! You will also notice that each letter you input in the terminal was echoed by the server (e.g., your username: ttuusseerr). This is because the characters were received by the server, then echoed in your terminal so you could see what you were typing. An exception is your password: if you recall, the characters were not displayed in your terminal, so each letter is only seen once here.
+Close the Follow TCP Stream window.
+
+Streams allow you to view specific sessions between hosts. Wireshark carves out packets related to individual sessions by looking at information like Source and Destination addresses, as well as flags set in the packet that indicate the beginning of a connection (a SYN flag) and the end of a connection (FIN or RST). If you look at the Info column in the Packet List, you should see a [SYN] packet at the top of the list. At the bottom, you should see a [FIN] packet. Furthermore, you should see Wireshark has colored these SYN and FIN packets as a visual aid for demarcating the beginning and end of this stream.
+
+You will also notice that after filtering this stream, you can see fewer telnet packets. This operation excluded that second telnet session of yours. Neat!
+
+Now that you’ve seen Streams, it's time to check out Conversations.
+In the display filter, click the X icon on the right to remove your current filter expression.
+Select any packet with 192.168.1.1 (the address of h1) in the Source column and 172.16.0.1 (the address of webserver) in the Destination column.
+Right-click the selected packet and select Conversation Filter > IPv4 from the context menu.
+Embedded image
+
+Look at the filter display—all Wireshark did was say “group all packets that contain both of these IP addresses.” As you can see, Conversations are Wireshark’s way of grouping all traffic passed between two endpoints, regardless of individual sessions or protocols.
+
+Some protocols are connection-less, so they don’t use SYN and FIN flags to start and end sessions. In those cases, it’s useful to begin with a Conversation, and then filter the display to only the target protocol. One example of a connection-less protocol is the familiar HTTP. Let's look at that next.
+In the display filter, append the following to the current filter expression and press Enter:
+
+and http
+
+This shows any HTTP traffic exchanged by the two hosts in this conversation. Find an HTTP packet and follow that stream to see where it gets you.
+Select and right-click any HTTP packet, then select Follow > HTTP Stream from the context menu.
+
+Each request for a website is met with a response, and that’s the extent of HTTP in the stream. A total of one exchange—as we said, connection-less. However, it’s still handy to get the exchange in your stream window for easy reading. Remember, client request is red, server is blue: can you tell what type of Server is running on webserver?
+
+Take note of the version of Python listed here. You'll need it to answer one of the questions on the Tasks tab.
+Close the Follow HTTP Stream window.
+
+Next, you will try out some other HTTP filters. You logged into that web application, so if HTTP is connection-less, how does the web application recognize you?
+
+Cookies. Yum.
+In the display filter, replace the current filter expression with http.cookie.
+Embedded image
+
+Here are all packets that contain the HTTP cookies. A session cookie was added to your browser as a form of identifying you with each request, and will be a jumble of alphanumeric characters. But this application also added an additional cookie in plain english, and wasn’t removed when you logged out (pesky trackers…). Can you spot it?
+
+Hint: Expand the Hypertext Transfer Protocol line for each packet and look for the line beginning with Cookie.
+
+Take note of the cookie (it's wrapped in {brackets}). You will need this information to answer one of the questions on the Tasks tab.
+
+You can double-click on a packet to reveal its contents in a dedicated window. Check out a couple packets and see if you can find this human-readable cookie. Remember that Wireshark groups the packets in the order they were received. Since this cookie wasn’t removed at logout (but the session cookie was), check out a packet that came after the /logout request.
+
+Speaking of unwelcome injections, didn’t that site push a file download to your computer that was quickly deleted? No problem – Wireshark lets you reconstitute this file from the packet data.  I mean, why wouldn’t it, when you’ve captured all the bytes passing through the wire?
+
+One exported file coming up, hot off the wire.
+From the Wireshark menu, select File > Export Objects > HTTP to open the Export dialog box.
+Embedded image
+
+No filter required – this view shows a list of data objects transferred with HTTP. One of those objects looks juicy, why don’t you pull that one down and take a closer look.
+In the Export dialog box, select the HTTP object with a Filename of download, then click Save.
+In the Save Object As... dialog box, click Save to save the file with the default name.
+
+Let’s check out your pull!
+On the docked menu at the bottom of the screen, click the Folder icon on the right side, then select h1 > Open Folder.
+Embedded image
+
+Double-click the file called download to get a closer look at your loot.
+
+Score! Unfortunately, Harold’s pain can’t be hidden when a wire shark is on the job.
+
+Take note of the last two words in this image. You will need this information to answer one of the questions on the Tasks tab.
+
+Last step – time to review your file transfer. Return to the Wireshark window and close the Export dialog box.
+In the display filer, replace the current filter expression with ftp and press Enter.
+Select and right-click any packet and select Follow > TCP Stream from the context menu.
+Embedded image
+
+As before, the full exchange is recounted in red and blue transmissions. A neat ledger that contains the username and password in cleartext, as well as the files that were transferred.
+
+But what about the contents of the file? You can see that, too. You just need a different filter, because FTP uses a separate channel for transferring the content of files.
+Close the Follow TCP Stream window.
+In the display filter, replace the current expression with ftp-data and press Enter.
+Select and right-click the packet that lists passwords.txt in the Info column, then select Follow > TCP Stream from the context menu.
+
+Jackpot! You shark, you.
+Up Next
+If you’re curious about the other available Wireshark filters, check out the following cheat sheet: https://www.stationx.net/wireshark-cheat-sheet.
+
+You’ll also find a Wireshark Command Generator where you can describe what you’d like Wireshark to do in plain English and have that request converted into a ready-to-use Wireshark display filter. Neat!
+
+Now that you’ve had some guided practice and grown your baby wire shark teeth, it’s time to conduct some packet analysis on your own in the optional Challenge Exercise. We’ll provide a capture file for you to sink your teeth into.
+
+1. What color does Wireshark use to indicate SYN and FIN packets in a TCP stream? Hint: Remember that Telnet connection you made?
+A. gray
+B. green
+C. red
+D. yellow
+>>> A
+Correct!
+2. What Wireshark Display Filter would you use to isolate all ICMP and ARP traffic?
+A. icmp and arp
+B. icmp or arp
+C. icmp + arp
+D. icmp && arp
+>>> B
+Correct!
+3. What version of Python is running on the webserver?
+>>> 3.10.6
+Correct!
+4. What cookie remained in your browser after logging out of the web application?
+>>> {SIGH_BRARY_WELL_THEN}
+Correct!
+5. You exported an HTTP object which turned out to be an image with some text. What are the last two words in this image (no spaces)?
+>>> NEVERHAPPENED
+
+
+1.3 Challenge Exercise
+----------------------
+1. Based on the ARP traffic, how many live hosts are on the network this was captured on?
+>>> 6
+
+2. What FTP credentials were used to log in to the fileserver? (Provide your answer in the format username / password)
+>>>cybrarian / dewey-hexadecimal
+
+3. Identify the human-readable session cookie set by the web application that remains after logout.
+>>> {CHOCOLATE_CHIP}
+
+4. Export the file that was downloaded when the user visited a website over HTTP. What are the two words depicted in the file (no spaces)?
+>>> incidentresponse
