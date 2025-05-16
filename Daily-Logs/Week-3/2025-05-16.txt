@@ -1,0 +1,287 @@
+Nmap Basics
+===========
+1.1 Core Concepts
+-----------------
+Are you tired of seeing IP ranges and not knowing what servers live within them? Are you tired of hearing about ports rather than hearing from ports? Are you thirsty for knowledge and in search of the right tools and techniques to help you quench that thirst? Search no more - we’ve got you covered. In just three lessons, we’ll turn you from a junior network cartographer into a multi-armed, port-knocking, network-divining wizard. Just check out one of our latest testimonials.
+
+Embedded image
+
+Convinced? Ready to get started? Great - then let’s get some fundamentals out of the way. You need to know what we’re doing before you can appreciate how to do it. So what are we doing? Scanning and enumerating - that’s what.
+
+Scanning and Enumeration (and Nmap)
+Scanning and enumeration are two common techniques for gathering information about hosts and services on a network. Scanning refers to the use of various tools and techniques to survey a network for active hosts, open ports, and the types of services running on those ports. Enumeration refers to gathering detailed information about the discoveries made using scanning techniques, such as the operating system running on those hosts, the version of software running on its open ports, and even vulnerabilities associated with those versions.
+
+Now, networks - these constellations of buzzing machines - can seem inscrutable if you don’t have the right tool. And one of the most popular (and effective) tools in this space is Nmap (“Network Mapper”), a network exploration and security auditing tool. Originally conceived for quickly mapping hosts in large networks, it has since developed additional functionality well beyond its humble origins. Nmap is your cure for understanding and infiltrating (or plugging holes in) networks.
+
+In this lab, you will learn about four of the phases in an Nmap scan (there are eleven in total). The first two are focused on initial scanning, and the latter two are focused on enumerating details about the discovered hosts and services. They are:
+
+Host Discovery (also called Ping scanning)
+Port Scanning
+Operating System Detection
+Service/Service Version Detection
+Also - if the term “port” is unfamiliar for you, let’s catch you up with a quick primer, as this concept will be foundational to understanding much of this lab. Otherwise, you can skip the indented section ahead.
+
+A Quick Note on Ports - Ports are how network applications are identified on a host. A host can be identified by its IP address—this is like the street address for an apartment complex. To send mail to a specific person in that complex, you would need to put a unit number. That’s a port. 
+
+Furthermore, you’ll be hunting for services running on TCP ports, the most common type of ports found on the Internet. TCP is a network protocol, which is just a set of rules and specifications that specifies how systems should communicate – in other words, a language. Computers are literal, they need rules to follow. TCP has one particularly important rule – connections must begin with a 3-way handshake. It goes:
+
+1. Client: SYN (synchronize)
+
+2. Server: SYN/ACK (synchronize/acknowledge)
+
+3. Client: ACK (acknowledge)
+
+Boom – you’ve established a TCP connection. And now you can speak TCP. Say it fast, it’s fun: SYN, SYNACK, ACK. Again. SYNSYNACKACK (Mars Attacks, anyone?)
+
+That handshake rule makes scanning for TCP ports easy – a service on that port is always going to respond to a connection request (SYN or synchronize) if the port is open. 
+
+Okay, you’re all caught up – now, back to Nmap.
+
+Whether scanning for open ports or enumerating services and versions on a host, Nmap takes the same approach: send data, analyze the response. 
+
+As part of its analysis, Nmap maintains a database of “fingerprints” - composite profiles that it compares responses against. If it can get a host to talk enough, it can sufficiently disambiguate from the alternatives. Consider the following example, in which you are trying to distinguish two people from one another, Mary and Molly. 
+
+You say “Hello”, and both Mary and Molly respond with “Hello.” Then you say “Hello, how are you,” and Mary responds, “I am well, how are you” while Molly responds, “Good and you?”.
+
+Now, pretend that’s the way they will almost always respond. At this point, you know sending a “Hello” does not provide you enough information to infer details about who it is. But sending a “hello, how are you” does provide enough detail to differentiate them.
+
+Embedded image
+
+Now you’ve found a strategy for differentiating the two from one another - congratulations, you’ve become a fleshy Nmap. Just like you differentiated Mary and Molly by how they respond to a greeting, Nmap differentiates services by how they respond to probes. And the more questions (probes) Nmap asks, the more accurate its identification. Neat!
+
+Alright - we get what Nmap is. Let’s cover the basics for using it. Just a couple more sections before we let you take the wheel.
+
+Nmap Scan Types
+In most (nearly all) scenarios, you’ll be using one of these TCP scan types. Say hello to your bread and your butter.
+
+-sT - TCP connect scan, also called a “full-open” or Connect scan. Completes the TCP handshake, then terminates the connection (SYN, SYN/ACK, ACK, ACK, RST).
+Embedded image
+
+This is the default scan if running Nmap without root privileges, so the following command is equivalent.
+Embedded image
+
+-sS - SYN stealth scan, also called a “half-open” scan, because it begins and then abruptly ends the 3-way handshake with a reset packet (SYN, SYN/ACK, RST). “Stealth” here refers to application logging (if connection doesn’t complete, probably won’t be logged), although modern firewall and IDS/IPS solutions are likely to detect such unusual traffic. It is not necessarily stealthier than full-open scans, which are likely to detect such unusual traffic. But it is faster and lower bandwidth!
+Embedded image
+
+This is the default scan if running Nmap with root privileges, so the following command is equivalent.
+Embedded image
+
+Note: The -sS scans pictured above also identified one additional port. Typically, both -sS and -sT will reveal the same ports, but it is not unusual to see variations in results between the various scanning techniques.
+Nmap also provides some more niche scanning options, including -sA (ACK scan) which may be used to map firewalls, and -sU (UDP scan) for exploring UDP ports. However, these are used much less frequently than the half- or full-connect scans discussed above. See here for a complete list of available scan types.
+
+Now, how about those port states? Running Nmap is only part of the battle - and the smaller part. Our true power arises from our ability to interpret the results.
+
+Nmap Port States
+These are the three primary port states that Nmap will report. They are defined as follows.
+
+Open – the port is reachable and a service is listening on it.
+Closed – the port is reachable and no service is listening on it.
+Filtered – the port is not reachable so I cannot tell (usually indicates a firewall).
+Invoking our previous example, you can see one open port, one filtered port, and 998 closed ports (note that Nmap scans the top 1000 most common ports by default).
+
+Embedded image
+
+That’s to say, we can be fairly certain that some service lives at port 22. And we can make an educated guess that port 3389 is being blocked by a firewall - but we can’t know whether any service is actually running on that port, as it would need to be reachable in order to make that determination. And we can be fairly certain that the remaining 998 don’t have any service attached to them - the door was open, but nobody was home.
+
+Note: There are three other states which you can read about in Nmap’s port-scanning basics documentation. However, you’re unlikely to see them until you engage in more advanced scanning techniques.
+
+Now that you are familiar with the basic functionality of Nmap, let's review some common options you can use to augment your scans.
+
+Nmap Options
+Determining which of the 1000 most common ports might have services listening on them is a good start, but what if we want to check other ports? Or what if we want to know more about the ports we’ve identified or the services running on them? Don’t worry - we’ve got options.
+
+Port Specification
+The following options can be used to target specific ports during your Nmap scan.
+
+-p <port num> - Specifies port(s) to scan. Can be a single port, a range, a comma-separated list, or any combination of those.
+Embedded image
+
+Looking for web servers? Running nmap -p 80,443,8080,8443 is a good net to cast.
+--top-ports <number of ports> - Select the top <number> common ports.
+
+Maybe you’re staring at a pretty large network and scanning the default top 1000 ports at each IP address is a little greedy/slow for your taste. Tell Nmap your preferred shortlist size.
+
+Running nmap --top-ports 50 would scan the top 50 most common ports.
+Embedded image
+
+-F - Fast (shorthand for “top 100 ports”).
+
+And then maybe the top 100 ports sounds like a good net to cast in order to find if anything is alive in your target range, but you’re too lazy to type --top-ports 100. Nmap’s got you.
+Embedded image
+
+Host Discovery
+The following options can be used to control host discovery during your Nmap scan.
+
+-sn - Disables port-scanning (so that only host discovery is performed).
+
+Because sometimes you just want to confirm they exist.
+Embedded image
+
+-Pn - Disables host discovery (treats all hosts as online).
+
+Nmap won’t scan a target that wasn’t found in the host discovery phase. If you suspect a target is blocking Nmap’s host discovery probes, tell Nmap to skip discovery and dive straight at those ports.
+Embedded image
+
+Fingerprint Operating Systems & Services
+The following options can be used to detect operating systems and services during your Nmap scan.
+
+-O - ​​Detect the operating system running on the host.
+
+If the target system is a close enough match to an OS fingerprint in Nmap’s database, it will report the OS. Otherwise, you can force it to guess more aggressively by adding –osscan-guess.
+Embedded image
+
+-sV - Detect the network service and version running on a host’s open ports.
+
+This provides some additional information about the host operating system, though the primary aim is to identify vulnerable services (for patching or exploiting, depending on your role).
+Embedded image
+
+Timing
+The following options can be used to control the speed of your Nmap scan.
+
+-T1-5 - Timing templates for adjusting your scan speed. These templates are categorized as Paranoid (0) | Sneaky (1) | Polite (2) | Normal (3) | Aggressive (4) | Insane (5).
+
+The default is Normal (3). You may want to speed up your scan because you’re impatient (T5 - insane!) or slow it right down so that you don’t trip any filters that will give you a bad read (T0 - paranoid...).
+
+
+1.2 Guided Exercise
+-------------------
+Part 1: Run a Basic Nmap Scan
+In this part of the lab, you will fire off two basic Nmap scans on your in-lab workstation to get comfortable. This will prepare you for Part 2, where you will scan and enumerate the rest of the target network.
+
+We will begin by opening a Terminal window and starting the network emulator that we will use to create our target network.
+
+On the dock at the bottom of the screen, click the Terminal Emulator icon to open a Terminal window.
+At the cybrary@clabnet prompt, type clabnet and press Enter to start the network emulator.
+
+You will receive a new terminal window once the network initializes.
+Embedded image
+
+This Node (h1) terminal is your rental for this lab - your workstation within clabnet.
+In the Node (h1) window, type nmap 192.168.0.1 and press Enter to run your first Nmap scan on the h1 machine.
+Embedded image
+
+This is your first TCP connect scan – congratulations! You can specify this type of scan using the option -sT, but it is also the default when running without root privileges. This type of scan, also known as full-open, performs a full 3-way handshake to complete a connection to the service running on a port. Here you can see an open port (22) on your machine.
+
+If run as root, Nmap will default to a SYN stealth scan, which you can specify using -sS. Let's try it.
+In the Node (h1) window, type sudo nmap 192.168.0.1 and press Enter to run a default Nmap scan with root privileges.
+Embedded image
+
+This type of scan, also known as half-open, does not complete the TCP handshake – it initiates the connection, and once it gets a response, it immediately terminates it.
+
+As you can see, it also identified one additional port. Typically, both TCP scan types will reveal the same ports, but it is not uncommon to see variations in results between the various scanning techniques.
+
+You should see one open port, one filtered port, and the remaining 998 ports as closed.
+Part 2: Enumerate the Target Network
+In this part of the lab, you will perform scanning and enumeration using a range of different Nmap options. You will begin by running a host discovery scan on the target network.
+
+Before proceeding, review the questions on the Tasks tab. You will find the answers to these questions as you complete the following steps.
+
+In the Node (h1) window, type sudo nmap -sn 192.168.0.0/24 and press Enter to perform host discovery, skipping the port scanning phase (-sn).
+
+Take note of the number of hosts that Nmap determines to be alive on the 192.168.0.0/24 network. You will need this information to answer one of the questions on the Tasks tab.
+Embedded image
+
+In the Node (h1) window, type sudo nmap -sn -reason 192.168.0.0/24 and press Enter to ask Nmap how it determined these hosts were up.
+Embedded image
+
+Nmap utilizes several techniques for detecting hosts on a network. If running a ping scan (as root) on a local network, Nmap will attempt host discovery using ARP, a protocol that systems on the same network use to determine which MAC address belongs to a particular IP address. It does this by broadcasting to the network (who has this IP and what is your MAC address?). Handy for taking attendance!
+
+Now that you’ve discovered some hosts, it’s time to see if any of them have open ports. With your next scan, you will alter the range of the scan, now that you know the IP addresses available in the network (i.e., all are between 1 and 100).
+In the Node (h1) window, type sudo nmap -Pn 192.168.0.2-100 -F and press Enter to perform a SYN Stealth scan on a smaller target range (excluding your own machine at 192.168.0.1), skipping host discovery (-Pn) and looking only at the top 100 ports (-F).
+Embedded image
+
+Note: Since you are running Nmap with root privileges, the following command is equivalent: nmap -sS -Pn 192.168.0.2,20. You can also press Enter at any time to see the current progress of the scan.
+
+You skipped the host discovery scan here because you know the target hosts are all up. That said, it is common for modern devices to block ping probes, and Nmap will not proceed to the port scanning phase if it fails to discover any live hosts. If you are sure the host is up, but is blocking your ping probes, -Pn is the path forward.
+
+At this point, you have two targets: webserver and fileserver.
+
+Nmap also performs reverse DNS resolution (using the IP address to obtain the Domain Name), and these names can indicate the purpose of the server.
+
+You will start with the fileserver host at 192.168.0.2, which has closed ports – recall this means the ports are reachable, but no services are running on them (see: no firewall). The other target, 192.168.0.20, has the remainder of its ports filtered instead, so it may require a more careful touch. You will come back to that later.
+
+Start by enumerating the software and version running on port 21.
+In the Node (h1) window, type sudo nmap -sV 192.168.0.20 -p 21 and press Enter to detect the software and version running on port 21.
+
+Take note of the service version running on port 21 on the 192.168.0.20 host. You will need this information to answer one of the questions on the Tasks tab.
+Embedded image
+
+In the Node (h1) window, type sudo nmap -O 192.168.0.20 and press Enter to detect the operating system running on this host.
+Embedded image
+
+If Nmap doesn’t find a high enough match in its database, it will provide a fingerprint (a set of defining characteristics for that host, created from its responses) and urge you to submit it for entry into its official catalog. We encourage you not to waste their time with this one – we promise there are no novel operating systems worth cataloging in this lab.
+
+If you are content with receiving a guess, despite Nmap’s lack of confidence, you can request a list of its best guesses by adding the –osscan-guess option.
+In the Node (h1) window, type sudo nmap -O –osscan-guess 192.168.0.20 and press Enter to force Nmap to guess more aggressively.
+
+Take note of the top aggressive OS guess offered by Nmap for the 192.168.0.20 host. You will need this information to answer one of the questions on the Tasks tab.
+Embedded image
+
+In your next scan, you will run a scan on all ports to ensure you didn’t miss any. That’s 65535 ports in total – so why don’t you make it go fast.
+
+Like, insanely fast.
+In the Node (h1) window, type sudo nmap -Pn 192.168.0.20 -T5 -p- and press Enter to scan the remaining ports on your target using the Insane (5) timing template.
+
+Note: -p- is shorthand for all ports and is equivalent to -p 1-65535.
+
+Speed means you may miss some things, but it’s common to run a quick scan to start and then set a longer one in the background while you investigate your initial yield. It is also important to consider your goal – if you are attempting to evade defensive detection (such as a red team operative trying to avoid attention from the blue team), you may want to slow down your scan to decrease your risk of detection. If you are a penetration tester, you have no such obligations, and can be as noisy as you want – you just want to enumerate vulnerabilities you can exploit to demonstrate impact.
+
+Well done (we hope)! Now, time to enumerate that fileserver you skipped initially, which you discovered had a service running on port 8080. We’re only giving you a handful of ports to look at here – otherwise this scan could take a while. Only some of these ports are truly open, and it’s your job to determine which. Let's start with a fast scan.
+In the Node (h1) window, type sudo nmap -Pn -T5 192.168.0.2 -p 22,25,1000,2099,8080,8888 and press Enter to scan the ports on the fileserver you discovered.
+
+Are you satisfied with what you see? Some filtered ports (firewall!), others open. Ready to declare victory? Not so fast. It’s possible the filtering mechanism is protecting against denial-of-service attacks or is blocking based on unusual traffic patterns. You may want to slow down the scan to ensure you don’t inadvertently sound the alarm, causing packets to be dropped and limiting the utility of your scans. It may even be a good idea to switch to TCP connect (“full-open”) scans in this case, should those mechanisms not approve of your digital doorbell-ringing via half-open SYN scans.
+
+These are the kind of crossroads you’ll reach when scanning and enumerating unfamiliar networks. Each scan may provide useful information, but not always conclusive. Sometimes you need to synthesize the output of several scans to build an accurate profile of your target. Part of good reconnaissance is knowing how to use your tool, but the larger part is knowing how to read the output and determining next actions based on what it tells you. This is the difference between script kiddies blasting networks and seasoned professionals producing high-fidelity maps of an organization’s infrastructure.
+In the Node (h1) window, type nmap -Pn 192.168.0.2 -T1 -p 22,25,1000,2099,8080,8888 and press Enter to slow (Polite) scan the target webserver.
+
+Despite a handful of ports, this scan may still take around 1-2 minutes. Press Enter to see the progress.
+
+3 of these ports are open, did you discover which? If so, well done! You’ve fooled a shoddy packet filtering system. Pat yourself on the back.
+
+1. How many hosts are alive on the 192.168.0.0/24 network, including your own?
+9
+
+2. What is the service version running on port 21 on the 192.168.0.20 host?
+3.0.5
+
+3. What is nmap’s best guess as to the OS running on 192.168.0.20? (name and version, no spaces). Note: the OS name will not be a real operating system, just an artifact for this lab.
+CLabOS0.1
+
+4. Add up the open ports you discovered on 192.168.0.2 (e.g., if ports 1, 2, and 3 are open, 1+2+3=6). What is the number?
+8127
+
+
+1.3 Challenge Exercise
+----------------------
+In this challenge exercise, you will target a new network and perform your own reconnaissance to answer the questions on the Tasks tab. Your target network is 172.16.0.0/24. We recommend running -T4 or -T5 for these scans, unless otherwise indicated.
+
+Perform a host discovery (ping) scan on the network with scanning disabled.
+Run a SYN scan on the hosts you identified, targeting the top 100 ports. You'll notice one of these hosts is likely tucked behind a firewall.
+We’ve hidden a host on this network that is blocking discovery probes. This host is somewhere between 172.16.0.10 and 172.16.0.20. Can you find it?
+
+Run a SYN stealth scan with ping scanning disabled to find the hidden host.
+This machine has several “honey ports,” meaning they will return “?” if you run service detection on them. You are searching for the port running a legitimate, or non-honey service, which will return a service and version.
+
+Start the game by running a TCP connect scan on port 12345 of the host, then run another scan (SYN or TCP) on the host to view the new ports opened up.
+Run a service detection scan on the ports you discovered to reveal the port that does not return “?”
+Alright, investigate one more host – the one you identified as being behind a firewall in Step 2.
+
+Three of the following ports are open, can you determine which? 80, 445 2600, 53, 23, 3389. You may run a SYN or TCP connect scan. (Hint: you may have to slow down your scans)
+
+1. How many hosts does your ping scan find?
+>>> 2
+
+2. Which host is likely to be behind a firewall?
+>>> 172.16.0.32
+
+3. What is the IP address of the “hidden” host?
+>>> 172.16.0.16
+
+4. What port is running on the “hidden” host?
+>>> 12345
+
+5. What is the legitimate service running on the hidden host?
+>>> sambasmbd4.6.2
+
+6. Which ports are open on the host behind a firewall? Add up the 3 open ports you discovered.
+>>> 548
