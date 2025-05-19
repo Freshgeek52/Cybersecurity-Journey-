@@ -1,0 +1,250 @@
+VPN Basics
+==========
+1.1 Core Concepts
+-----------------
+A Virtual Private Network (VPN) is a technology that establishes a secure and encrypted connection over a public or untrusted network, such as the Internet. VPNs provide a secure way for users to access internal resources and safely transmit data. VPNs ensure privacy, confidentiality, and security by leveraging encryption protocols to scramble data as it travels between VPN endpoints. VPNs support multiple authentication methods, including passwords and digital certificates. VPNs can also help hide a user's true location and IP address, thereby providing a degree of anonymity.
+
+Common VPN Protocols
+Point-to-Point Tunneling Protocol (PPTP): PPTP is an older protocol used primarily on Windows. PPTP uses an insecure authentication method (MS-CHAP) and an outdated streaming cipher (RC4). You will still find PPTP in use as it is easy to set up and comes free with Windows.
+Layer 2 Tunneling Protocol (L2TP): L2TP is similar to PPTP. Whereas PPTP uses TCP for connection stability, L2TP uses UDP to improve speed. L2TP is often combined with IPsec (see below), as L2TP tunnels do not encrypt data.
+Secure Socket Tunneling Protocol (SSTP): SSTO uses SSL 3.0 to create a private connection. SSTP is often used to bypass firewalls as it uses TCP port 443. As SSL 3.0 is vulnerable to the POODLE attack, there is some risk in using this protocol.
+Internet Security Protocol (IPsec): IPsec is a collection of protocols that add authentication, encryption, data integrity, and secure key exchange to the IP protocol. IPsec will be discussed in more detail below. 
+OpenVPN: OpenVPN is an open-source VPN solution that uses the OpenSSL library to implement encryption. OpenVPN supports certificate-based authentication and pre-shared keys for verifying the client and server's identity.
+Anatomy of IPsec
+As mentioned above, IPsec is an added extension to the IP protocol. The IP protocol is designed to move packets from one network to another. A typical IP packet is shown below: the TCP header encapsulates the data, which is encapsulated by the IP header.
+
+Embedded image
+
+IPsec uses the Authentication Header (AH) protocol, the Encapsulation Security Protocol (ESP), or both to provide authentication and encryption. Below, we see one IP packet with the AH protocol and one using the ESP protocol:
+
+Embedded image
+
+Note the packets shown above will look different depending on the mode of IPsec used. IPsec supports tunnel mode and transport mode. The images above show transport mode. Transport mode is used to secure peer-to-peer connections. Tunnel mode, also called site-to-site, connects two locations, like two offices. Tunnel mode adds a second IP header to the IP packet:
+
+Embedded image
+
+The key takeaway here is that IP alone is not secure, but it can be encapsulated with other protocols to make it secure.
+
+There are five steps required to create an IPsec connection.
+
+Tunnel creation trigger (also called interesting traffic)
+Internet Key Exchange (IKE) Phase 1
+Internet Key Exchange (IKE) Phase 2
+Data Transfer
+Tunnel termination
+The first step is when a router, firewall, VPN appliance, or VPN client software sees interesting traffic. For example, two offices are connected using a site-to-site VPN tunnel. One office has an internal subnet of 192.168.1.0/10, and the other has an internal subnet of 10.10.10.0/24. When the firewall in the 192.168.1.0/24 network sees traffic destined for 10.10.10.0/24, it deems this traffic to be interesting and will initiate a secure IPsec connection to the firewall associated with the 10.10.10.0/24 network.
+
+Note: In the case of most site-to-site connections, the administrator will often initiate the tunnel manually and not wait for interesting traffic.
+
+Next comes IKE Phase 1 and IKE Phase 2. Think of this as a tunnel inside a tunnel. IKE Phase 1 is mostly concerned with authentication and laying the groundwork for Phase 2. IKE Phase 2 encrypts and passes the data from one side of the VPN tunnel to the next. These tunnels are referred to as Security Associations (SA). IKE Phase 1 is computationally heavier and slower than IKE Phase 2. This is why two tunnels are preferred: one for slow, one-time asynchronous operations and an encapsulated tunnel for fast synchronous encryption operations.
+
+Embedded image
+
+Packets are sent between the initiator and the receiver as long as the SA stays valid. When the SA times out, the tunnel will be torn down. Sometimes, connectivity issues can cause an SA to time out and close. Administrators should monitor the state of their VPN tunnels for an SA that needs to be restarted.
+
+Note: The description above is a bit simplified. IPsec is a complex protocol suite, but getting lost in the details is unnecessary. For an in-depth look at IKE, check out this video on YouTube: https://www.youtube.com/watch?v=15amNny_kKI
+
+
+1.2 Guided Exercise
+-------------------
+In this lesson, you will use the GNS3 network simulator to configure a site-to-site VPN solution. First, you will need to start up your simulated network.
+
+From the dock at the bottom of the screen, click the Terminal icon to open a new Terminal window.
+At the command prompt, type gns3 & and press Enter to open GNS3 in the background.
+
+It will take a few minutes for GNS3 to launch. When GNS3 opens, you will be asked to create a project or open an existing project.
+In the Project window, click the Projects library tab, then select VPN Basics and click OK.
+
+When prompted, click No to ignore the update check.
+Embedded image
+
+This topology shows two networks (192.168.1.0/24 and 10.10.10.0/24) behind a firewall connected to an Internet service provider (ISP). This lab will guide you through configuring a site-to-site VPN tunnel on the firewalls so that the 192.168.1.0/24 network and the 10.10.10.0/24 network can reach each other securely over the Internet.
+In the topology window, right-click the Site-A firewall device and select Start to power up the firewall, then do the same for the Site-B firewall device.
+In the topology window, right-click the Site-A firewall device and select Console to open a TigerVNC console, then do the same for the Site-B firewall device.
+
+You must wait for the firewalls to be fully up before continuing. Wait until you see the following menu on both firewalls before continuing with the lab:
+Embedded image
+
+Note: The firewall can take up to 3 minutes to fully boot up.
+Close both the Site-A and Site-B console windows.
+On the GNS3 control bar, click the Start button (the large green arrow) to power on all devices.
+
+When prompted, click Yes to continue.
+
+In the GNS3 topology window, you will see all connections turn green, indicating the hosts are powered on and connected to the network.
+Part 1: Validate Connectivity
+Before we configure our VPN, we will access the Site-A Firewall and validate that it can communicate with the Site-B firewall.
+
+In the topology window, right-click the Browser-A host and select Console to open a VNC console connection to the Browser-A host.
+
+As the host's name indicates, the TigerVNC console will launch with a web browser window open. You will use the web browser to connect to the pfSense appliance's web GUI. Although you could interact with the pfSense appliance directly through the command line interface that you saw when you started the device, the web GUI is easier to use for instructional purposes.
+In the web browser, click the pfSense - Login bookmark to connect to the pfSense firewall.
+
+If prompted with a security warning, click Advanced > Accept the Risk to continue.
+On the pfSense login page, click the Sign In button to sign in using the saved credentials.
+From the menu bar at the top, click Firewall and select Rules to open the Rules table for the WAN interface.
+Embedded image
+
+Take note of the protocol for the pre-configured rule on the WAN interface. You will need this information to answer one of the questions on the Tasks tab.
+
+On the Firewall / Rules / WAN page, note a rule has been added allowing ping traffic from any source IP ( * ) to the WAN address. A similar rule has been added to the Site-B firewall. This rule is not required for a VPN to work, but it is helpful to ensure the remote site is reachable. In production, a rule like this would be disabled after testing.
+From the pfSense menu bar, click Diagnostics and select Ping to open the Ping diagnostic tool.
+On the Diagnostics / Ping page, type 203.0.113.5 in the Hostname field, then click Ping to ping the external interface of the Site-B firewall.
+
+At the bottom of the page, you should see a positive result.
+Embedded image
+
+Part 2: Configure the Site-A VPN
+Now that we know Site-B is reachable, let’s configure the Site-A side of the VPN. In our new site-to-site VPN, Site-A will be the initiator, and Site-B will be the receiver. Once we have both sides configured, we will manually start the VPN tunnel on Site-A.
+
+From the pfSense menu bar, click VPN and select IPsec to open the VPN / IPsec / Tunnels page.
+
+As we learned in the Core Concepts lesson, IPsec creates two tunnels: one for authentication (IKE Phase 1) and one for encryption (IKE Phase 2). On the pfSense firewall, the first tunnel is referred to as P1 (Phase 1), and the second is P2 (Phase 2).
+On the VPN / IPsec / Tunnels page, click Add P1 to create a new IKE Phase 1 Security Association (SA).
+On the VPN / IPsec / Tunnels / Edit Phase 1 page, enter the following details, then click Save at the bottom of the page. Unless told to change a value, accept the defaults.
+
+Description: Connection to Site-B
+Remote Gateway: 203.0.113.5
+Pre-Shared Key: cybrary
+Encryption Algorithm: set the Key Length to 256 bits
+Child SA Close Action: Restart/Reconnect
+
+Note: For the purposes of this lab, we are using pre-shared keys for authentication because pre-shared keys are easier to use than certificates. However, a short key like “cybrary” is not secure. In a production system, you should always use longer and stronger keys (which pfSense can generate for you).
+On the VPN / IPsec / Tunnels page, click Apply Changes and wait for the new Phase 1 SA to be activated.
+Embedded image
+
+On the VPN / IPsec / Tunnels page, under the newly configured Phase 1 SA, click Show Phase 2 Entries (0), then click Add P2 to create a new IKE Phase 2 Security Association (SA).
+On the VPN / IPsec / Tunnels / Edit Phase 2 page, enter the following details, then click Save at the bottom of the page. Unless told to change a value, accept the defaults.
+
+Description: Site-B
+Remote Network: Network 10.10.10.0 / 24
+Encryption Algorithms: AES192-GCM / Auto only
+On the VPN / IPsec / Tunnels page, click Apply Changes and wait for the new Phase 2 SA to be applied.
+Embedded image
+
+On the VPN / IPsec / Tunnels page, under the Phase 1 SA, click Show Phase 2 Entries (1).
+
+Your P1 and P2 should match the following screenshot:
+Embedded image
+
+Take note of the P2 Protocol value. you will need this information to answer one of the questions on the Tasks tab.
+From the menu bar at the top, click Firewall and select Rules, then select the IPsec tab to open the Rules table for the IPsec interface.
+
+Notice that there are no rules allowing traffic over the IPsec tunnel.
+Click the Add button to begin adding a new rule.
+
+Note: There is an Add with an up arrow and an Add with a down arrow. Because there are currently no rules, you can use either one.
+On the Firewall / Rules / Edit page, enter the following details, then click Save at the bottom of the page. Unless told to change a value, accept the defaults.
+
+Protocol: Any
+Source: Network 10.10.10.0 / 24
+Destination: LAN net
+On the Firewall / Rules / Edit page, click Apply Changes.
+
+When done, your new IPsec firewall rule should match the following screenshot:
+Embedded image
+
+Note: While this rule would be overly permissive for a production environment, it is a good rule to use during testing.
+Part 3: Configure the Site-B VPN
+Now, let's configure the other side of the site-to-site VPN.
+
+In the GNS3 topology window, right-click the Browser-B host and select Console to open a VNC console connection to the Browser-B host.
+
+As the host's name indicates, the TigerVNC console will launch with a web browser window open. This may take 20-30 seconds.
+In the web browser, click the pfSense - Login bookmark to connect to the pfSense firewall.
+
+If prompted with a security warning, click Advanced > Accept the Risk to continue.
+On the pfSense login page, click the Sign In button to sign in using the saved credentials.
+From the pfSense menu bar, click VPN and select IPsec to open the VPN / IPsec / Tunnels page.
+On the VPN / IPsec / Tunnels page, click Add P1 to create a new IKE Phase 1 Security Association (SA).
+On the VPN / IPsec / Tunnels / Edit Phase 1 page, enter the following details, then click Save at the bottom of the page. Unless told to change a value, accept the defaults.
+
+Description: Connection to Site-A
+Remote Gateway: 198.51.100.3
+Pre-Shared Key: cybrary
+Encryption Algorithm: set the Key Length to 256 bits
+Life Time: 31680
+Child SA Start Action: None (Responder Only)
+Child SA Close Action: Close connection and clear SA
+On the VPN / IPsec / Tunnels page, click Apply Changes and wait for the new Phase 1 SA to be configured.
+Embedded image
+
+On the VPN / IPsec / Tunnels page, under the newly configured Phase 1 SA, click Show Phase 2 Entries (0), then click Add P2 to create a new IKE Phase 2 Security Association (SA).
+On the VPN / IPsec / Tunnels / Edit Phase 2 page, enter the following details, then click Save at the bottom of the page. Unless told to change a value, accept the defaults.
+
+Description: Site-A
+Remote Network: Network 192.168.1.0 / 24
+Encryption Algorithms: AES192-GCM / Auto only
+Life Time: 5400
+On the VPN / IPsec / Tunnels page, click Apply Changes and wait for the new Phase 2 SA to be configured.
+On the VPN / IPsec / Tunnels page, under the Phase 1 SA, click Show Phase 2 Entries (1).
+
+Your P1 and P2 should match the following screenshot:
+Embedded image
+
+From the menu bar at the top, click Firewall and select Rules, then select the IPsec tab to open the Rules table for the IPsec interface.
+Click the Add button to begin adding a new rule.
+On the Firewall / Rules / Edit page, enter the following details, then click Save at the bottom of the page. Unless told to change a value, accept the defaults.
+
+Protocol: Any
+Source: Network 192.168.1.0 / 24
+Destination: LAN net
+On the Firewall / Rules / Edit page, click Apply Changes.
+
+When done, your new IPsec firewall rule should match the following screenshot:
+Embedded image
+
+Part 4: Activate the Site-to-Site VPN
+Now that we've configured both sides of our site-to-site VPN, we will activate it and verify that it's working.
+
+Restore the TigerVNC console for the Browser-A host.
+From the pfSense menu bar, click Status and select IPsec to open the VPN / IPsec / Tunnels page.
+On the Status / IPsec / Overview page, click Connect P1 and P2s to activate the VPN tunnel.
+
+Take note of the values on this page. You will need them to answer some of the questions on the Tasks tab.
+In the GNS3 topology window, right-click Linux-A and select Console.
+
+In the terminal window, a new tab will open for the Linux-A host.
+On the Linux-A tab, type ping -c 8 10.10.10.10 and press Enter.
+Embedded image
+
+Notice you can ping 10.10.10.10 from the 192.168.1.0/24 network as if it were a local resource. The VPN tunnel and the firewall rules have connected the two remote networks! Now let's try it from the other direction.
+Open a console to Linux-B and ping the Linux-A host at 192.168.1.10.
+
+
+1. What protocol does the pre-configured rule on the WAN interface of the Site-A and Site-B firewalls allow?
+>>> ICMP
+
+2. What is the P2 Protocol used in the IPsec tunnel configuration on the Site-A firewall?
+>>> ESP
+
+3. According to the IPsec status page for the activated VPN tunnel, what is the complete Host Address for the local host?
+>>> 198.51.100.3:500
+
+4. According to the IPsec status page for the activated VPN tunnel, what is the 3rd algorithm listed in the Algor field?
+>>> PRF_HMAC_SHA2_256
+
+
+1.3 Challenge Exercise
+----------------------
+For this challenge exercise, you will configure a second site-to-site IPsec VPN using the same process and parameters as the guided exercise. To begin, you will need to open the Challenge project from the GNS3 project library. The network topology should be nearly identical to the project from the guided exercise, but with different IP addresses on some devices.
+
+First, you will need to bring up both firewalls. Then, power on the rest of the network. Once the whole network is online, you will need to:
+
+Configure IPsec on the Site-A firewall.
+Configure IPsec on the Site-B firewall.
+Bring up the VPN, then ping 10.10.10.10 from Linux-A.
+Retrieve the Flag
+Once you can ping 10.10.10.10 from Linux-A, you will be able to retrieve the flag for this challenge using the following steps:
+
+On the Ubuntu workstation, right-click the flag.txt file and open it using the Text Editor. In the Text Editor, press CTRL-A to select all text, then press CTRL-C to copy it.
+In the Terminal window, on the Linux-A tab, type echo " and paste the contents of the flag.txt file, then type " > flag.sh and press Enter to copy the flag.sh script to Linux-A.
+On the Linux-A tab, type chmod 755 flag.sh and press Enter to make the flag.sh file executable.
+Execute sh flag.sh to check your work and retrieve the flag.
+Unlimited access to Cybrary for FREE?
+Click to see if your company has licenses
+Check Now
+
+
+1. What is the flag for this challenge?
+VPNVIP!
